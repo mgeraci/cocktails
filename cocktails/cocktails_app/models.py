@@ -53,6 +53,14 @@ class IngredientCategory(models.Model):
         return self.name
 
 
+class Unit(models.Model):
+    name = models.CharField(max_length=100)
+    plural = models.CharField(max_length=100)
+
+    def __unicode__(self):
+        return self.name
+
+
 class Ingredient(models.Model):
     name = models.CharField(max_length=200)
     category = models.ForeignKey(IngredientCategory, default="Alcohol")
