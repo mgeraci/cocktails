@@ -6,6 +6,15 @@
 
 <h1>Cocktails</h1>
 
+<h2>Recipes</h2>
+
+{% for recipe in recipes %}
+	<a href="/recipe/{{ recipe.slug }}">
+		{{ recipe.name }}
+	</a>
+	<br />
+{% endfor %}
+
 <h2>Ingredient Categories</h2>
 
 {% for category in categories %}
