@@ -6,6 +6,12 @@
 
 <h1>{{ recipe.name }}</h1>
 
-todo add steps
+<ul>
+	{% for step in steps %}
+		<li>
+			{{ step.order }} - {{ step.recipe_print }}
+		</li>
+	{% endfor %}
+</ul>
 
 {% endblock %}

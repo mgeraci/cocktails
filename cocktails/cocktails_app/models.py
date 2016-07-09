@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 from django.db import models
+from util.model import RealInstanceProvider
 
 
 class Recipe(models.Model):
@@ -13,7 +14,7 @@ class Recipe(models.Model):
         return self.name
 
 
-class Step(models.Model):
+class Step(models.Model, RealInstanceProvider):
     order = models.PositiveSmallIntegerField(default=0)
     recipe = models.ForeignKey(Recipe)
 
@@ -33,6 +34,9 @@ class Action(models.Model):
 
 class ActionStep(Step):
     action = models.ForeignKey(Action)
+
+    def recipe_print(self):
+        return self.action.name
 
     def __unicode__(self):
         return self.action.name

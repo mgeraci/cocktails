@@ -34,9 +34,14 @@ def ingredient_category(request, slug):
 
 def recipe(request, slug):
     recipe = get_object_or_404(Recipe, slug=slug)
+    steps = []
+
+    for step in recipe.step_set.all():
+        steps.append(step.get_actual_instance())
 
     context = {
         'recipe': recipe,
+        'steps': steps,
     }
 
     return render(request, 'pages/recipe.html', context)
