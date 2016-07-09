@@ -1,0 +1,4 @@
+$ = require("jquery")
+
+module.exports = {
+}

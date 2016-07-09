@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<title>
+			{% block title %}{% endblock %}
+		</title>
+		<meta name="viewport" content="width=device-width, user-scalable=no" />
+		<link rel="shortcut icon" href="http://michaelgeraci.com/favicon.ico" type="image/x-icon">
+		<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/styles.css">
+	</head>
+	<body class="page-{% block bodyclass %}{% endblock %}">
+
+		<section class="content">
+			{% block content %}{% endblock %}
+		</section>
+
+	</body>
+</html>

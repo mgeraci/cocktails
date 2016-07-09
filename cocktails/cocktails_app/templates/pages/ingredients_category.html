@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Ingredients by category{% endblock %}
+{% block bodyclass %}index{% endblock %}
+
+{% block content %}
+
+<h1>Cocktails</h1>
+
+<h2>Ingredients by Category: {{ category }}</h2>
+
+{% for ingredient in ingredients %}
+	{{ ingredient }}
+	<br />
+{% endfor %}
+
+{% endblock %}
