@@ -5,4 +5,13 @@
 body {
   background: lightgray;
   padding: 20px;
-  color: rebeccapurple; }
+  color: rebeccapurple;
+  font-family: helvetica neue, helvetica, arial, sans serif; }
+
+h1 {
+  font-size: 20px;
+  padding-bottom: 20px; }
+
+h2 {
+  font-size: 18px;
+  padding-bottom: 10px; }
