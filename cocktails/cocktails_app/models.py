@@ -62,3 +62,13 @@ class Ingredient(models.Model):
 
     def __unicode__(self):
         return u'{} - {}'.format(self.category, self.name)
+
+
+class IngredientStep(Step):
+    ingredient = models.ForeignKey(Ingredient)
+
+    def recipe_print(self):
+        return self.ingredient.name
+
+    def __unicode__(self):
+        return self.ingredient.name
