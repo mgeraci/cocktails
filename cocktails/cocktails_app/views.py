@@ -2,6 +2,7 @@
 
 from django.shortcuts import render, get_object_or_404
 from cocktails.localsettings import STATIC_URL
+from util.view import is_safe
 
 from cocktails_app.models import IngredientCategory
 from cocktails_app.models import Ingredient
@@ -45,3 +46,50 @@ def recipe(request, slug):
     }
 
     return render(request, 'pages/recipe.html', context)
+
+
+def search(request, slug):
+    q = slug.lower()
+    ingredient_res = []
+    recipe_res = []
+
+    # TODO don't search with fewer than 3 chars
+
+    ingredients = Ingredient.objects.all()
+    recipes = Recipe.objects.all()
+
+    for ingredient in ingredients:
+        if ingredient.name.lower().find(q) >= 0:
+            ingredient_res.append(ingredient)
+
+    for recipe in recipes:
+        print recipe.name
+        if recipe.name.lower().find(q) >= 0:
+            recipe_res.append(recipe)
+
+        for step in recipe.step_set.all():
+            step = step.get_actual_instance()
+
+            if hasattr(step, 'ingredient'):
+                print 'ingredient step'
+
+                if step.ingredient.name.lower().find(q) >= 0:
+                    ingredient_res.append(step.ingredient)
+
+    if not is_safe(q):
+        q = "No special characters allowed"
+
+    context = {
+        'query': slug,
+    }
+
+    if len(recipe_res) > 0:
+        context['recipe_res'] = recipe_res
+
+    if len(ingredient_res) > 0:
+        context['ingredient_res'] = ingredient_res
+
+    if len(ingredient_res) == 0 and len(recipe_res) == 0:
+        context['no_results'] = True
+
+    return render(request, 'pages/search.html', context)

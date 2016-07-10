@@ -74,16 +74,19 @@ class Ingredient(models.Model):
 
 class IngredientStep(Step):
     ingredient = models.ForeignKey(Ingredient)
-    amount = models.FloatField(null=True, blank=True)
-    unit = models.ForeignKey(Unit, null=True, blank=True)
+    amount = models.FloatField(default=1)
+    unit = models.ForeignKey(Unit, default=1, null=True, blank=True)
 
     def recipe_print(self):
-        if self.amount > 1.0:
-            unit = self.unit.plural
-        else:
-            unit = self.unit.name
+        if self.unit:
+            if self.amount > 1.0:
+                unit = self.unit.plural
+            else:
+                unit = self.unit.name
 
-        return u'{} {} {}'.format(self.amount, unit, self.ingredient.name)
+            return u'{} {} {}'.format(self.amount, unit, self.ingredient.name)
+        else:
+            return u'{} {}'.format(self.amount, self.ingredient.name)
 
     def __unicode__(self):
         return self.ingredient.name

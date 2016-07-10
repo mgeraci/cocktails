@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}&ldquo;{{ query }}&rdquo; | Cocktails{% endblock %}
+{% block bodyclass %}search{% endblock %}
+
+{% block content %}
+
+<h1>Search: {{ query }}</h1>
+
+{% if no_results %}
+	No results found
+{% endif %}
+
+{% if recipe_res %}
+	<h2>Recipe matches</h2>
+	<ul>
+		{% for result in recipe_res %}
+			<li>
+				{{ result }}
+			</li>
+		{% endfor %}
+	</ul>
+{% endif %}
+
+{% if ingredient_res and recipe_res %}
+	<br />
+	<br />
+{% endif %}
+
+{% if ingredient_res %}
+	<h2>Ingredient matches</h2>
+	<ul>
+		{% for result in ingredient_res %}
+			<li>
+				{{ result }}
+			</li>
+		{% endfor %}
+	</ul>
+{% endif %}
+
+{% endblock %}
