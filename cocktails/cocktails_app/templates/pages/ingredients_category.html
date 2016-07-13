@@ -8,9 +8,14 @@
 
 <h2>Ingredients by Category: {{ category }}</h2>
 
-{% for ingredient in ingredients %}
-	{{ ingredient.name }}
-	<br />
-{% endfor %}
+<ul>
+	{% for ingredient in ingredients %}
+		<li>
+			<a href="{% url 'ingredient_url' ingredient.slug %}">
+				{{ ingredient.name }}
+			</a>
+		</li>
+	{% endfor %}
+</ul>
 
 {% endblock %}

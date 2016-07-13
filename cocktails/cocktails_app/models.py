@@ -1,14 +1,22 @@
 from __future__ import unicode_literals
 from django.db import models
+from django.template.defaultfilters import slugify
 from util.model import RealInstanceProvider
 
 
 class Recipe(models.Model):
     name = models.CharField(max_length=200)
-    slug = models.SlugField(max_length=200, unique=True)
+    slug = models.SlugField(max_length=200, blank=True)
 
     class Meta:
         ordering = ['name']
+
+    # add a slug on save, if one doesn't exist
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+
+        super(Recipe, self).save(*args, **kwargs)
 
     def __unicode__(self):
         return self.name
@@ -64,9 +72,17 @@ class Unit(models.Model):
 class Ingredient(models.Model):
     name = models.CharField(max_length=200)
     category = models.ForeignKey(IngredientCategory, default="Alcohol")
+    slug = models.SlugField(blank=True)
 
     class Meta:
         ordering = ['name']
+
+    # add a slug on save, if one doesn't exist
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+
+        super(Ingredient, self).save(*args, **kwargs)
 
     def __unicode__(self):
         return u'{} - {}'.format(self.category, self.name)

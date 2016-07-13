@@ -1,16 +1,19 @@
 {% extends 'base.html' %}
-{% block title %}Recipes with category{% endblock %}
+{% block title %}Recipes with {{ ingredient.name }}{% endblock %}
 {% block bodyclass %}index{% endblock %}
 
 {% block content %}
 
-<h1>Cocktails</h1>
+<h1>Recipes with {{ ingredient.name }}</h1>
 
-<h2>Ingredients by Category: {{ category }}</h2>
-
-{% for ingredient in ingredients %}
-	{{ ingredient.name }}
-	<br />
-{% endfor %}
+<ul>
+	{% for recipe in recipes %}
+		<li>
+			<a href="{% url 'recipe_url' recipe.slug %}">
+				{{ recipe.name }}
+			</a>
+		</li>
+	{% endfor %}
+</ul>
 
 {% endblock %}

@@ -11,6 +11,7 @@ urlpatterns = [
     # main pages
     url(r'^$', views.index, name='index_url'),
     url(r'^ingredients/(?P<slug>[^/]+)/$', views.ingredient_category, name='ingredient_category'),
+    url(r'^ingredient/(?P<slug>[^/]+)/$', views.ingredient, name='ingredient_url'),
     url(r'^recipe/(?P<slug>[^/]+)/$', views.recipe, name='recipe_url'),
     url(r'^search/(?P<slug>[^/]+)/$', views.search, name='search_url'),
 ]

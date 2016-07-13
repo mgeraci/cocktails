@@ -33,7 +33,9 @@
 	<ul>
 		{% for result in ingredient_res %}
 			<li>
-				{{ result }}
+				<a href="{% url 'ingredient_url' result.slug %}">
+					{{ result.name }}
+				</a>
 			</li>
 		{% endfor %}
 	</ul>

@@ -48,6 +48,29 @@ def recipe(request, slug):
     return render(request, 'pages/recipe.html', context)
 
 
+def ingredient(request, slug):
+    ingredient = get_object_or_404(Ingredient, slug=slug)
+    recipe_res = set()
+
+    if ingredient != None:
+        recipes = Recipe.objects.all()
+
+    for recipe in recipes:
+        for step in recipe.step_set.all():
+            step = step.get_actual_instance()
+
+            if hasattr(step, 'ingredient'):
+                if step.ingredient == ingredient:
+                    recipe_res.add(recipe)
+
+    context = {
+        'ingredient': ingredient,
+        'recipes': recipe_res,
+    }
+
+    return render(request, 'pages/ingredient.html', context)
+
+
 def search(request, slug):
     q = slug.lower()
     ingredient_res = set()
@@ -63,7 +86,6 @@ def search(request, slug):
             ingredient_res.add(ingredient)
 
     for recipe in recipes:
-        print recipe.name
         if recipe.name.lower().find(q) >= 0:
             recipe_res.append(recipe)
 
@@ -71,8 +93,6 @@ def search(request, slug):
             step = step.get_actual_instance()
 
             if hasattr(step, 'ingredient'):
-                print 'ingredient step'
-
                 if step.ingredient.name.lower().find(q) >= 0:
                     ingredient_res.add(step.ingredient)
 
