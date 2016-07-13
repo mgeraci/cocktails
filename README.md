@@ -1,5 +1,8 @@
-michaelgeraci.com
-=================
+cocktails
+=========
+
+Cocktails is a simple web app to manage cocktail recipes. It's written in
+Django.
 
 CSS and JS
 ----------
