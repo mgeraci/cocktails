@@ -11,7 +11,7 @@ from cocktails_app.models import Recipe
 
 
 class search_form(forms.Form):
-    query = forms.CharField(required=False, label="Search",
+    query = forms.CharField(required=False, label='',
             widget=forms.TextInput(
                 attrs={'placeholder': 'e.g., Rye or Sazerac'}))
 

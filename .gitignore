@@ -1,4 +1,5 @@
 .pyc
+**/*.pyc
 .DS_Store
 node_modules
 .sass-cache

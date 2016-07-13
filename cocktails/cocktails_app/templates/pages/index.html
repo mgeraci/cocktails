@@ -4,8 +4,6 @@
 
 {% block content %}
 
-<h1>Cocktails</h1>
-
 <h2>Search</h2>
 
 <form action="/search" method="get">
@@ -28,7 +26,7 @@
 <br />
 <br />
 
-<h2>Ingredient Categories</h2>
+<h2>Browse by ingredient</h2>
 
 {% for category in categories %}
 	<a href="{% url 'ingredient_category' category.slug %}">

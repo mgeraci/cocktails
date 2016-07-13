@@ -4,14 +4,14 @@
 
 {% block content %}
 
-<h1>Search: {{ query }}</h1>
+<h2>Search: {{ query }}</h2>
 
 {% if no_results %}
 	No results found
 {% endif %}
 
 {% if recipe_res %}
-	<h2>Recipe matches</h2>
+	<h3>Recipes</h3>
 	<ul>
 		{% for result in recipe_res %}
 			<li>
@@ -29,7 +29,7 @@
 {% endif %}
 
 {% if ingredient_res %}
-	<h2>Ingredient matches</h2>
+	<h3>Ingredients</h3>
 	<ul>
 		{% for result in ingredient_res %}
 			<li>
