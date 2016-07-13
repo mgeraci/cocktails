@@ -15,7 +15,9 @@
 	<ul>
 		{% for result in recipe_res %}
 			<li>
-				{{ result }}
+				<a href="{% url 'recipe_url' result.slug %}">
+					{{ result.name }}
+				</a>
 			</li>
 		{% endfor %}
 	</ul>

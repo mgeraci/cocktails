@@ -9,7 +9,7 @@
 <h2>Recipes</h2>
 
 {% for recipe in recipes %}
-	<a href="/recipe/{{ recipe.slug }}">
+	<a href="{% url 'recipe_url' recipe.slug %}">
 		{{ recipe.name }}
 	</a>
 	<br />
@@ -21,7 +21,7 @@
 <h2>Ingredient Categories</h2>
 
 {% for category in categories %}
-	<a href="/ingredients/{{ category.slug }}">
+	<a href="{% url 'ingredient_category' category.slug %}">
 		{{ category.name }}
 	</a>
 	<br />

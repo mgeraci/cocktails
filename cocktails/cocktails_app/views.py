@@ -50,7 +50,7 @@ def recipe(request, slug):
 
 def search(request, slug):
     q = slug.lower()
-    ingredient_res = []
+    ingredient_res = set()
     recipe_res = []
 
     # TODO don't search with fewer than 3 chars
@@ -60,7 +60,7 @@ def search(request, slug):
 
     for ingredient in ingredients:
         if ingredient.name.lower().find(q) >= 0:
-            ingredient_res.append(ingredient)
+            ingredient_res.add(ingredient)
 
     for recipe in recipes:
         print recipe.name
@@ -74,7 +74,7 @@ def search(request, slug):
                 print 'ingredient step'
 
                 if step.ingredient.name.lower().find(q) >= 0:
-                    ingredient_res.append(step.ingredient)
+                    ingredient_res.add(step.ingredient)
 
     if not is_safe(q):
         q = "No special characters allowed"
