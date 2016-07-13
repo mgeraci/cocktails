@@ -7,6 +7,7 @@ from cocktails_app.models import (
     ActionStep,
     Action,
     Unit,
+    Source,
 )
 
 
@@ -41,8 +42,13 @@ class ActionAdmin(admin.ModelAdmin):
     pass
 
 
+class SourceAdmin(admin.ModelAdmin):
+    pass
+
+
 admin.site.register(Ingredient, IngredientAdmin)
 admin.site.register(IngredientCategory, IngredientCategoryAdmin)
 admin.site.register(Recipe, RecipeAdmin)
 admin.site.register(Action, ActionAdmin)
 admin.site.register(Unit, UnitAdmin)
+admin.site.register(Source, SourceAdmin)

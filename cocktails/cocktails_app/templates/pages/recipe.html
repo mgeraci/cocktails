@@ -6,6 +6,12 @@
 
 <h1>{{ recipe.name }}</h1>
 
+{% if recipe.source %}
+	from {{ recipe.source }}
+	<br />
+	<br />
+{% endif %}
+
 <ul>
 	{% for step in steps %}
 		<li>

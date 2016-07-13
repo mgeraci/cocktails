@@ -4,9 +4,17 @@ from django.template.defaultfilters import slugify
 from util.model import RealInstanceProvider
 
 
+class Source(models.Model):
+    name = models.CharField(max_length=200)
+
+    def __unicode__(self):
+        return self.name
+
+
 class Recipe(models.Model):
     name = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, blank=True)
+    source = models.ForeignKey(Source, blank=True, default='')
 
     class Meta:
         ordering = ['name']
