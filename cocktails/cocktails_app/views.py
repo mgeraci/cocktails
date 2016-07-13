@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.shortcuts import render, get_object_or_404
+from django import forms
 from cocktails.localsettings import STATIC_URL
 from util.view import is_safe
 
@@ -9,6 +10,11 @@ from cocktails_app.models import Ingredient
 from cocktails_app.models import Recipe
 
 
+class search_form(forms.Form):
+    query = forms.CharField(required=False, label="Search",
+            widget=forms.TextInput(
+                attrs={'placeholder': 'e.g., Rye or Sazerac'}))
+
 def index(request):
     categories = IngredientCategory.objects.all()
     recipes = Recipe.objects.all()
@@ -16,6 +22,7 @@ def index(request):
     context = {
         'categories': categories,
         'recipes': recipes,
+        'search_form': search_form(),
     }
 
     return render(request, 'pages/index.html', context)
@@ -71,8 +78,11 @@ def ingredient(request, slug):
     return render(request, 'pages/ingredient.html', context)
 
 
-def search(request, slug):
-    q = slug.lower()
+def search(request):
+    if request.GET.get('query'):
+        q_orig = request.GET.get('query')
+        q = q_orig.lower()
+
     ingredient_res = set()
     recipe_res = []
 
@@ -100,7 +110,7 @@ def search(request, slug):
         q = "No special characters allowed"
 
     context = {
-        'query': slug,
+        'query': q_orig,
     }
 
     if len(recipe_res) > 0:
