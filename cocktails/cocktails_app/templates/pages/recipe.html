@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% block title %}{{ recipe.name }} | Cocktails{% endblock %}
-{% block bodyclass %}index{% endblock %}
+{% block bodyclass %}recipe{% endblock %}
+
+{% load recipe_extras %}
 
 {% block content %}
 
@@ -24,7 +26,7 @@
 <ul>
 	{% for step in steps %}
 		<li>
-			{{ step.recipe_print }}
+			{{ step.recipe_print|format_value }}
 		</li>
 	{% endfor %}
 </ul>
