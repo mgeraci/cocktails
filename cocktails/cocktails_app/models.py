@@ -11,10 +11,29 @@ class Source(models.Model):
         return self.name
 
 
+class Glass(models.Model):
+    name = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=200, blank=True)
+
+    class Meta:
+        ordering = ['name']
+
+    # add a slug on save, if one doesn't exist
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+
+        super(Glass, self).save(*args, **kwargs)
+
+    def __unicode__(self):
+        return self.name
+
+
 class Recipe(models.Model):
     name = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, blank=True)
-    source = models.ForeignKey(Source, blank=True, default='')
+    source = models.ForeignKey(Source, blank=True, default='', null=True)
+    glass = models.ForeignKey(Glass, blank=True, default='', null=True)
 
     class Meta:
         ordering = ['name']

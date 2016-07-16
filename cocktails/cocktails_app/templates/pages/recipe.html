@@ -12,6 +12,15 @@
 	<br />
 {% endif %}
 
+{% if recipe.glass %}
+	<span class="{{ recipe.glass.slug }}">
+		{{ recipe.glass.name }}
+	</span>
+	glass
+	<br />
+	<br />
+{% endif %}
+
 <ul>
 	{% for step in steps %}
 		<li>
