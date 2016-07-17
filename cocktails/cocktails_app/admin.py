@@ -4,8 +4,6 @@ from cocktails_app.models import (
     IngredientCategory,
     Recipe,
     IngredientStep,
-    ActionStep,
-    Action,
     Unit,
     Source,
     Glass,
@@ -24,22 +22,13 @@ class IngredientStepInline(admin.TabularInline):
     model = IngredientStep
 
 
-class ActionStepInline(admin.TabularInline):
-    model = ActionStep
-
-
 class RecipeAdmin(admin.ModelAdmin):
     inlines = [
-        ActionStepInline,
         IngredientStepInline,
     ]
 
 
 class UnitAdmin(admin.ModelAdmin):
-    pass
-
-
-class ActionAdmin(admin.ModelAdmin):
     pass
 
 
@@ -54,7 +43,6 @@ class GlassAdmin(admin.ModelAdmin):
 admin.site.register(Ingredient, IngredientAdmin)
 admin.site.register(IngredientCategory, IngredientCategoryAdmin)
 admin.site.register(Recipe, RecipeAdmin)
-admin.site.register(Action, ActionAdmin)
 admin.site.register(Unit, UnitAdmin)
 admin.site.register(Source, SourceAdmin)
 admin.site.register(Glass, GlassAdmin)

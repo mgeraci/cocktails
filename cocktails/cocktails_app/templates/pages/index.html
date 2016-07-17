@@ -16,23 +16,29 @@
 
 <h2>Recipes</h2>
 
-{% for recipe in recipes %}
-	<a href="{% url 'recipe_url' recipe.slug %}">
-		{{ recipe.name }}
-	</a>
-	<br />
-{% endfor %}
+<ul>
+	{% for recipe in recipes %}
+		<li>
+			<a href="{% url 'recipe_url' recipe.slug %}">
+				{{ recipe.name }}
+			</a>
+		</li>
+	{% endfor %}
+</ul>
 
 <br />
 <br />
 
 <h2>Browse by ingredient</h2>
 
-{% for category in categories %}
-	<a href="{% url 'ingredient_category' category.slug %}">
-		{{ category.name }}
-	</a>
-	<br />
-{% endfor %}
+<ul>
+	{% for category in categories %}
+		<li>
+			<a href="{% url 'ingredient_category' category.slug %}">
+				{{ category.name }}
+			</a>
+		</li>
+	{% endfor %}
+</ul>
 
 {% endblock %}

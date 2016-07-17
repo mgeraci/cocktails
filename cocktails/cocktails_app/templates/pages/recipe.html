@@ -31,4 +31,10 @@
 	{% endfor %}
 </ul>
 
+{% if recipe.directions %}
+	<br />
+	<br />
+	{{ recipe.directions }}
+{% endif %}
+
 {% endblock %}

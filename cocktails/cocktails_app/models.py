@@ -34,6 +34,7 @@ class Recipe(models.Model):
     slug = models.SlugField(max_length=200, blank=True)
     source = models.ForeignKey(Source, blank=True, default='', null=True)
     glass = models.ForeignKey(Glass, blank=True, default='', null=True)
+    directions = models.TextField(blank=True)
 
     class Meta:
         ordering = ['name']
@@ -58,23 +59,6 @@ class Step(models.Model, RealInstanceProvider):
 
     def __unicode__(self):
         return u'{} - {}'.format(self.recipe, self.order)
-
-
-class Action(models.Model):
-    name = models.CharField(max_length=300)
-
-    def __unicode__(self):
-        return self.name
-
-
-class ActionStep(Step):
-    action = models.ForeignKey(Action)
-
-    def recipe_print(self):
-        return self.action.name
-
-    def __unicode__(self):
-        return self.action.name
 
 
 class IngredientCategory(models.Model):
