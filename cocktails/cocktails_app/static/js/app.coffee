@@ -1,4 +1,6 @@
 $ = require("jquery")
+Fastclick = require("fastclick")
+modernizr = require("./vendor/modernizr.js")
 
-module.exports = {
-}
+Fastclick.attach(document.body)
+

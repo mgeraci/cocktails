@@ -1,6 +1,10 @@
 // variables
 ///////////////////////////////////////////////////////////////////////////////
 
+$purple: #4a3d4c
+$pink: #8a504d
+$brown: #b57226
+$tan: #bf9f6b
 
 
 // global includes
@@ -8,6 +12,8 @@
 
 @import "bourbon/bourbon"
 @import "reset.css"
+@import "fonts"
+@import "mixins"
 
 
 // general styles
@@ -17,10 +23,13 @@
   box-sizing: border-box
 
 body
-  background: lightgray
+  background: $purple
   padding: 20px
-  color: rebeccapurple
-  font-family: helvetica neue, helvetica, arial, sans serif
+  color: $tan
+  font-family: "body", helvetica neue, helvetica, arial, sans serif
+
+a
+  @include link($tan, darken($tan, 10%))
 
 h1
   font-size: 20px

@@ -1,12 +1,29 @@
 @import url(reset.css);
+@font-face {
+  font-family: "body";
+  src: url("../fonts/body.eot?#iefix") format("embedded-opentype"), url("../fonts/body.woff") format("woff"), url("../fonts/body.ttf") format("truetype"), url("../fonts/body.svg#Body") format("svg");
+  font-weight: normal;
+  font-style: normal; }
 * {
   box-sizing: border-box; }
 
 body {
-  background: lightgray;
+  background: #4a3d4c;
   padding: 20px;
-  color: rebeccapurple;
-  font-family: helvetica neue, helvetica, arial, sans serif; }
+  color: #bf9f6b;
+  font-family: "body", helvetica neue, helvetica, arial, sans serif; }
+
+a {
+  text-decoration: none;
+  background-repeat: repeat-x;
+  background-size: 2px 2px;
+  background-position: 0 92%; }
+  a, a:visited {
+    color: #bf9f6b;
+    background-image: linear-gradient(to bottom, transparent 50%, rgba(191, 159, 107, 0.6) 50%); }
+  .no-touchevents a:hover, .no-touchevents a:active {
+    color: #ac874b;
+    background-image: linear-gradient(to bottom, transparent 50%, rgba(172, 135, 75, 0.6) 50%); }
 
 h1 {
   font-size: 20px;
