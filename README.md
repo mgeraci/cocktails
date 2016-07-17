@@ -12,19 +12,20 @@ Installation
 * `pip install -r requirements.txt`
 * add the file `cocktails/cocktails/localsettings.py`, with the following contents:
 
-	DEBUG = True
-	STATIC_ROOT = 'staticfiles'
-	STATIC_URL = '/static/'
-	SECRET_KEY = '[your secret key]'
+    DEBUG = True
+    STATIC_ROOT = 'staticfiles'
+    STATIC_URL = '/static/'
+    SECRET_KEY = '[your secret key]'
 
-	DATABASES = {
-			'default': {
-					'ENGINE': 'django.db.backends.mysql',
-					'NAME': '[your database name]',
-					'USER': '[your database user]',
-					'PASSWORD': '[your database user password]'
-			}
-	}
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': '[your database name]',
+            'USER': '[your database user]',
+            'PASSWORD': '[your database user password]'
+        }
+    }
+
 * `./cocktails/manage.py migrate`
 * `./cocktails/manage.py runserver`
 
