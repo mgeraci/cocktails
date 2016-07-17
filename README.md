@@ -1,8 +1,15 @@
-cocktails
+Cocktails
 =========
 
 Cocktails is a simple web app to manage cocktail recipes. It's written in
 Django.
+
+Installation
+------------
+
+* clone the repo
+* `mkvirtualenv cocktails`
+* `pip install -r requirements.txt`
 
 CSS and JS
 ----------

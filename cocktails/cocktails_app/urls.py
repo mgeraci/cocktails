@@ -15,5 +15,3 @@ urlpatterns = [
     url(r'^recipe/(?P<slug>[^/]+)/$', views.recipe, name='recipe_url'),
     url(r'^search/$', views.search, name='search_url'),
 ]
-
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
