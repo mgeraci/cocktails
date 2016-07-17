@@ -1,14 +1,6 @@
 import os
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '2lot@0i0s1x837s2@dia+nr5^pnvc@vsfqovv+7#bhl$9h(#86'
 
 ALLOWED_HOSTS = []
 
@@ -18,9 +10,9 @@ from localsettings import (
     DATABASES,
     STATIC_ROOT,
     STATIC_URL,
+    SECRET_KEY
 )
 
-# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
