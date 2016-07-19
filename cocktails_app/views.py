@@ -33,7 +33,7 @@ def index(request):
 
 def source(request, slug):
     source = get_object_or_404(Source, slug=slug)
-    recipes = Recipe.objects.select_related().filter(source = source.id)
+    recipes = Recipe.objects.filter(source=source.id)
 
     context = {
         'source': source,
