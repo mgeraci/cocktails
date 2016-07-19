@@ -61,6 +61,8 @@ Mostly for my own use, to deploy:
 		WSGIDaemonProcess michael_cocktails processes=2 threads=12 python-path=[path-to-app]/michael_cocktails:[path-to-app]/michael_cocktails/cocktails:/home/katur/.virtualenvs/michael_cocktails/lib/python2.7/site-packages:/home/    katur/.virtualenvs/michael_cocktails/lib/python2.7 27 WSGIPythonPath [path-to-app]/michael_cocktails:[path-to-app]/michael_cocktails/cocktails:/home/katur/.virtualenvs/michael_cocktails/lib/python2.7/site-packages:/home/katur/.virtualenvs/michael_cocktails/lib/python2.7
 		WSGIScriptAlias / [path-to-app]/michael_cocktails/cocktails/cocktail/wsgi.py
 
+* change any settings necessary in the static application, like to serve fonts
+
 To deploy updates:
 
 * `git pull`
