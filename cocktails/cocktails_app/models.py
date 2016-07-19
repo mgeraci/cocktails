@@ -6,6 +6,14 @@ from util.model import RealInstanceProvider
 
 class Source(models.Model):
     name = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=200, blank=True)
+
+    # add a slug on save, if one doesn't exist
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+
+        super(Source, self).save(*args, **kwargs)
 
     def __unicode__(self):
         return self.name

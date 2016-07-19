@@ -6,10 +6,13 @@
 
 {% block content %}
 
-<h1>{{ recipe.name }}</h1>
+<h2>{{ recipe.name }}</h2>
 
 {% if recipe.source %}
-	from {{ recipe.source }}
+	from
+	<a href="{% url 'source_url' recipe.source.slug %}">
+		{{ recipe.source.name }}
+	</a>
 	<br />
 	<br />
 {% endif %}
@@ -32,7 +35,6 @@
 </ul>
 
 {% if recipe.directions %}
-	<br />
 	<br />
 	{{ recipe.directions }}
 {% endif %}

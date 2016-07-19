@@ -34,8 +34,23 @@
 <ul>
 	{% for category in categories %}
 		<li>
-			<a href="{% url 'ingredient_category' category.slug %}">
+			<a href="{% url 'ingredient_category_url' category.slug %}">
 				{{ category.name }}
+			</a>
+		</li>
+	{% endfor %}
+</ul>
+
+<br />
+<br />
+
+<h2>Browse by source</h2>
+
+<ul>
+	{% for source in sources %}
+		<li>
+			<a href="{% url 'source_url' source.slug %}">
+				{{ source.name }}
 			</a>
 		</li>
 	{% endfor %}

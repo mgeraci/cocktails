@@ -42,3 +42,18 @@ run:
 Then to start gulp watching and compiling the files, run:
 
 	gulp
+
+Deployment Notes
+----------------
+
+Mostly for my own use, to deploy:
+
+* create a python application for the app and a static php application for the
+  static files
+* create domains for each
+* create a database and database user, add those to localsettings.py
+
+To deploy updates:
+
+* `git pull`
+* `./cocktails/manage.py collectstatic`

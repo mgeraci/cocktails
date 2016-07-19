@@ -11,7 +11,9 @@ body {
   background: #4a3d4c;
   padding: 20px;
   color: #bf9f6b;
-  font-family: "body", helvetica neue, helvetica, arial, sans serif; }
+  font-family: "body", helvetica neue, helvetica, arial, sans serif;
+  font-size: 18px;
+  line-height: 24px; }
 
 a {
   text-decoration: none;
@@ -26,9 +28,9 @@ a {
     background-image: linear-gradient(to bottom, transparent 50%, rgba(172, 135, 75, 0.6) 50%); }
 
 h1 {
-  font-size: 20px;
-  padding-bottom: 20px; }
+  font-size: 30px;
+  padding-bottom: 26px; }
 
 h2 {
-  font-size: 18px;
-  padding-bottom: 10px; }
+  font-size: 24px;
+  padding-bottom: 12px; }

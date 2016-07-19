@@ -10,8 +10,9 @@ urlpatterns = [
 
     # main pages
     url(r'^$', views.index, name='index_url'),
-    url(r'^ingredients/(?P<slug>[^/]+)/$', views.ingredient_category, name='ingredient_category'),
+    url(r'^ingredients/(?P<slug>[^/]+)/$', views.ingredient_category, name='ingredient_category_url'),
     url(r'^ingredient/(?P<slug>[^/]+)/$', views.ingredient, name='ingredient_url'),
+    url(r'^source/(?P<slug>[^/]+)/$', views.source, name='source_url'),
     url(r'^recipe/(?P<slug>[^/]+)/$', views.recipe, name='recipe_url'),
     url(r'^search/$', views.search, name='search_url'),
 ]

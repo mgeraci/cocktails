@@ -8,6 +8,7 @@ from util.view import is_safe
 from cocktails_app.models import IngredientCategory
 from cocktails_app.models import Ingredient
 from cocktails_app.models import Recipe
+from cocktails_app.models import Source
 
 
 class search_form(forms.Form):
@@ -18,14 +19,28 @@ class search_form(forms.Form):
 def index(request):
     categories = IngredientCategory.objects.all()
     recipes = Recipe.objects.all()
+    sources = Source.objects.all()
 
     context = {
         'categories': categories,
         'recipes': recipes,
+        'sources': sources,
         'search_form': search_form(),
     }
 
     return render(request, 'pages/index.html', context)
+
+
+def source(request, slug):
+    source = get_object_or_404(Source, slug=slug)
+    recipes = Recipe.objects.select_related().filter(source = source.id)
+
+    context = {
+        'source': source,
+        'recipes': recipes,
+    }
+
+    return render(request, 'pages/source.html', context)
 
 
 def ingredient_category(request, slug):
