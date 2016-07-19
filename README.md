@@ -26,8 +26,8 @@ Installation
         }
     }
 
-* `./cocktails/manage.py migrate`
-* `./cocktails/manage.py runserver`
+* `./manage.py migrate`
+* `./manage.py runserver`
 
 CSS and JS
 ----------
@@ -65,3 +65,4 @@ To deploy updates:
 
 * `git pull`
 * `./cocktails/manage.py collectstatic`
+* restart apache, if necessary, with `./apache2/bin/restart`
