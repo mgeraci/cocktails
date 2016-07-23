@@ -33,9 +33,50 @@ a
   @include link($tan, darken($tan, 10%))
 
 h1
-  font-size: 30px
-  padding-bottom: 26px
+  @include type(30px, 40px)
+
+  a
+    @include no-link
 
 h2
   font-size: 24px
   padding-bottom: 12px
+
+.page
+  @include center
+  width: 100%
+  max-width: 800px
+
+  &-header,
+  &-content
+    @include clearfix
+    display: block
+    width: 100%
+
+  &-header
+    margin-bottom: 40px
+
+    &-title
+      float: left
+
+    &-search
+      float: right
+
+      input[type=text]
+        width: 200px
+        padding: 8px
+        font-size: 14px
+        border-radius: 2px
+        border: 0
+
+        .no-touchevents &
+          opacity: 0.3
+          @include transition(opacity 75ms linear)
+
+          &:focus,
+          &:hover
+            opacity: 1
+            outline: none
+
+      button[type=submit]
+        display: none

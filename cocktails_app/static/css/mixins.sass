@@ -22,6 +22,10 @@
       color: $hover-color
       @include link-underline($hover-color)
 
+@mixin no-link
+  text-decoration: none
+  background-image: none
+
 @mixin bare-button
   padding: 0
   margin: 0

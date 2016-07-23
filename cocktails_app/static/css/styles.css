@@ -29,8 +29,51 @@ a {
 
 h1 {
   font-size: 30px;
-  padding-bottom: 26px; }
+  line-height: 40px; }
+  h1 a {
+    text-decoration: none;
+    background-image: none; }
 
 h2 {
   font-size: 24px;
   padding-bottom: 12px; }
+
+.page {
+  position: relative;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 800px; }
+  .page-header, .page-content {
+    display: block;
+    width: 100%; }
+    .page-header::after, .page-content::after {
+      clear: both;
+      content: "";
+      display: table; }
+  .page-header {
+    margin-bottom: 40px; }
+    .page-header-title {
+      float: left; }
+    .page-header-search {
+      float: right; }
+      .page-header-search input[type=text] {
+        width: 200px;
+        padding: 8px;
+        font-size: 14px;
+        border-radius: 2px;
+        border: 0; }
+        .no-touchevents .page-header-search input[type=text] {
+          opacity: 0.3;
+          -webkit-transition: opacity 75ms linear;
+          -moz-transition: opacity 75ms linear;
+          transition: opacity 75ms linear; }
+          .no-touchevents .page-header-search input[type=text]:focus, .no-touchevents .page-header-search input[type=text]:hover {
+            opacity: 1;
+            outline: none; }
+      .page-header-search button[type=submit] {
+        display: none; }

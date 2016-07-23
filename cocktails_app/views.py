@@ -11,11 +11,6 @@ from cocktails_app.models import Recipe
 from cocktails_app.models import Source
 
 
-class search_form(forms.Form):
-    query = forms.CharField(required=False, label='',
-            widget=forms.TextInput(
-                attrs={'placeholder': 'e.g., Rye or Sazerac'}))
-
 def index(request):
     categories = IngredientCategory.objects.all()
     recipes = Recipe.objects.all()
@@ -25,7 +20,6 @@ def index(request):
         'categories': categories,
         'recipes': recipes,
         'sources': sources,
-        'search_form': search_form(),
     }
 
     return render(request, 'pages/index.html', context)
