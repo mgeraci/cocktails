@@ -31,6 +31,10 @@ def format_value(step):
         elif fraction == '75':
             step = step.replace('.75', u'¾')
 
+        if whole == '0' and fraction == '0':
+            print step
+            step = re.sub(r'^\. ', '', step)
+
     return step
 
 

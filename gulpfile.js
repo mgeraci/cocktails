@@ -3,11 +3,11 @@ var webpack = require("webpack");
 var gutil = require("gulp-util");
 var sass = require('gulp-ruby-sass');
 
-var cssRoot = "./cocktails/cocktails_app/static/css/";
-var cssEntry = "cocktails/cocktails_app/static/css/styles.sass";
+var cssRoot = "./cocktails_app/static/css/";
+var cssEntry = "cocktails_app/static/css/styles.sass";
 var cssFiles = cssRoot + "**/*";
 
-var jsRoot = "./cocktails/cocktails_app/static/js/";
+var jsRoot = "./cocktails_app/static/js/";
 var jsEntry = jsRoot + "app.coffee";
 var jsFiles = jsRoot + "**/*";
 
