@@ -77,3 +77,6 @@ h2 {
             outline: none; }
       .page-header-search button[type=submit] {
         display: none; }
+
+.page-search-results {
+  margin-bottom: 40px; }

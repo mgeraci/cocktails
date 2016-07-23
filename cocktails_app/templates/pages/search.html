@@ -10,35 +10,49 @@
 	No results found
 {% endif %}
 
-{% if recipe_res %}
-	<h3>Recipes</h3>
-	<ul>
-		{% for result in recipe_res %}
-			<li>
-				<a href="{% url 'recipe_url' result.slug %}">
-					{{ result.name }}
-				</a>
-			</li>
-		{% endfor %}
-	</ul>
+{% if recipe_titles_res %}
+	<div class="page-search-results">
+		<h3>Recipes</h3>
+		<ul>
+			{% for result in recipe_titles_res %}
+				<li>
+					<a href="{% url 'recipe_url' result.slug %}">
+						{{ result.name }}
+					</a>
+				</li>
+			{% endfor %}
+		</ul>
+	</div>
 {% endif %}
 
-{% if ingredient_res and recipe_res %}
-	<br />
-	<br />
+{% if recipe_ingredients_res %}
+	<div class="page-search-results">
+		<h3>Recipes with matching ingredients</h3>
+		<ul>
+			{% for result in recipe_ingredients_res %}
+				<li>
+					<a href="{% url 'recipe_url' result.slug %}">
+						{{ result.name }}
+					</a>
+				</li>
+			{% endfor %}
+		</ul>
+	</div>
 {% endif %}
 
 {% if ingredient_res %}
-	<h3>Ingredients</h3>
-	<ul>
-		{% for result in ingredient_res %}
-			<li>
-				<a href="{% url 'ingredient_url' result.slug %}">
-					{{ result.name }}
-				</a>
-			</li>
-		{% endfor %}
-	</ul>
+	<div class="page-search-results">
+		<h3>Ingredients</h3>
+		<ul>
+			{% for result in ingredient_res %}
+				<li>
+					<a href="{% url 'ingredient_url' result.slug %}">
+						{{ result.name }}
+					</a>
+				</li>
+			{% endfor %}
+		</ul>
+	</div>
 {% endif %}
 
 {% endblock %}

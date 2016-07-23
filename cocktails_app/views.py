@@ -11,6 +11,12 @@ from cocktails_app.models import Recipe
 from cocktails_app.models import Source
 
 
+class search_form(forms.Form):
+    query = forms.CharField(required=False, label='',
+            widget=forms.TextInput(
+                attrs={'placeholder': 'e.g., Rye or Sazerac'}))
+
+
 def index(request):
     categories = IngredientCategory.objects.all()
     recipes = Recipe.objects.all()
@@ -20,6 +26,7 @@ def index(request):
         'categories': categories,
         'recipes': recipes,
         'sources': sources,
+        'search_form': search_form(),
     }
 
     return render(request, 'pages/index.html', context)
@@ -32,6 +39,7 @@ def source(request, slug):
     context = {
         'source': source,
         'recipes': recipes,
+        'search_form': search_form(),
     }
 
     return render(request, 'pages/source.html', context)
@@ -44,6 +52,7 @@ def ingredient_category(request, slug):
     context = {
         'category': category,
         'ingredients': ingredients,
+        'search_form': search_form(),
     }
 
     return render(request, 'pages/ingredients_category.html', context)
@@ -59,6 +68,7 @@ def recipe(request, slug):
     context = {
         'recipe': recipe,
         'steps': steps,
+        'search_form': search_form(),
     }
 
     return render(request, 'pages/recipe.html', context)
@@ -82,6 +92,7 @@ def ingredient(request, slug):
     context = {
         'ingredient': ingredient,
         'recipes': recipe_res,
+        'search_form': search_form(),
     }
 
     return render(request, 'pages/ingredient.html', context)
@@ -93,7 +104,8 @@ def search(request):
         q = q_orig.lower()
 
     ingredient_res = set()
-    recipe_res = []
+    recipe_ingredients_res = set()
+    recipe_titles_res = set()
 
     # TODO don't search with fewer than 3 chars
 
@@ -106,7 +118,7 @@ def search(request):
 
     for recipe in recipes:
         if recipe.name.lower().find(q) >= 0:
-            recipe_res.append(recipe)
+            recipe_titles_res.add(recipe)
 
         for step in recipe.step_set.all():
             step = step.get_actual_instance()
@@ -114,21 +126,26 @@ def search(request):
             if hasattr(step, 'ingredient'):
                 if step.ingredient.name.lower().find(q) >= 0:
                     ingredient_res.add(step.ingredient)
+                    recipe_ingredients_res.add(recipe)
 
     if not is_safe(q):
         q = "No special characters allowed"
 
     context = {
         'query': q_orig,
+        'search_form': search_form(),
     }
 
-    if len(recipe_res) > 0:
-        context['recipe_res'] = recipe_res
+    if len(recipe_titles_res) > 0:
+        context['recipe_titles_res'] = recipe_titles_res
+
+    if len(recipe_ingredients_res) > 0:
+        context['recipe_ingredients_res'] = recipe_ingredients_res
 
     if len(ingredient_res) > 0:
         context['ingredient_res'] = ingredient_res
 
-    if len(ingredient_res) == 0 and len(recipe_res) == 0:
+    if len(ingredient_res) == 0 and len(recipe_ingredients_res) == 0 and len(recipe_titles_res) == 0:
         context['no_results'] = True
 
     return render(request, 'pages/search.html', context)

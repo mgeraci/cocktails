@@ -16,13 +16,8 @@
 					<a href="/">Cocktails</a>
 				</h1>
 
-				<form class="page-header-search" action="{{ search_url }}" method="get">
-					<input
-						type="text"
-						name="query"
-						placeholder="e.g., Rye or Sazerac"
-						value="{{ query }}"
-					/>
+				<form class="page-header-search" action="/search" method="get">
+					{{ search_form.as_p }}
 					<button type="submit">Submit</button>
 				</form>
 			</header>
