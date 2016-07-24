@@ -27,21 +27,27 @@ body
   background: $purple
   padding: 20px
   color: $tan
-  font-family: "body", helvetica neue, helvetica, arial, sans serif
-  @include type(18px, 24px)
+  font-family: "body-light", helvetica neue, helvetica, arial, sans serif
+  @include type(20px, 26px)
 
 a
   @include link($tan, darken($tan, 10%))
 
+h1,
+h2,
+h3,
+h4
+  font-family: "body"
+
 h1
-  @include type(30px, 40px)
+  @include type(33px, 42px)
 
   a
     @include no-link
 
 h2
-  font-size: 24px
-  padding-bottom: 24px
+  font-size: 28px
+  padding-bottom: 26px
 
 .page
   @include center
@@ -57,6 +63,10 @@ h2
 
   &-header
     margin-bottom: 40px
+
+    @include mobile
+      padding-bottom: 8px
+      border-bottom: 1px solid lighten($purple, 7%)
 
     &-title
       float: left
@@ -102,14 +112,19 @@ h2
 
 .page-header-search-icon
   @include bare-button
-  float: right
-  position: relative
-  top: 5px
-  margin-left: 7px
+  position: absolute
+  top: -4px
+  right: -10px
   display: block
-  width: 20px
-  height: 20px
-  @include icon("search")
+  width: 50px
+  height: 50px
+  text-align: center
+
+  &-image
+    @include icon("search")
+    display: inline-block
+    width: 20px
+    height: 20px
 
   @include desktop
     display: none
@@ -119,3 +134,4 @@ h2
 ///////////////////////////////////////////////////////////////////////////////
 
 @import "page-search"
+@import "page-recipe"

@@ -1,7 +1,13 @@
 $font-root: '../fonts/'
 
-@font-face
-  font-family: 'body'
-  src: url('#{$font-root}body.eot?#iefix') format('embedded-opentype'), url('#{$font-root}body.woff') format('woff'), url('#{$font-root}body.ttf') format('truetype'), url('#{$font-root}body.svg#Body') format('svg')
+@mixin font($name)
+  font-family: $name
+  src: url('#{$font-root}#{$name}.eot?#iefix') format('embedded-opentype'), url('#{$font-root}#{$name}.woff') format('woff'), url('#{$font-root}#{$name}.ttf') format('truetype'), url('#{$font-root}#{$name}.svg##{$name}') format('svg')
   font-weight: normal
   font-style: normal
+
+@font-face
+  @include font('body')
+
+@font-face
+  @include font('body-light')

@@ -1,9 +1,14 @@
+// style mixins
+///////////////////////////////////////////////////////////////////////////////
+
 @mixin type($font-size, $line-height)
   font-size: $font-size
   line-height: $line-height
 
+
 @mixin link-underline($color)
   background-image: linear-gradient(to bottom, rgba(0,0,0,0) 50%, rgba($color ,0.6) 50%)
+
 
 @mixin link($default-color, $hover-color)
   text-decoration: none
@@ -22,9 +27,11 @@
       color: $hover-color
       @include link-underline($hover-color)
 
+
 @mixin no-link
   text-decoration: none
   background-image: none
+
 
 @mixin bare-button
   padding: 0
@@ -35,14 +42,20 @@
   font-family: inherit
   outline: none
 
+
 @mixin center
   position: relative
   left: 50%
   @include transform(translateX(-50%))
 
+
+// media queries
+///////////////////////////////////////////////////////////////////////////////
+
 @mixin mobile
   @media (max-width: 500px)
     @content
+
 
 @mixin desktop
   @media (min-width: 500px)

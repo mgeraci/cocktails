@@ -6,37 +6,40 @@
 
 {% block content %}
 
-<h2>{{ recipe.name }}</h2>
+<div class="page-recipe-content">
+	<h2 class="page-recipe-content-title">
+		{{ recipe.name }}
+	</h2>
 
-{% if recipe.source %}
-	from
-	<a href="{% url 'source_url' recipe.source.slug %}">
-		{{ recipe.source.name }}
-	</a>
-	<br />
-	<br />
-{% endif %}
+	<ul class="page-recipe-content-steps">
+		{% for step in steps %}
+			<li>
+				{{ step.recipe_print|format_value }}
+			</li>
+		{% endfor %}
+	</ul>
 
-{% if recipe.glass %}
-	<span class="{{ recipe.glass.slug }}">
-		{{ recipe.glass.name }}
-	</span>
-	glass
-	<br />
-	<br />
-{% endif %}
+	{% if recipe.directions %}
+		<br />
+		{{ recipe.directions }}
+	{% endif %}
 
-<ul>
-	{% for step in steps %}
-		<li>
-			{{ step.recipe_print|format_value }}
-		</li>
-	{% endfor %}
-</ul>
+	{% if recipe.source %}
+		<br />
+		<br />
+		from
+		<a href="{% url 'source_url' recipe.source.slug %}">
+			{{ recipe.source.name }}</a>
+	{% endif %}
 
-{% if recipe.directions %}
-	<br />
-	{{ recipe.directions }}
-{% endif %}
+	{% if recipe.glass %}
+		<br />
+		<br />
+		<span class="{{ recipe.glass.slug }}">
+			{{ recipe.glass.name }}
+		</span>
+		glass
+	{% endif %}
+</div>
 
 {% endblock %}

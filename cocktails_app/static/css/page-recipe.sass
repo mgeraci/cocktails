@@ -1,0 +1,37 @@
+.page-recipe
+  &-content
+    margin-top: 50px
+    @include center
+    max-width: 600px
+
+    &-title
+      position: relative
+      display: block
+      width: 100%
+      padding-bottom: 20px
+      margin-bottom: 40px
+      text-align: center
+      border-bottom: 1px solid $brown
+
+      $dot-size: 8px
+      $dot-border-size: 6px
+      $dot-size-total: $dot-size + $dot-border-size * 2
+
+      &:after
+        content: ""
+        display: block
+        position: absolute
+        bottom: $dot-size-total * -0.5 - 1
+        left: 50%
+        margin-left: $dot-size-total * -0.5
+        width: $dot-size
+        height: $dot-size
+        border-radius: 50%
+        background: $tan
+        border: $dot-border-size solid $purple
+
+    &-steps
+      @include type(25px, 36px)
+
+      @include mobile
+        @include type(20px, 28px)
