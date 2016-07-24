@@ -39,3 +39,11 @@
   position: relative
   left: 50%
   @include transform(translateX(-50%))
+
+@mixin mobile
+  @media (max-width: 500px)
+    @content
+
+@mixin desktop
+  @media (min-width: 500px)
+    @content

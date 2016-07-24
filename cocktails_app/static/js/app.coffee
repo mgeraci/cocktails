@@ -1,6 +1,10 @@
-$ = require("jquery")
+# vendor
 Fastclick = require("fastclick")
 modernizr = require("./vendor/modernizr.js")
 
-Fastclick.attach(document.body)
+# pages
+Search = require("./search.coffee")
 
+# execute
+Fastclick.attach(document.body)
+Search.init()

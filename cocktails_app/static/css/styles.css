@@ -36,7 +36,7 @@ h1 {
 
 h2 {
   font-size: 24px;
-  padding-bottom: 12px; }
+  padding-bottom: 24px; }
 
 .page {
   position: relative;
@@ -49,6 +49,7 @@ h2 {
   width: 100%;
   max-width: 800px; }
   .page-header, .page-content {
+    position: relative;
     display: block;
     width: 100%; }
     .page-header::after, .page-content::after {
@@ -59,24 +60,62 @@ h2 {
     margin-bottom: 40px; }
     .page-header-title {
       float: left; }
+
+.page-header-search {
+  float: right; }
+  @media (max-width: 500px) {
     .page-header-search {
-      float: right; }
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: none; }
+      .has-search .page-header-search {
+        display: block; } }
+  .page-header-search input[type=text] {
+    width: 200px;
+    padding: 8px;
+    font-size: 14px;
+    border-radius: 2px;
+    border: 0;
+    opacity: 0.3; }
+    @media (max-width: 500px) {
       .page-header-search input[type=text] {
-        width: 200px;
-        padding: 8px;
-        font-size: 14px;
-        border-radius: 2px;
-        border: 0; }
-        .no-touchevents .page-header-search input[type=text] {
-          opacity: 0.3;
-          -webkit-transition: opacity 75ms linear;
-          -moz-transition: opacity 75ms linear;
-          transition: opacity 75ms linear; }
-          .no-touchevents .page-header-search input[type=text]:focus, .no-touchevents .page-header-search input[type=text]:hover {
-            opacity: 1;
-            outline: none; }
-      .page-header-search button[type=submit] {
-        display: none; }
+        width: 100%;
+        opacity: 1; } }
+    .no-touchevents .page-header-search input[type=text] {
+      -webkit-transition: opacity 75ms linear;
+      -moz-transition: opacity 75ms linear;
+      transition: opacity 75ms linear; }
+      .no-touchevents .page-header-search input[type=text]:focus, .no-touchevents .page-header-search input[type=text]:hover {
+        opacity: 1;
+        outline: none; }
+    .touchevents .page-header-search input[type=text] {
+      opacity: 1; }
+  .page-header-search button[type=submit] {
+    display: none; }
+
+.page-header-search-icon {
+  padding: 0;
+  margin: 0;
+  background: none;
+  border: none;
+  font-size: inherit;
+  font-family: inherit;
+  outline: none;
+  float: right;
+  position: relative;
+  top: 5px;
+  margin-left: 7px;
+  display: block;
+  width: 20px;
+  height: 20px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAiIGhlaWdodD0iMzAiIHZpZXdCb3g9IjAgMCAzMCAzMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+PHRpdGxlPnNlYXJjaDwvdGl0bGU+PGRlZnM+PGNpcmNsZSBpZD0iYSIgY3g9IjEwLjUiIGN5PSIxMC41IiByPSIxMC41Ii8+PG1hc2sgaWQ9ImIiIHg9IjAiIHk9IjAiIHdpZHRoPSIyMSIgaGVpZ2h0PSIyMSIgZmlsbD0iI2ZmZiI+PHVzZSB4bGluazpocmVmPSIjYSIvPjwvbWFzaz48L2RlZnM+PGcgc3Ryb2tlPSIjQkY5RjZCIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjx1c2UgbWFzaz0idXJsKCNiKSIgc3Ryb2tlLXdpZHRoPSI2IiB4bGluazpocmVmPSIjYSIvPjxwYXRoIGQ9Ik0xNyAxOGwxMS41IDEwLjUiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PC9nPjwvc3ZnPg==); }
+  @media (min-width: 500px) {
+    .page-header-search-icon {
+      display: none; } }
 
 .page-search-results {
   margin-bottom: 40px; }
