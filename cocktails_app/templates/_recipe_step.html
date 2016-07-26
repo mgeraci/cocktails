@@ -3,13 +3,16 @@
 <li class="step">
 
 	{% if step.amount %}
-		<span class="step-amount">
+		<span class="step-amount" data-original-amount="{{ step.amount }}">
 			{{ step.amount|format_value }}
 		</span>
 	{% endif %}
 
 	{% if step.unit and step.amount %}
-		<span class="step-unit">
+		<span
+				class="step-unit"
+				data-unit-singular="{{ step.unit.name }}"
+				data-unit-plural="{{ step.unit.plural }}">
 			{% if step.amount > 1 %}
 				{{ step.unit.plural }}
 			{% else %}

@@ -35,3 +35,58 @@
 
       @include mobile
         @include type(20px, 28px)
+
+  $q-color: $pink
+  $q-form-color: lighten($tan, 10%)
+  $q-br: 4px
+  .quantity
+    position: relative
+    width: 230px
+    height: 60px
+    margin-top: 6px
+    border-radius: $q-br
+
+    @include mobile
+      width: 100%
+
+    &-button,
+    &-input
+      @include bare-button
+      height: 100%
+      font-size: 28px
+
+    &-button
+      position: absolute
+      top: 0
+      width: 30%
+      background: $q-color
+      color: $q-form-color
+      @include transition(background 75ms linear)
+
+      @include mobile
+        width: 17%
+
+      &:active
+        background: darken($q-color, 5%)
+
+      &-text
+        position: relative
+        bottom: 2px
+
+      &--decrement
+        left: 0
+        @include border-left-radius($q-br)
+
+      &--increment
+        right: 0
+        @include border-right-radius($q-br)
+
+    &-input
+      width: 100%
+      border: none
+      outline: none
+      text-align: center
+      background: $q-form-color
+      border-radius: $q-br + 1
+      font-family: body-light
+      color: $q-color

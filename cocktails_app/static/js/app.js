@@ -44,7 +44,7 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Fastclick, Search, modernizr;
+	var Fastclick, Recipe, Search, modernizr;
 
 	Fastclick = __webpack_require__(1);
 
@@ -52,9 +52,13 @@
 
 	Search = __webpack_require__(3);
 
+	Recipe = __webpack_require__(5);
+
 	Fastclick.attach(document.body);
 
 	Search.init();
+
+	Recipe.init();
 
 
 /***/ },
@@ -10774,6 +10778,116 @@
 
 	return jQuery;
 	}));
+
+
+/***/ },
+/* 5 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var $;
+
+	$ = __webpack_require__(4);
+
+	module.exports = {
+	  directions: {
+	    increment: "increment",
+	    decrement: "decrement"
+	  },
+	  init: function() {
+	    if (!$(".page-recipe").length) {
+	      return;
+	    }
+	    this.steps = $(".step");
+	    return this.listen();
+	  },
+	  listen: function() {
+	    return $(".quantity-button").on("click tap", (function(_this) {
+	      return function(e) {
+	        var button, direction, field;
+	        button = $(e.currentTarget);
+	        field = button.closest(".quantity").find("input");
+	        if (button.hasClass("quantity-button--increment")) {
+	          direction = "increment";
+	        } else {
+	          direction = "decrement";
+	        }
+	        return _this.changeValue(field, direction);
+	      };
+	    })(this));
+	  },
+	  changeValue: function(field, direction) {
+	    var value;
+	    value = field.val();
+	    if (direction === this.directions.increment) {
+	      value++;
+	    } else if (direction === this.directions.decrement) {
+	      value--;
+	    }
+	    if (value < 1) {
+	      value = 1;
+	    } else if (value > 30) {
+	      value = 30;
+	    }
+	    field.val(value);
+	    return this.updateRecipeQuantities(value);
+	  },
+	  updateRecipeQuantities: function(quantity) {
+	    var amount, i, len, newAmount, originalAmount, ref, results, step, unit;
+	    ref = this.steps;
+	    results = [];
+	    for (i = 0, len = ref.length; i < len; i++) {
+	      step = ref[i];
+	      step = $(step);
+	      amount = step.find(".step-amount");
+	      unit = step.find(".step-unit");
+	      if (!amount.length) {
+	        continue;
+	      }
+	      originalAmount = parseFloat($(amount).data("original-amount"));
+	      newAmount = originalAmount * quantity;
+	      amount.text(this._formatAmount(newAmount));
+	      if (newAmount > 1) {
+	        results.push(unit = unit.text(unit.data("unit-plural")));
+	      } else {
+	        results.push(unit = unit.text(unit.data("unit-singular")));
+	      }
+	    }
+	    return results;
+	  },
+	  _formatAmount: function(amount) {
+	    var fraction, i, len, matches, num, ref, ref1, step, whole;
+	    step = String(amount);
+	    matches = step.match(/\d+\.\d+/);
+	    if (!(matches != null ? matches.length : void 0)) {
+	      return step;
+	    }
+	    ref = step.match(/\d+\.\d+/);
+	    for (i = 0, len = ref.length; i < len; i++) {
+	      num = ref[i];
+	      ref1 = num.split('.'), whole = ref1[0], fraction = ref1[1];
+	      if (whole === '0') {
+	        step = step.replace('0', '');
+	      }
+	      if (fraction === '0') {
+	        step = step.replace(num, whole);
+	      } else if (fraction === '25') {
+	        step = step.replace('.25', '¼');
+	      } else if (fraction === '33') {
+	        step = step.replace('.33', '⅓');
+	      } else if (fraction === '5') {
+	        step = step.replace('.5', '½');
+	      } else if (fraction === '66') {
+	        step = step.replace('.66', '⅔');
+	      } else if (fraction === '75') {
+	        step = step.replace('.75', '¾');
+	      }
+	      if (whole === '0' && fraction === '0') {
+	        step = step.replace(/^\. /, '', step);
+	      }
+	    }
+	    return step;
+	  }
+	};
 
 
 /***/ }

@@ -9,7 +9,6 @@ register = template.Library()
 value_re = re.compile('\d+\.\d+')
 
 def format_value(step):
-    print step
     step = str(step)
     iterator = re.finditer(value_re, step)
 
@@ -34,7 +33,6 @@ def format_value(step):
             step = step.replace('.75', u'¾')
 
         if whole == '0' and fraction == '0':
-            print step
             step = re.sub(r'^\. ', '', step)
 
     return step
