@@ -61,13 +61,20 @@ def ingredient_category(request, slug):
 def recipe(request, slug):
     recipe = get_object_or_404(Recipe, slug=slug)
     steps = []
+    steps_data = []
 
     for step in recipe.step_set.all():
-        steps.append(step.get_actual_instance())
+        step = step.get_actual_instance()
+
+        if hasattr(step, "get_step_data"):
+            steps_data.append(step.get_step_data())
+
+        steps.append(step)
 
     context = {
         'recipe': recipe,
         'steps': steps,
+        'steps_data': steps_data,
         'search_form': search_form(),
     }
 

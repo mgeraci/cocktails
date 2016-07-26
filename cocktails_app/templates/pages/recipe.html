@@ -12,10 +12,8 @@
 	</h2>
 
 	<ul class="page-recipe-content-steps">
-		{% for step in steps %}
-			<li>
-				{{ step.recipe_print|format_value }}
-			</li>
+		{% for step in steps_data %}
+			{% include "_recipe_step.html" with step=step %}
 		{% endfor %}
 	</ul>
 

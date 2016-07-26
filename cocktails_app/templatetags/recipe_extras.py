@@ -9,6 +9,8 @@ register = template.Library()
 value_re = re.compile('\d+\.\d+')
 
 def format_value(step):
+    print step
+    step = str(step)
     iterator = re.finditer(value_re, step)
 
     for match in iterator:

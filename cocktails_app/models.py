@@ -123,5 +123,17 @@ class IngredientStep(Step):
         else:
             return u'{} {}'.format(self.amount, self.ingredient.name)
 
+    def get_step_data(self):
+        unit = None
+
+        if self.unit:
+            unit = self.unit
+
+        return {
+            'amount': self.amount,
+            'ingredient': self.ingredient.name,
+            'unit': unit,
+        }
+
     def __unicode__(self):
         return self.ingredient.name

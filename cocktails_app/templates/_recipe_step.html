@@ -1,0 +1,25 @@
+{% load recipe_extras %}
+
+<li class="step">
+
+	{% if step.amount %}
+		<span class="step-amount">
+			{{ step.amount|format_value }}
+		</span>
+	{% endif %}
+
+	{% if step.unit and step.amount %}
+		<span class="step-unit">
+			{% if step.amount > 1 %}
+				{{ step.unit.plural }}
+			{% else %}
+				{{ step.unit.name }}
+			{% endif %}
+		</span>
+	{% endif %}
+
+	<span class="step-ingredient">
+		{{ step.ingredient }}
+	</span>
+
+</li>
