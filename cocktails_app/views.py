@@ -66,7 +66,7 @@ def recipe(request, slug):
     for step in recipe.step_set.all():
         step = step.get_actual_instance()
 
-        if hasattr(step, "get_step_data"):
+        if hasattr(step, 'get_step_data'):
             steps_data.append(step.get_step_data())
 
         steps.append(step)

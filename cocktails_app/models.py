@@ -40,8 +40,8 @@ class Glass(models.Model):
 class Recipe(models.Model):
     name = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, blank=True)
-    source = models.ForeignKey(Source, blank=True, default='', null=True)
-    glass = models.ForeignKey(Glass, blank=True, default='', null=True)
+    source = models.ForeignKey(Source, blank=True, null=True)
+    glass = models.ForeignKey(Glass, blank=True, null=True)
     directions = models.TextField(blank=True)
 
     class Meta:
@@ -110,7 +110,9 @@ class Ingredient(models.Model):
 class IngredientStep(Step):
     ingredient = models.ForeignKey(Ingredient)
     amount = models.FloatField(default=1)
-    unit = models.ForeignKey(Unit, default=1, null=True, blank=True)
+    amount_num = models.IntegerField()
+    amount_den = models.IntegerField(default=1)
+    unit = models.ForeignKey(Unit, null=True, blank=True)
 
     def recipe_print(self):
         if self.unit:
@@ -119,9 +121,14 @@ class IngredientStep(Step):
             else:
                 unit = self.unit.name
 
-            return u'{} {} {}'.format(self.amount, unit, self.ingredient.name)
+            return u'{}/{} {} {}'.format(
+                self.amount_num, self.amount_den, unit,
+                self.ingredient.name
+            )
         else:
-            return u'{} {}'.format(self.amount, self.ingredient.name)
+            return u'{}/{} {}'.format(
+                self.amount_num, self.amount_den, self.ingredient.name
+            )
 
     def get_step_data(self):
         unit = None
@@ -130,7 +137,8 @@ class IngredientStep(Step):
             unit = self.unit
 
         return {
-            'amount': self.amount,
+            'amount_num': self.amount_num,
+            'amount_den': self.amount_den,
             'ingredient': self.ingredient.name,
             'unit': unit,
         }

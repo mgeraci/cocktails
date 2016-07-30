@@ -20,6 +20,7 @@
     "coffee-script": "^1.10.0",
     "fastclick": "^1.0.6",
     "fitvids": "^1.0.2",
+    "fractional": "^1.0.0",
     "gulp": "^3.9.1",
     "gulp-ruby-sass": "^2.0.6",
     "gulp-util": "^3.0.7",

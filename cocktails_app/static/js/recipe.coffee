@@ -1,4 +1,5 @@
 $ = require("jquery")
+Fraction = require("fractional").Fraction
 
 module.exports = {
 	directions: {
@@ -11,6 +12,7 @@ module.exports = {
 
 		@steps = $(".step")
 		@listen()
+		@updateRecipeQuantities(1)
 
 	listen: ->
 		$(".quantity-button").on("click tap", (e) =>
@@ -49,44 +51,60 @@ module.exports = {
 
 			continue if !amount.length
 
-			originalAmount = parseFloat($(amount).data("original-amount"))
-			newAmount = originalAmount * quantity
+			num = amount.data("original-amount-num")
+			den = amount.data("original-amount-den")
 
-			amount.text(@_formatAmount(newAmount))
+			newAmountFraction = new Fraction(num, den).multiply(quantity)
+			newAmountFloat = newAmountFraction.numerator / newAmountFraction.denominator
 
-			if newAmount > 1
+			amount.text(@_formatAmount(newAmountFraction))
+
+			if newAmountFraction > 1
 				unit = unit.text(unit.data("unit-plural"))
 			else
 				unit = unit.text(unit.data("unit-singular"))
 
-	# duplicate of templatetags/recipe_extras.py:format_value
-	_formatAmount: (amount) ->
-		step = String(amount)
-		matches = step.match(/\d+\.\d+/)
+	_fractionLookup: {
+		1: {
+			3: "⅓"
+			5: "⅕"
+			6: "⅙"
+			7: "⅐"
+			8: "⅛"
+			9: "⅑"
+			10: "⅒"
+		}
+		2: {
+			3: "⅔"
+			5: "⅖"
+		}
+		3: {
+			5: "⅗"
+			8: "⅜"
+		}
+		4: {
+			5: "⅘"
+		}
+		5: {
+			6: "⅚"
+			8: "⅝"
+		}
+		7: {
+			8: "⅞"
+		}
+	}
 
-		return step if !matches?.length
+	# split the fraction into the integer and a fraction
+	_formatAmount: (fraction) ->
+		numerator = fraction.numerator % fraction.denominator
+		int = Math.floor(fraction.numerator / fraction.denominator)
+		fractionCharacter = this._fractionLookup[numerator]?[fraction.denominator]
 
-		for num in step.match(/\d+\.\d+/)
-			[whole, fraction] = num.split('.')
-
-			if whole == '0'
-				step = step.replace('0', '')
-
-			if fraction == '0'
-				step = step.replace(num, whole)
-			else if fraction == '25'
-				step = step.replace('.25', '¼')
-			else if fraction == '33'
-				step = step.replace('.33', '⅓')
-			else if fraction == '5'
-				step = step.replace('.5', '½')
-			else if fraction == '66'
-				step = step.replace('.66', '⅔')
-			else if fraction == '75'
-				step = step.replace('.75', '¾')
-
-			if whole == '0' and fraction == '0'
-				step = step.replace(/^\. /, '', step)
-
-		return step
+		if fractionCharacter
+			if int
+				return "#{int} #{fractionCharacter}"
+			else
+				return fractionCharacter
+		else
+			return fraction.toString()
 }
