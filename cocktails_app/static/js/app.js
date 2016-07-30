@@ -10817,7 +10817,7 @@
 	  },
 	  changeValue: function(field, direction) {
 	    var value;
-	    value = field.val();
+	    value = parseInt(field.val(), 10);
 	    if (direction === this.directions.increment) {
 	      value++;
 	    } else if (direction === this.directions.decrement) {

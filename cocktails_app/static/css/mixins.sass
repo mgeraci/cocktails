@@ -49,6 +49,18 @@
   @include transform(translateX(-50%))
 
 
+@mixin quantity-size($width, $height, $font-size, $line-height)
+  width: $width
+  height: $height
+  font-size: $font-size
+
+  .quantity-button
+    line-height: $line-height
+    width: $height
+
+  .quantity-input
+    padding-top: $line-height / 9
+
 // media queries
 ///////////////////////////////////////////////////////////////////////////////
 

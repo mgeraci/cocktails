@@ -26,7 +26,7 @@ module.exports = {
 		)
 
 	changeValue: (field, direction) ->
-		value = field.val()
+		value = parseInt(field.val(), 10)
 
 		if direction == @directions.increment
 			value++
