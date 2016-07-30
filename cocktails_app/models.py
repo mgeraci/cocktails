@@ -109,7 +109,6 @@ class Ingredient(models.Model):
 
 class IngredientStep(Step):
     ingredient = models.ForeignKey(Ingredient)
-    amount = models.FloatField(default=1)
     amount_num = models.IntegerField()
     amount_den = models.IntegerField(default=1)
     unit = models.ForeignKey(Unit, null=True, blank=True)
