@@ -10,7 +10,11 @@ Installation
 * clone the repo
 * `mkvirtualenv cocktails`
 * `pip install -r requirements.txt`
-* add the file `cocktails/cocktails/localsettings.py`, with the following contents:
+* add the file `cocktails/localsettings.py` (contents below)
+* `./manage.py migrate`
+* `./manage.py runserver`
+
+### localsetting.py
 
     DEBUG = True
     STATIC_ROOT = 'staticfiles'
@@ -25,9 +29,6 @@ Installation
             'PASSWORD': '[your database user password]'
         }
     }
-
-* `./manage.py migrate`
-* `./manage.py runserver`
 
 CSS and JS
 ----------
@@ -46,7 +47,7 @@ Then to start gulp watching and compiling the files, run:
 Deployment Notes
 ----------------
 
-Mostly for my own use, to deploy:
+Mostly for my own use, but to deploy:
 
 * create a python application for the app and a static php application for the
   static files
