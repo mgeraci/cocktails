@@ -11,7 +11,7 @@
 		{{ recipe.name }}
 	</h2>
 
-	<ul class="page-recipe-content-steps">
+	<ul class="page-recipe-content-steps uninitialized">
 		{% for step in steps_data %}
 			{% include "_recipe_step.html" with step=step %}
 		{% endfor %}

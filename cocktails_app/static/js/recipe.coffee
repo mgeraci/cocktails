@@ -13,6 +13,7 @@ module.exports = {
 		@steps = $(".step")
 		@listen()
 		@updateRecipeQuantities(1)
+		@steps.closest("ul").removeClass("uninitialized")
 
 	listen: ->
 		$(".quantity-button").on("click tap", (e) =>

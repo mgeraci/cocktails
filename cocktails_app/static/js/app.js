@@ -10801,7 +10801,8 @@
 	    }
 	    this.steps = $(".step");
 	    this.listen();
-	    return this.updateRecipeQuantities(1);
+	    this.updateRecipeQuantities(1);
+	    return this.steps.closest("ul").removeClass("uninitialized");
 	  },
 	  listen: function() {
 	    return $(".quantity-button").on("click tap", (function(_this) {
