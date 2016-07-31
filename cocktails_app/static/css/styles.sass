@@ -30,6 +30,9 @@ body
   font-family: "body-light", helvetica neue, helvetica, arial, sans serif
   @include type(20px, 26px)
 
+  @include mobile
+    @include type(18px, 26px)
+
 a
   @include link($tan, darken($tan, 10%))
 
@@ -46,7 +49,7 @@ h1
     @include no-link
 
 h2
-  font-size: 28px
+  @include type(28px, 36px)
   padding-bottom: 26px
 
 .page

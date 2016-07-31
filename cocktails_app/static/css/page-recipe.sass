@@ -7,53 +7,77 @@
     @include mobile
       margin: 40px 0
 
-    &-title
-      position: relative
+  &-title
+    position: relative
+    display: block
+    width: 100%
+    padding-bottom: 0
+    font-family: body-light
+    text-align: center
+
+  &-source
+    display: block
+    width: 100%
+    text-align: center
+    font-size: 18px
+
+    @include mobile
+      font-size: 16px
+
+    &-link
+      font-style: oblique
+
+  &-separator
+    position: relative
+    width: 100%
+    margin-top: 53px
+    margin-bottom: 88px
+    border-bottom: 1px solid lighten($purple, 10%)
+
+    &:after
+      content: ""
       display: block
-      width: 100%
-      padding-bottom: 53px
-      margin-bottom: 48px
-      font-family: body-light
-      text-align: center
-      border-bottom: 1px solid lighten($purple, 10%)
+      @include center
+      position: absolute
+      bottom: -19px
+      width: 93px
+      height: 50px
+      background-color: $purple
+      border-right: 15px solid $purple
+      border-left: 15px solid $purple
+      @include icon("witness")
+
+    @include mobile
+      border: 0
 
       &:after
-        content: ""
-        display: block
-        @include center
-        position: absolute
-        bottom: -19px
-        width: 93px
-        height: 50px
-        background-color: $purple
-        border-right: 15px solid $purple
-        border-left: 15px solid $purple
-        @include icon("witness")
+        width: 70px
 
-      @include mobile
-        border: 0
+  &-steps
+    @include type(25px, 38px)
 
-        &:after
-          width: 70px
+    &.uninitialized
+      opacity: 0
 
-    &-steps
-      @include type(25px, 38px)
+    @include mobile
+      @include type(20px, 30px)
 
-      &.uninitialized
-        opacity: 0
+  &-directions,
+  &-glass
+    margin-top: 30px
 
-      @include mobile
-        @include type(20px, 30px)
+  &-directions
+    @include type(22px, 34px)
 
-    &-directions
-      margin-top: 30px
-      @include type(22px, 34px)
+    @include mobile
+      @include type(18px, 26px)
 
-      @include mobile
-        @include type(18px, 26px)
+  &-glass
+    &-icon
+      display: none
 
-  $q-color: $pink
-  $q-form-color: lighten($tan, 10%)
+  $q-color: $brown
+  $q-form-color: $purple
   $q-br: 4px
   .quantity
     position: relative
@@ -81,7 +105,7 @@
       position: absolute
       top: 0
       background: $q-color
-      color: $q-form-color
+      color: $tan
       @include transition(background 75ms linear)
 
       &:active
@@ -101,10 +125,10 @@
 
     &-input
       width: 100%
-      border: none
+      border: 1px solid $q-color
       outline: none
       text-align: center
       background: $q-form-color
       border-radius: $q-br + 1
       font-family: body-light
-      color: $q-color
+      color: $tan

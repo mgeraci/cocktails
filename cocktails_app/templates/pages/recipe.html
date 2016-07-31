@@ -7,37 +7,40 @@
 {% block content %}
 
 <div class="page-recipe-content">
-	<h2 class="page-recipe-content-title">
+	<h2 class="page-recipe-title">
 		{{ recipe.name }}
 	</h2>
 
-	<ul class="page-recipe-content-steps uninitialized">
+	{% if recipe.source %}
+		<div class="page-recipe-source">
+			by
+			<a class="page-recipe-source-link"
+				href="{% url 'source_url' recipe.source.slug %}">
+				{{ recipe.source.name }}</a>
+		</div>
+	{% endif %}
+
+	<div class="page-recipe-separator"></div>
+
+	<ul class="page-recipe-steps uninitialized">
 		{% for step in steps_data %}
 			{% include "_recipe_step.html" with step=step %}
 		{% endfor %}
 	</ul>
 
 	{% if recipe.directions %}
-		<div class="page-recipe-content-directions">
+		<div class="page-recipe-directions">
 			{{ recipe.directions }}
 		</div>
 	{% endif %}
 
-	{% if recipe.source %}
-		<br />
-		<br />
-		from
-		<a href="{% url 'source_url' recipe.source.slug %}">
-			{{ recipe.source.name }}</a>
-	{% endif %}
-
 	{% if recipe.glass %}
-		<br />
-		<br />
-		<span class="{{ recipe.glass.slug }}">
-			{{ recipe.glass.name }}
-		</span>
-		glass
+		<div class="page-recipe-glass">
+			<span class="page-recipe-glass-icon {{ recipe.glass.slug }}">
+				{{ recipe.glass.name }}
+			</span>
+			{{ recipe.glass.name }} glass
+		</div>
 	{% endif %}
 
 	<div class="quantity">
