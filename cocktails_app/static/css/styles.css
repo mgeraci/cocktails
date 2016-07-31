@@ -195,6 +195,14 @@ h2 {
       .page-recipe-content-steps {
         font-size: 20px;
         line-height: 30px; } }
+  .page-recipe-content-directions {
+    margin-top: 30px;
+    font-size: 22px;
+    line-height: 34px; }
+    @media (max-width: 500px) {
+      .page-recipe-content-directions {
+        font-size: 18px;
+        line-height: 26px; } }
 .page-recipe .quantity {
   position: relative;
   margin-top: 30px;

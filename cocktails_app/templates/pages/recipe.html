@@ -18,8 +18,9 @@
 	</ul>
 
 	{% if recipe.directions %}
-		<br />
-		{{ recipe.directions }}
+		<div class="page-recipe-content-directions">
+			{{ recipe.directions }}
+		</div>
 	{% endif %}
 
 	{% if recipe.source %}
