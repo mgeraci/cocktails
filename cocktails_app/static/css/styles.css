@@ -221,7 +221,7 @@ h2 {
     .page-recipe-steps {
       font-size: 20px;
       line-height: 30px; } }
-.page-recipe-directions, .page-recipe-glass {
+.page-recipe-directions, .page-recipe-glass, .page-recipe-bottom-icon {
   margin-top: 30px; }
 .page-recipe-directions {
   font-size: 22px;
@@ -274,7 +274,7 @@ h2 {
     position: absolute;
     top: 0;
     background: #b57226;
-    color: #bf9f6b;
+    color: #4a3d4c;
     -webkit-transition: background 75ms linear;
     -moz-transition: background 75ms linear;
     transition: background 75ms linear; }
@@ -296,7 +296,7 @@ h2 {
     border: 1px solid #b57226;
     outline: none;
     text-align: center;
-    background: #4a3d4c;
+    background: #bf9f6b;
     border-radius: 5px;
     font-family: body-light;
-    color: #bf9f6b; }
+    color: #4a3d4c; }
