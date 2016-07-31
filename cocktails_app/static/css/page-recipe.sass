@@ -1,45 +1,49 @@
 .page-recipe
   &-content
-    margin-top: 50px
-    margin-bottom: 50px
+    margin: 60px 0
     @include center
     max-width: 600px
+
+    @include mobile
+      margin: 40px 0
 
     &-title
       position: relative
       display: block
       width: 100%
-      padding-bottom: 20px
-      margin-bottom: 40px
+      padding-bottom: 53px
+      margin-bottom: 48px
       font-family: body-light
       text-align: center
-      border-bottom: 1px solid $brown
-
-      $dot-size: 8px
-      $dot-border-size: 6px
-      $dot-size-total: $dot-size + $dot-border-size * 2
+      border-bottom: 1px solid lighten($purple, 10%)
 
       &:after
         content: ""
         display: block
+        @include center
         position: absolute
-        bottom: $dot-size-total * -0.5 - 1
-        left: 50%
-        margin-left: $dot-size-total * -0.5
-        width: $dot-size
-        height: $dot-size
-        border-radius: 50%
-        background: $tan
-        border: $dot-border-size solid $purple
+        bottom: -19px
+        width: 93px
+        height: 50px
+        background-color: $purple
+        border-right: 15px solid $purple
+        border-left: 15px solid $purple
+        @include icon("witness")
+
+      @include mobile
+        border: 0
+
+        &:after
+          width: 70px
 
     &-steps
-      @include type(25px, 36px)
+      @include type(25px, 38px)
 
       &.uninitialized
         opacity: 0
 
       @include mobile
-        @include type(20px, 28px)
+        @include type(20px, 30px)
 
   $q-color: $pink
   $q-form-color: lighten($tan, 10%)
