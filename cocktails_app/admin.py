@@ -29,13 +29,13 @@ class RecipeAdmin(admin.ModelAdmin):
 
     class Media:
         css = {
-            'all': ('/static/css/vendor/chosen.css',)
+            'all': ('css/vendor/chosen.css',)
         }
 
         js = (
-            '/static/js/vendor/jquery-3.1.0.min.js',
-            '/static/js/vendor/chosen.jquery.min.js',
-            '/static/js/admin/recipe-admin.js',
+            'js/vendor/jquery-3.1.0.min.js',
+            'js/vendor/chosen.jquery.min.js',
+            'js/admin/recipe-admin.js',
         )
 
 
