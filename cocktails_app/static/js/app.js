@@ -10783,7 +10783,7 @@
 	    this.hasSearch = false;
 	    this.header = $(".page-header");
 	    this.input = $(".page-header-search input");
-	    this.showSearchClass = "has-search";
+	    this.showSearchClass = "hasSearch";
 	    $("body").on("click", ".page-header-search-icon", (function(_this) {
 	      return function(e) {
 	        if (_this.hasSearch) {

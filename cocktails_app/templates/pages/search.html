@@ -4,7 +4,11 @@
 
 {% block content %}
 
-<h2>Search: {{ query }}</h2>
+<h2 class="page-search-title">Search: {{ query }}</h2>
+
+{% if invalid_search %}
+	No special characters allowed
+{% endif %}
 
 {% if no_results %}
 	No results found

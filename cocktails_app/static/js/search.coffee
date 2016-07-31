@@ -5,7 +5,7 @@ module.exports = {
 		@hasSearch = false
 		@header = $(".page-header")
 		@input = $(".page-header-search input")
-		@showSearchClass = "has-search"
+		@showSearchClass = "hasSearch"
 
 		# toggle form on icon click
 		$("body").on("click", ".page-header-search-icon", (e) =>

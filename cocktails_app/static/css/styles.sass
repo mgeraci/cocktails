@@ -84,8 +84,12 @@ h2
     width: 100%
     display: none
 
-    .has-search &
+    .hasSearch &
       display: block
+
+  // hide the django form error; instead, I'm handling it in the template
+  .errorlist
+    display: none
 
   input[type=text]
     width: 200px

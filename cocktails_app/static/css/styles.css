@@ -97,8 +97,10 @@ h2 {
       left: 0;
       width: 100%;
       display: none; }
-      .has-search .page-header-search {
+      .hasSearch .page-header-search {
         display: block; } }
+  .page-header-search .errorlist {
+    display: none; }
   .page-header-search input[type=text] {
     width: 200px;
     padding: 8px;
@@ -175,6 +177,8 @@ h2 {
     .page-index-section-label h2 {
       padding-bottom: 0; }
 
+.page-search-title {
+  word-wrap: break-word; }
 .page-search-results {
   margin-bottom: 40px; }
 
@@ -320,7 +324,6 @@ h2 {
       border-top-right-radius: 4px; }
   .page-recipe .quantity-input {
     width: 100%;
-    border: 1px solid #b57226;
     outline: none;
     text-align: center;
     background: #bf9f6b;
