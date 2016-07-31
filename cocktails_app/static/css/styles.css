@@ -148,6 +148,33 @@ h2 {
     .page-header-search-icon {
       display: none; } }
 
+@media (max-width: 500px) {
+  .page-index a {
+    text-decoration: none;
+    background-image: none; }
+  .page-index-section.isCollapsed {
+    height: 50px; } }
+.page-index-section {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 30px; }
+  .page-index-section-label {
+    padding: 0;
+    margin: 0;
+    background: none;
+    border: none;
+    font-size: inherit;
+    font-family: inherit;
+    outline: none;
+    display: block;
+    width: 100%;
+    text-align: left;
+    height: 50px;
+    line-height: 50px;
+    color: #bf9f6b; }
+    .page-index-section-label h2 {
+      padding-bottom: 0; }
+
 .page-search-results {
   margin-bottom: 40px; }
 

@@ -44,17 +44,21 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Fastclick, Recipe, Search, modernizr;
+	var Fastclick, Index, Recipe, Search, modernizr;
 
 	Fastclick = __webpack_require__(1);
 
 	modernizr = __webpack_require__(2);
 
-	Search = __webpack_require__(3);
+	Index = __webpack_require__(3);
 
-	Recipe = __webpack_require__(5);
+	Search = __webpack_require__(5);
+
+	Recipe = __webpack_require__(6);
 
 	Fastclick.attach(document.body);
+
+	Index.init();
 
 	Search.init();
 
@@ -927,35 +931,21 @@
 
 	module.exports = {
 	  init: function() {
-	    this.hasSearch = false;
-	    this.header = $(".page-header");
-	    this.input = $(".page-header-search input");
-	    this.showSearchClass = "has-search";
-	    $("body").on("click", ".page-header-search-icon", (function(_this) {
+	    if (!$(".page-index").length) {
+	      return;
+	    }
+	    this.sectionClass = ".page-index-section";
+	    this.collapseClass = "isCollapsed";
+	    this.sections = $(this.sectionClass);
+	    return this.listen();
+	  },
+	  listen: function() {
+	    return $("body").on("click", ".page-index-section-label", (function(_this) {
 	      return function(e) {
-	        if (_this.hasSearch) {
-	          return _this._hideForm();
-	        } else {
-	          return _this._showForm();
-	        }
+	        _this.sections.addClass(_this.collapseClass);
+	        return $(e.currentTarget).closest(_this.sectionClass).removeClass(_this.collapseClass);
 	      };
 	    })(this));
-	    return this.input.on("blur", (function(_this) {
-	      return function(e) {
-	        if (_this.input.val() === "") {
-	          return _this._hideForm();
-	        }
-	      };
-	    })(this));
-	  },
-	  _showForm: function() {
-	    this.header.addClass(this.showSearchClass);
-	    this.input.focus();
-	    return this.hasSearch = true;
-	  },
-	  _hideForm: function() {
-	    this.header.removeClass(this.showSearchClass);
-	    return this.hasSearch = false;
 	  }
 	};
 
@@ -10784,11 +10774,54 @@
 /* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
+	var $;
+
+	$ = __webpack_require__(4);
+
+	module.exports = {
+	  init: function() {
+	    this.hasSearch = false;
+	    this.header = $(".page-header");
+	    this.input = $(".page-header-search input");
+	    this.showSearchClass = "has-search";
+	    $("body").on("click", ".page-header-search-icon", (function(_this) {
+	      return function(e) {
+	        if (_this.hasSearch) {
+	          return _this._hideForm();
+	        } else {
+	          return _this._showForm();
+	        }
+	      };
+	    })(this));
+	    return this.input.on("blur", (function(_this) {
+	      return function(e) {
+	        if (_this.input.val() === "") {
+	          return _this._hideForm();
+	        }
+	      };
+	    })(this));
+	  },
+	  _showForm: function() {
+	    this.header.addClass(this.showSearchClass);
+	    this.input.focus();
+	    return this.hasSearch = true;
+	  },
+	  _hideForm: function() {
+	    this.header.removeClass(this.showSearchClass);
+	    return this.hasSearch = false;
+	  }
+	};
+
+
+/***/ },
+/* 6 */
+/***/ function(module, exports, __webpack_require__) {
+
 	var $, Fraction;
 
 	$ = __webpack_require__(4);
 
-	Fraction = __webpack_require__(6).Fraction;
+	Fraction = __webpack_require__(7).Fraction;
 
 	module.exports = {
 	  directions: {
@@ -10911,7 +10944,7 @@
 
 
 /***/ },
-/* 6 */
+/* 7 */
 /***/ function(module, exports) {
 
 	/*

@@ -1,0 +1,27 @@
+$label-height: 50px
+
+.page-index
+  @include mobile
+    a
+      @include no-link
+
+    &-section
+      &.isCollapsed
+        height: $label-height
+
+  &-section
+    position: relative
+    overflow: hidden
+    margin-bottom: 30px
+
+    &-label
+      @include bare-button
+      display: block
+      width: 100%
+      text-align: left
+      height: $label-height
+      line-height: $label-height
+      color: $tan
+
+      h2
+        padding-bottom: 0
