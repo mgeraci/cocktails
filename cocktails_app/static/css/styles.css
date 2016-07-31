@@ -71,7 +71,7 @@ h2 {
     margin-bottom: 40px; }
     @media (max-width: 500px) {
       .page-header {
-        padding-bottom: 8px;
+        padding-bottom: 11px;
         border-bottom: 1px solid #5d4d60; } }
     .page-header-title {
       float: left; }
