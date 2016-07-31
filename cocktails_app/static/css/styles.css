@@ -1,4 +1,4 @@
-@import url(reset.css);
+@import url(vendor/reset.css);
 @font-face {
   font-family: "body";
   src: url("../fonts/body.eot?#iefix") format("embedded-opentype"), url("../fonts/body.woff") format("woff"), url("../fonts/body.ttf") format("truetype"), url("../fonts/body.svg#body") format("svg");
