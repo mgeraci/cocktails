@@ -28,4 +28,10 @@
 		{{ step.ingredient }}
 	</span>
 
+	{% if not step.amount_num and step.unit.name == "rinse" %}
+		<span class="step-unit">
+			{{ step.unit.name }}
+		</span>
+	{% endif %}
+
 </li>
