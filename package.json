@@ -24,7 +24,7 @@
     "gulp": "^3.9.1",
     "gulp-ruby-sass": "^2.0.6",
     "gulp-util": "^3.0.7",
-    "jquery": "^2.2.1",
+    "npm-zepto": "^1.1.7",
     "webpack": "^1.12.13"
   }
 }

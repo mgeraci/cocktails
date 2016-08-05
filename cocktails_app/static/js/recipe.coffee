@@ -1,4 +1,4 @@
-$ = require("jquery")
+$ = require("npm-zepto")
 Fraction = require("fractional").Fraction
 
 module.exports = {
