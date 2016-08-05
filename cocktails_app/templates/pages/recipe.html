@@ -30,29 +30,37 @@
 	</ul>
 
 	{% if recipe.directions %}
-		<div class="page-recipe-directions">
+		<div class="page-recipe-directions page-recipe-row">
 			{{ recipe.directions }}
 		</div>
 	{% endif %}
 
-	{% if recipe.glass %}
-		<div class="page-recipe-glass">
-			<span class="page-recipe-glass-icon {{ recipe.glass.slug }}">
-				{{ recipe.glass.name }}
+	<div class="page-recipe-row">
+		<div class="quantity-wrapper">
+			<div class="quantity">
+				<input class="quantity-input" name="quantity" type="text" value="1" />
+				<div class="quantity-screen"></div>
+				<button class="quantity-button quantity-button--decrement">
+					<span class="quantity-button-text">-</span>
+				</button>
+				<button class="quantity-button quantity-button--increment">
+					<span class="quantity-button-text">+</span>
+				</button>
+			</div>
+			<span class="page-recipe-label">
+				Quantity
 			</span>
-			{{ recipe.glass.name }} glass
 		</div>
-	{% endif %}
 
-	<div class="quantity">
-		<input class="quantity-input" name="quantity" type="text" value="1" />
-		<div class="quantity-screen"></div>
-		<button class="quantity-button quantity-button--decrement">
-			<span class="quantity-button-text">-</span>
-		</button>
-		<button class="quantity-button quantity-button--increment">
-			<span class="quantity-button-text">+</span>
-		</button>
+		{% if recipe.glass %}
+			<div class="page-recipe-glass">
+				<span class="page-recipe-glass-icon glass-{{ recipe.glass.slug }}">
+				</span>
+				<span class="page-recipe-label">
+					{{ recipe.glass.name }} glass
+				</span>
+			</div>
+		{% endif %}
 	</div>
 
 </div>

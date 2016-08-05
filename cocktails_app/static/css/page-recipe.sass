@@ -31,7 +31,7 @@
     position: relative
     width: 100%
     margin-top: 53px
-    margin-bottom: 88px
+    margin-bottom: 78px
     border-bottom: 1px solid lighten($purple, 10%)
 
     &:after
@@ -49,6 +49,7 @@
 
     @include mobile
       border: 0
+      margin-bottom: 88px
 
       &:after
         width: 70px
@@ -62,33 +63,34 @@
     @include mobile
       @include type(20px, 30px)
 
-  &-directions,
-  &-glass,
-  &-bottom-icon
+  &-row
     margin-top: 30px
 
   &-directions
+    position: relative
+    bottom: 3px
     @include type(22px, 34px)
 
     @include mobile
       @include type(18px, 26px)
 
-  &-glass
-    &-icon
-      display: none
 
   $q-color: $brown
   $q-form-color: $tan
   $q-text-color: $purple
   $q-br: 4px
+  $desktop-width: 130px
+  $desktop-height: 40px
+  $mobile-height: 50px
+
   .quantity
     position: relative
-    margin-top: 30px
+    display: inline-block
     border-radius: $q-br
-    @include quantity-size($width: 130px, $height: 40px, $font-size: 22px, $line-height: 44px)
+    @include quantity-size($width: $desktop-width, $height: $desktop-height, $font-size: 22px, $line-height: 44px)
 
     @include mobile
-      @include quantity-size($width: 160px, $height: 50px, $font-size: 26px, $line-height: 57px)
+      @include quantity-size($width: 160px, $height: $mobile-height, $font-size: 26px, $line-height: 57px)
 
     &-screen
       position: absolute
@@ -126,6 +128,7 @@
         @include border-right-radius($q-br)
 
     &-input
+      float: left // fixes weird quirk for the next line
       width: 100%
       outline: none
       text-align: center
@@ -133,3 +136,54 @@
       border-radius: $q-br + 1
       font-family: body-light
       color: $q-text-color
+
+  &-glass
+    &-icon
+      display: inline-block
+      width: $desktop-height
+      height: $desktop-height
+
+      @include mobile
+        width: $mobile-height
+        height: $mobile-height
+
+    $glasses: cocktail collins flute martini rocks snifter
+
+    @each $glass in $glasses
+      .glass-#{$glass}
+        background-position: center center
+        @include icon("glass-#{$glass}")
+
+        @if $glass == "rocks"
+          @include transform(scale(0.85))
+
+
+  // layout for bottom section, quantity and glass
+  // ---------------------------------------------
+
+  .quantity-wrapper,
+  &-glass
+    float: left
+    text-align: center
+
+  .quantity-wrapper
+    width: $desktop-width
+    margin-right: 3%
+
+    @include mobile
+      width: 60%
+      margin-right: 3%
+
+  &-glass
+    width: 180px
+
+    @include mobile
+      width: 37%
+
+  &-label
+    display: block
+    width: 100%
+    font-size: 18px
+
+    @include mobile
+      font-size: 16px

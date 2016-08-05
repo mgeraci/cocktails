@@ -11,6 +11,7 @@ Installation
 * `mkvirtualenv cocktails`
 * `pip install -r requirements.txt`
 * add the file `cocktails/localsettings.py` (contents below)
+* create a local database
 * `./manage.py migrate`
 * `./manage.py runserver`
 
