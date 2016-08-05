@@ -12,7 +12,9 @@ module.exports = {
 
 		@steps = $(".step")
 		@listen()
-		@updateRecipeQuantities(1)
+		@updateRecipeQuantities(1, {
+			initialLoad: true
+		})
 		@steps.closest("ul").removeClass("uninitialized")
 
 	listen: ->
@@ -26,6 +28,10 @@ module.exports = {
 				direction = "decrement"
 
 			@changeValue(field, direction)
+		)
+
+		$(".step-amount").on("animationend", (e) =>
+			$(e.currentTarget).removeClass("highlight")
 		)
 
 	changeValue: (field, direction) ->
@@ -44,7 +50,7 @@ module.exports = {
 		field.val(value)
 		@updateRecipeQuantities(value)
 
-	updateRecipeQuantities: (quantity) ->
+	updateRecipeQuantities: (quantity, params = {}) ->
 		for step in @steps
 			step = $(step)
 			amount = step.find(".step-amount")
@@ -59,6 +65,9 @@ module.exports = {
 			newAmountFloat = newAmountFraction.numerator / newAmountFraction.denominator
 
 			amount.text(@_formatAmount(newAmountFraction))
+
+			if !params.initialLoad
+				amount.addClass("highlight")
 
 			if newAmountFraction > 1
 				unit = unit.text(unit.data("unit-plural"))

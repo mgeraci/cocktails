@@ -10834,11 +10834,13 @@
 	    }
 	    this.steps = $(".step");
 	    this.listen();
-	    this.updateRecipeQuantities(1);
+	    this.updateRecipeQuantities(1, {
+	      initialLoad: true
+	    });
 	    return this.steps.closest("ul").removeClass("uninitialized");
 	  },
 	  listen: function() {
-	    return $(".quantity-button").on("click tap", (function(_this) {
+	    $(".quantity-button").on("click tap", (function(_this) {
 	      return function(e) {
 	        var button, direction, field;
 	        button = $(e.currentTarget);
@@ -10849,6 +10851,11 @@
 	          direction = "decrement";
 	        }
 	        return _this.changeValue(field, direction);
+	      };
+	    })(this));
+	    return $(".step-amount").on("animationend", (function(_this) {
+	      return function(e) {
+	        return $(e.currentTarget).removeClass("highlight");
 	      };
 	    })(this));
 	  },
@@ -10868,8 +10875,11 @@
 	    field.val(value);
 	    return this.updateRecipeQuantities(value);
 	  },
-	  updateRecipeQuantities: function(quantity) {
+	  updateRecipeQuantities: function(quantity, params) {
 	    var amount, den, i, len, newAmountFloat, newAmountFraction, num, ref, results, step, unit;
+	    if (params == null) {
+	      params = {};
+	    }
 	    ref = this.steps;
 	    results = [];
 	    for (i = 0, len = ref.length; i < len; i++) {
@@ -10885,6 +10895,9 @@
 	      newAmountFraction = new Fraction(num, den).multiply(quantity);
 	      newAmountFloat = newAmountFraction.numerator / newAmountFraction.denominator;
 	      amount.text(this._formatAmount(newAmountFraction));
+	      if (!params.initialLoad) {
+	        amount.addClass("highlight");
+	      }
 	      if (newAmountFraction > 1) {
 	        results.push(unit = unit.text(unit.data("unit-plural")));
 	      } else {
