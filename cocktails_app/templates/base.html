@@ -1,3 +1,5 @@
+{% load staticfiles %}
+
 <!DOCTYPE HTML>
 <html lang="en">
 	<head>
@@ -10,10 +12,18 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 		<meta name="mobile-web-app-capable" content="yes">
 
+		{% for size in apple_touch_icon_sizes %}
+			{% with src='images/apple-touch-icon-'|add:size|add:'.png' %}
+				<link rel="apple-touch-icon"
+					 sizes="{{ size }}x{{ size }}"
+					 href="{% static src %}">
+			{% endwith %}
+		{% endfor %}
+
 		{% include "_standalone_navigation.html" %}
 
 		<link rel="shortcut icon" href="http://michaelgeraci.com/favicon.ico" type="image/x-icon">
-		<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/styles.css">
+		<link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
 	</head>
 	<body class="page-{% block bodyclass %}{% endblock %}">
 
