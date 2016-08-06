@@ -37,13 +37,10 @@ class SearchForm(forms.Form):
                 recipe_titles_res.add(recipe)
 
             # ingredients in recipes
-            for step in recipe.step_set.all():
-                step = step.get_actual_instance()
-
-                if hasattr(step, 'ingredient'):
-                    if step.ingredient.name.lower().find(q) >= 0:
-                        ingredient_res.add(step.ingredient)
-                        recipe_ingredients_res.add(recipe)
+            for step in recipe.recipeingredient_set.all():
+                if step.ingredient.name.lower().find(q) >= 0:
+                    ingredient_res.add(step.ingredient)
+                    recipe_ingredients_res.add(recipe)
 
         return {
             'recipe_titles_res': recipe_titles_res,
