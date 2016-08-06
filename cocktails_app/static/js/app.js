@@ -2676,6 +2676,10 @@
 	      newAmountFloat = newAmountFraction.numerator / newAmountFraction.denominator;
 	      amount.text(this._formatAmount(newAmountFraction));
 	      if (!params.initialLoad) {
+	        if (amount.hasClass("highlight")) {
+	          amount.removeClass("highlight");
+	          amount.position();
+	        }
 	        amount.addClass("highlight");
 	      }
 	      if (newAmountFraction > 1) {

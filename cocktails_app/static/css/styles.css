@@ -269,21 +269,9 @@ h2 {
       font-size: 20px;
       line-height: 30px; } }
 .page-recipe .step-amount {
-  position: relative; }
-  .page-recipe .step-amount:before {
-    content: "";
-    position: absolute;
-    display: block;
-    top: -5px;
-    right: -4px;
-    bottom: -1px;
-    left: -3px;
-    border-radius: 3px;
-    border: 1px solid rgba(138, 80, 77, 0);
-    -webkit-transition: border-color 800ms linear;
-    -moz-transition: border-color 800ms linear;
-    transition: border-color 800ms linear; }
-  .page-recipe .step-amount.highlight:before {
+  position: relative;
+  border-bottom: 1px solid rgba(138, 80, 77, 0); }
+  .page-recipe .step-amount.highlight {
     -webkit-animation: highlight 800ms linear;
     -moz-animation: highlight 800ms linear;
     animation: highlight 800ms linear; }

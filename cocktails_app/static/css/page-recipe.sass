@@ -73,22 +73,10 @@
   .step
     &-amount
       position: relative
-
-      &:before
-        content: ""
-        position: absolute
-        display: block
-        top: -5px
-        right: -4px
-        bottom: -1px
-        left: -3px
-        border-radius: 3px
-        border: 1px solid rgba($pink, 0)
-        @include transition(border-color 800ms linear)
+      border-bottom: 1px solid rgba($pink, 0)
 
       &.highlight
-        &:before
-          @include animation(highlight 800ms linear)
+        @include animation(highlight 800ms linear)
 
   &-row
     margin-top: 30px

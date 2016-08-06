@@ -67,6 +67,12 @@ module.exports = {
 			amount.text(@_formatAmount(newAmountFraction))
 
 			if !params.initialLoad
+				# trigger a reflow if the animation is currently happening (as
+				# indicated by the animation class being present)
+				if amount.hasClass("highlight")
+					amount.removeClass("highlight")
+					amount.position()
+
 				amount.addClass("highlight")
 
 			if newAmountFraction > 1
