@@ -112,7 +112,7 @@ class RecipeIngredient(models.Model):
         return float(self.amount_num) / self.amount_den > 1
 
     def is_zero(self):
-        return not not self.amount_num
+        return not self.amount_num
 
     def is_rinse(self):
         return self.unit.name == 'rinse'

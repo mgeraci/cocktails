@@ -22,7 +22,7 @@
 	<div class="page-recipe-separator"></div>
 
 	<ul class="page-recipe-steps uninitialized">
-		{% for step in recipe.recipeingredient_set %}
+		{% for step in recipe.recipeingredient_set.all %}
 			{% include "_recipe_step.html" with step=step %}
 		{% endfor %}
 	</ul>
