@@ -66,13 +66,6 @@
 
 	Recipe.init();
 
-	$("body").on("click", "a", (function(_this) {
-	  return function(e) {
-	    e.preventDefault();
-	    return location.href = $(e.currentTarget).attr("href");
-	  };
-	})(this));
-
 
 /***/ },
 /* 1 */

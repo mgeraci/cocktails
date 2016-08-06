@@ -280,13 +280,13 @@ h2 {
     left: -3px;
     border-radius: 3px;
     border: 1px solid rgba(138, 80, 77, 0);
-    -webkit-transition: border-color 400ms linear;
-    -moz-transition: border-color 400ms linear;
-    transition: border-color 400ms linear; }
+    -webkit-transition: border-color 800ms linear;
+    -moz-transition: border-color 800ms linear;
+    transition: border-color 800ms linear; }
   .page-recipe .step-amount.highlight:before {
-    -webkit-animation: highlight 400ms linear;
-    -moz-animation: highlight 400ms linear;
-    animation: highlight 400ms linear; }
+    -webkit-animation: highlight 800ms linear;
+    -moz-animation: highlight 800ms linear;
+    animation: highlight 800ms linear; }
 .page-recipe-row {
   margin-top: 30px; }
 .page-recipe-directions {
