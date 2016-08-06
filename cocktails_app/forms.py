@@ -36,14 +36,7 @@ class SearchForm(forms.Form):
 
         title_recipes = recipes.filter(name__icontains=q)
         ingredients = Ingredient.get_for_recipes(recipes, name__icontains=q)
-
-        ingredient_recipes = Recipe.objects.none()
-
-        for ingredient in ingredients:
-            if self.request.user.is_authenticated():
-                ingredient_recipes |= ingredient.get_recipes()
-            else:
-                ingredient_recipes |= ingredient.get_recipes(is_public=True)
+        ingredient_recipes = Recipe.objects.filter(ingredients__in=ingredients).distinct()
 
         return {
             'recipe_titles_res': title_recipes,
