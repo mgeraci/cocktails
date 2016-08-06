@@ -3,7 +3,7 @@ from cocktails_app.models import (
     Ingredient,
     IngredientCategory,
     Recipe,
-    #  Step,
+    RecipeIngredient,
     Unit,
     Source,
     Glass,
@@ -18,15 +18,13 @@ class IngredientCategoryAdmin(admin.ModelAdmin):
     pass
 
 
-'''
-class StepInline(admin.TabularInline):
-    model = IngredientStep
-'''
+class RecipeIngredientInline(admin.TabularInline):
+    model = RecipeIngredient
 
 
 class RecipeAdmin(admin.ModelAdmin):
     inlines = [
-        #  IngredientStepInline,
+        RecipeIngredientInline,
     ]
 
     class Media:
