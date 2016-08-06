@@ -6,8 +6,8 @@
 
 <h2 class="page-search-title">Search: {{ query }}</h2>
 
-{% if invalid_search %}
-	No special characters allowed
+{% if form_error %}
+	{{ form_error }}
 {% endif %}
 
 {% if no_results %}

@@ -17,6 +17,10 @@ class Source(models.Model):
     def __unicode__(self):
         return self.name
 
+    @classmethod
+    def get_for_recipes(cls, recipes):
+        return cls.objects.filter(pk__in=recipes.values('source'))
+
 
 class Glass(models.Model):
     name = models.CharField(max_length=200)
@@ -57,9 +61,16 @@ class Recipe(models.Model):
     def __unicode__(self):
         return self.name
 
+    @classmethod
+    def get(cls, request, **kwargs):
+        if request.user.is_authenticated():
+            return cls.objects.filter(**kwargs)
+        else:
+            return cls.objects.filter(is_public=True, **kwargs)
+
 
 class IngredientCategory(models.Model):
-    name = models.CharField(max_length=200, default="Alcohol")
+    name = models.CharField(max_length=200, default='Alcohol')
     slug = models.SlugField(max_length=200, unique=True)
 
     class Meta:
@@ -71,7 +82,7 @@ class IngredientCategory(models.Model):
 
 class Ingredient(models.Model):
     name = models.CharField(max_length=200)
-    category = models.ForeignKey(IngredientCategory, default="Alcohol")
+    category = models.ForeignKey(IngredientCategory, default='Alcohol')
     slug = models.SlugField(blank=True)
 
     class Meta:
@@ -86,6 +97,22 @@ class Ingredient(models.Model):
 
     def __unicode__(self):
         return u'{} - {}'.format(self.category, self.name)
+
+    def get_recipes(self, **kwargs):
+        recipe_ingredients = self.recipeingredient_set
+
+        return Recipe.objects.filter(
+            pk__in=recipe_ingredients.values('recipe'), **kwargs)
+
+    @classmethod
+    def get_for_recipes(cls, recipes, **kwargs):
+        ingredient_steps = RecipeIngredient.objects.none()
+
+        for recipe in recipes:
+            ingredient_steps |= recipe.recipeingredient_set.all()
+
+        return Ingredient.objects.filter(
+            pk__in=ingredient_steps.values('ingredient'), **kwargs)
 
 
 class Unit(models.Model):

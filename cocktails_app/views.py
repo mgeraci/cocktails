@@ -13,19 +13,9 @@ from cocktails_app.models import (
 
 
 def index(request):
-    if request.user.is_authenticated():
-        recipes = Recipe.objects.all()
-    else:
-        recipes = Recipe.objects.filter(is_public=True)
-
-    sources = Source.objects.filter(pk__in=recipes.values('source'))
-
-    ingredient_steps = RecipeIngredient.objects.none()
-
-    for recipe in recipes:
-        ingredient_steps |= recipe.recipeingredient_set.all()
-
-    ingredients = Ingredient.objects.filter(pk__in=ingredient_steps.values('ingredient'))
+    recipes = Recipe.get(request)
+    sources = Source.get_for_recipes(recipes)
+    ingredients = Ingredient.get_for_recipes(recipes)
 
     context = {
         'ingredients': ingredients,
@@ -39,7 +29,7 @@ def index(request):
 
 def source(request, slug):
     source = get_object_or_404(Source, slug=slug)
-    recipes = Recipe.objects.filter(source=source.id)
+    recipes = Recipe.get(request, source=source)
 
     context = {
         'source': source,
@@ -66,19 +56,11 @@ def recipe(request, slug):
 
 def ingredient(request, slug):
     ingredient = get_object_or_404(Ingredient, slug=slug)
-    recipe_res = set()
-
-    if ingredient != None:
-        recipes = Recipe.objects.all()
-
-    for recipe in recipes:
-        for step in recipe.recipeingredient_set.all():
-            if step.ingredient == ingredient:
-                recipe_res.add(recipe)
+    recipes = ingredient.get_recipes()
 
     context = {
         'ingredient': ingredient,
-        'recipes': recipe_res,
+        'recipes': recipes,
         'search_form': SearchForm(),
     }
 
@@ -91,14 +73,14 @@ def search(request):
     if not request.GET:
         form = SearchForm()
     else:
-        form = SearchForm(request.GET)
+        form = SearchForm(request.GET, request=request)
         context['query'] = request.GET.get('query')
 
         if form.is_valid():
             for k, v in form.process().iteritems():
                 context[k] = v
         else:
-            context['invalid_search'] = True
+            context['form_error'] = form.errors['query']
 
     context['search_form'] = form
 
