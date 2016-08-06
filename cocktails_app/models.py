@@ -96,13 +96,13 @@ class Unit(models.Model):
         return self.name
 
 
-class Step(models.Model):
+class RecipeIngredient(models.Model):
     recipe = models.ForeignKey(Recipe)
-    ingredient_foo = models.ForeignKey(Ingredient)
+    ingredient = models.ForeignKey(Ingredient)
 
-    amount_num_foo = models.IntegerField()
-    amount_den_foo = models.IntegerField(default=1)
-    unit_foo = models.ForeignKey(Unit, null=True, blank=True)
+    amount_num = models.IntegerField()
+    amount_den = models.IntegerField(default=1)
+    unit = models.ForeignKey(Unit, null=True, blank=True)
     order = models.PositiveSmallIntegerField(default=0)
 
     class Meta:
