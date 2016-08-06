@@ -1,4 +1,5 @@
 # vendor
+$ = require("npm-zepto")
 Fastclick = require("fastclick")
 modernizr = require("./vendor/modernizr.js")
 
@@ -12,3 +13,8 @@ Fastclick.attach(document.body)
 Index.init()
 Search.init()
 Recipe.init()
+
+$("body").on("click", "a", (e) =>
+	e.preventDefault()
+	location.href = $(e.currentTarget).attr("href")
+)
