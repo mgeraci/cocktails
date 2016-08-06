@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from django.http import Http404
 from django.shortcuts import render, get_object_or_404
 
 from cocktails.localsettings import STATIC_URL
@@ -11,12 +12,19 @@ from cocktails_app.models import (
 
 
 def index(request):
-    categories = IngredientCategory.objects.all()
-    recipes = Recipe.objects.all()
-    sources = Source.objects.all()
+    if request.user.is_authenticated():
+        recipes = Recipe.objects.all()
+    else:
+        recipes = Recipe.objects.filter(is_public=True)
+
+    sources = Source.objects.filter(pk__in=recipes.values('source'))
+
+    #  IngredientStep.objects.filter(pk__in=recipes.values('ingredientstep_set'))
+    #  ingredients = Ingredient.objects.filter(pk__in=ingredient_steps.values('ingredient'))
+    ingredients = []
 
     context = {
-        'categories': categories,
+        'ingredients': ingredients,
         'recipes': recipes,
         'sources': sources,
         'search_form': SearchForm(),
@@ -53,21 +61,12 @@ def ingredient_category(request, slug):
 
 def recipe(request, slug):
     recipe = get_object_or_404(Recipe, slug=slug)
-    steps = []
-    steps_data = []
 
-    for step in recipe.step_set.all():
-        step = step.get_actual_instance()
-
-        if hasattr(step, 'get_step_data'):
-            steps_data.append(step.get_step_data())
-
-        steps.append(step)
+    if not recipe.is_public and not request.user.is_authenticated():
+        raise Http404
 
     context = {
         'recipe': recipe,
-        'steps': steps,
-        'steps_data': steps_data,
         'search_form': SearchForm(),
     }
 

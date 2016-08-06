@@ -1,8 +1,6 @@
-{% load recipe_extras %}
-
 <li class="step">
 
-	{% if step.amount_num %}
+	{% if not step.is_zero %}
 		<span
 			class="step-amount"
 			data-original-amount-num="{{ step.amount_num }}"
@@ -11,12 +9,12 @@
 		</span>
 	{% endif %}
 
-	{% if step.unit and step.amount_num %}
+	{% if step.unit and not step.is_zero %}
 		<span
 				class="step-unit"
 				data-unit-singular="{{ step.unit.name }}"
 				data-unit-plural="{{ step.unit.plural }}">
-			{% if step.amount > 1 %}
+			{% if step.is_over_one %}
 				{{ step.unit.plural }}
 			{% else %}
 				{{ step.unit.name }}
@@ -25,10 +23,10 @@
 	{% endif %}
 
 	<span class="step-ingredient">
-		{{ step.ingredient }}
+		{{ step.ingredient.name }}
 	</span>
 
-	{% if not step.amount_num and step.unit.name == "rinse" %}
+	{% if step.is_zero and step.is_rinse %}
 		<span class="step-unit">
 			{{ step.unit.name }}
 		</span>

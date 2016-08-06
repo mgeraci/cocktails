@@ -1,3 +1,4 @@
+database_backups
 .pyc
 **/*.pyc
 .DS_Store

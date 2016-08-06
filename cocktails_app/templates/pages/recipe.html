@@ -2,8 +2,6 @@
 {% block title %}{{ recipe.name }} | Cocktails{% endblock %}
 {% block bodyclass %}recipe{% endblock %}
 
-{% load recipe_extras %}
-
 {% block content %}
 
 <div class="page-recipe-content">
@@ -24,7 +22,7 @@
 	<div class="page-recipe-separator"></div>
 
 	<ul class="page-recipe-steps uninitialized">
-		{% for step in steps_data %}
+		{% for step in recipe.recipeingredient_set %}
 			{% include "_recipe_step.html" with step=step %}
 		{% endfor %}
 	</ul>

@@ -43,6 +43,7 @@ class Recipe(models.Model):
     source = models.ForeignKey(Source, blank=True, null=True)
     glass = models.ForeignKey(Glass, blank=True, null=True)
     directions = models.TextField(blank=True)
+    is_public = models.BooleanField(default=False)
 
     class Meta:
         ordering = ['name']
@@ -58,31 +59,12 @@ class Recipe(models.Model):
         return self.name
 
 
-class Step(models.Model, RealInstanceProvider):
-    order = models.PositiveSmallIntegerField(default=0)
-    recipe = models.ForeignKey(Recipe)
-
-    class Meta:
-        ordering = ['recipe', 'order']
-
-    def __unicode__(self):
-        return u'{} - {}'.format(self.recipe, self.order)
-
-
 class IngredientCategory(models.Model):
     name = models.CharField(max_length=200, default="Alcohol")
     slug = models.SlugField(max_length=200, unique=True)
 
     class Meta:
         ordering = ['name']
-
-    def __unicode__(self):
-        return self.name
-
-
-class Unit(models.Model):
-    name = models.CharField(max_length=100)
-    plural = models.CharField(max_length=100)
 
     def __unicode__(self):
         return self.name
@@ -105,6 +87,66 @@ class Ingredient(models.Model):
 
     def __unicode__(self):
         return u'{} - {}'.format(self.category, self.name)
+
+
+class Unit(models.Model):
+    name = models.CharField(max_length=100)
+    plural = models.CharField(max_length=100)
+
+    def __unicode__(self):
+        return self.name
+
+
+class Step(models.Model, RealInstanceProvider):
+    recipe = models.ForeignKey(Recipe)
+    ingredient_foo = models.ForeignKey(Ingredient)
+
+    amount_num_foo = models.IntegerField()
+    amount_den_foo = models.IntegerField(default=1)
+    unit_foo = models.ForeignKey(Unit, null=True, blank=True)
+    order = models.PositiveSmallIntegerField(default=0)
+
+    class Meta:
+        ordering = ['order']
+
+    def is_over_one(self):
+        return float(self.amount_num) / self.amount_den > 1
+
+    def is_zero(self):
+        return not not self.amount_num
+
+    def is_rinse(self):
+        return self.unit.name == 'rinse'
+
+    def __unicode__(self):
+        return self.ingredient.name
+
+
+'''
+class RecipeIngredient(models.Model):
+    recipe = models.ForeignKey(Recipe)
+    ingredient = models.ForeignKey(Ingredient)
+
+    amount_num = models.IntegerField()
+    amount_den = models.IntegerField(default=1)
+    unit = models.ForeignKey(Unit, null=True, blank=True)
+    order = models.PositiveSmallIntegerField(default=0)
+
+    class Meta:
+        ordering = ['order']
+
+    def is_over_one(self):
+        return float(self.amount_num) / self.amount_den > 1
+
+    def is_zero(self):
+        return not not self.amount_num
+
+    def is_rinse(self):
+        return self.unit.name == 'rinse'
+
+    def __unicode__(self):
+        return self.ingredient.name
+'''
 
 
 class IngredientStep(Step):

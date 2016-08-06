@@ -26,10 +26,10 @@
 	</button>
 
 	<ul class="page-index-section-content">
-		{% for category in categories %}
+		{% for ingredient in ingredients %}
 			<li>
-				<a href="{% url 'ingredient_category_url' category.slug %}">
-					{{ category.name }}
+				<a href="{% url 'ingredient_url' ingredient.slug %}">
+					{{ ingredient.name }}
 				</a>
 			</li>
 		{% endfor %}

@@ -4,7 +4,7 @@ Cocktails
 Cocktails is a simple web app to manage cocktail recipes. It's written in
 Django.
 
-cocktails.michaelgeraci.com
+[cocktails.michaelgeraci.com](http://cocktails.michaelgeraci.com)
 
 Installation
 ------------
