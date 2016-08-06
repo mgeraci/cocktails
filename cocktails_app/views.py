@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from django.db import models
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404
 
@@ -7,7 +8,7 @@ from cocktails.localsettings import STATIC_URL
 
 from cocktails_app.forms import SearchForm
 from cocktails_app.models import (
-    Ingredient, IngredientCategory, Recipe, Source
+    Ingredient, IngredientCategory, Recipe, RecipeIngredient, Source
 )
 
 
@@ -19,9 +20,12 @@ def index(request):
 
     sources = Source.objects.filter(pk__in=recipes.values('source'))
 
-    #  IngredientStep.objects.filter(pk__in=recipes.values('ingredientstep_set'))
-    #  ingredients = Ingredient.objects.filter(pk__in=ingredient_steps.values('ingredient'))
-    ingredients = []
+    ingredient_steps = RecipeIngredient.objects.none()
+
+    for recipe in recipes:
+        ingredient_steps |= recipe.recipeingredient_set.all()
+
+    ingredients = Ingredient.objects.filter(pk__in=ingredient_steps.values('ingredient'))
 
     context = {
         'ingredients': ingredients,
@@ -46,19 +50,6 @@ def source(request, slug):
     return render(request, 'pages/source.html', context)
 
 
-def ingredient_category(request, slug):
-    category = get_object_or_404(IngredientCategory, slug=slug)
-    ingredients = Ingredient.objects.filter(category=category)
-
-    context = {
-        'category': category,
-        'ingredients': ingredients,
-        'search_form': SearchForm(),
-    }
-
-    return render(request, 'pages/ingredients_category.html', context)
-
-
 def recipe(request, slug):
     recipe = get_object_or_404(Recipe, slug=slug)
 
@@ -81,12 +72,9 @@ def ingredient(request, slug):
         recipes = Recipe.objects.all()
 
     for recipe in recipes:
-        for step in recipe.step_set.all():
-            step = step.get_actual_instance()
-
-            if hasattr(step, 'ingredient'):
-                if step.ingredient == ingredient:
-                    recipe_res.add(recipe)
+        for step in recipe.recipeingredient_set.all():
+            if step.ingredient == ingredient:
+                recipe_res.add(recipe)
 
     context = {
         'ingredient': ingredient,
