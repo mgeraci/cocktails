@@ -3,6 +3,9 @@
 		// prevents links from apps from oppening in mobile safari when in
 		// standalone mode
 		if ((standalone in navigator) && navigator[standalone]) {
+			// add a class to the body
+			document.getElementsByTagName("body").className += "standalone";
+
 			var curnode, location=document.location, stop=/^(a|html)$/i;
 			document.addEventListener('click', function(e) {
 				curnode = e.target;
