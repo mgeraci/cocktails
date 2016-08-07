@@ -1,0 +1,31 @@
+{% load staticfiles %}
+
+<!-- iPhone -->
+<link href="{% static 'images/apple-touch-startup-image-320x480.png' %}"
+	media="(device-width: 320px) and (device-height: 480px)
+		 and (-webkit-device-pixel-ratio: 1)"
+	rel="apple-touch-startup-image">
+
+<!-- iPhone (Retina) -->
+<link href="{% static 'images/apple-touch-startup-image-320x480@2x.png' %}"
+	media="(device-width: 320px) and (device-height: 480px)
+		 and (-webkit-device-pixel-ratio: 2)"
+	rel="apple-touch-startup-image">
+
+<!-- iPhone 5 -->
+<link href="{% static 'images/apple-touch-startup-image-640x1096.png' %}"
+	media="(device-width: 320px) and (device-height: 568px)
+		 and (-webkit-device-pixel-ratio: 2)"
+	rel="apple-touch-startup-image">
+
+<!-- iPhone 6 -->
+<link href="{% static 'images/apple-touch-startup-image-750x1294.png' %}"
+	media="(device-width: 375px) and (device-height: 667px)
+		and(orientation: portrait) and (-webkit-device-pixel-ratio: 2)"
+	rel="apple-touch-startup-image">
+
+<!-- iPhone 6+ Portrait -->
+<link href="{% static 'images/apple-touch-startup-image-1242x2148.png' %}"
+	media="(device-width: 414px) and (device-height: 736px)
+		and (orientation: portrait) and (-webkit-device-pixel-ratio: 3)"
+	rel="apple-touch-startup-image">
