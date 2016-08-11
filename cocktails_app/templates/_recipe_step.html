@@ -9,6 +9,12 @@
 		</span>
 	{% endif %}
 
+	{% if step.unit.name == "leaf" %}
+		<span class="step-ingredient">
+			{{ step.ingredient.name }}
+		</span>
+	{% endif %}
+
 	{% if step.unit and not step.is_zero %}
 		<span
 				class="step-unit"
@@ -22,9 +28,11 @@
 		</span>
 	{% endif %}
 
-	<span class="step-ingredient">
-		{{ step.ingredient.name }}
-	</span>
+	{% if step.unit.name != "leaf" %}
+		<span class="step-ingredient">
+			{{ step.ingredient.name }}
+		</span>
+	{% endif %}
 
 	{% if step.is_zero and step.is_rinse %}
 		<span class="step-unit">
