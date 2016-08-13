@@ -44,7 +44,7 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var $, Fastclick, Index, Recipe, Search, modernizr;
+	var $, Fastclick, Index, Navigation, Recipe, Search, modernizr;
 
 	$ = __webpack_require__(1);
 
@@ -58,6 +58,8 @@
 
 	Recipe = __webpack_require__(6);
 
+	Navigation = __webpack_require__(8);
+
 	Fastclick.attach(document.body);
 
 	Index.init();
@@ -65,6 +67,8 @@
 	Search.init();
 
 	Recipe.init();
+
+	Navigation.init();
 
 
 /***/ },
@@ -3111,6 +3115,39 @@
 	}
 
 	module.exports.Fraction = Fraction
+
+
+/***/ },
+/* 8 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var $;
+
+	$ = __webpack_require__(1);
+
+	module.exports = {
+	  animationCount: 1,
+	  init: function() {
+	    if (!window.navigator.standalone) {
+	      return;
+	    }
+	    $("body").on("click", "a", (function(_this) {
+	      return function() {
+	        return _this.startAnimation();
+	      };
+	    })(this));
+	    return $("body").on("submit", "form", (function(_this) {
+	      return function() {
+	        return _this.startAnimation();
+	      };
+	    })(this));
+	  },
+	  startAnimation: function() {
+	    var animation;
+	    animation = Math.floor(Math.random() * this.animationCount);
+	    return $(".page-navigation").addClass("page-navigation--is-navigating n" + animation);
+	  }
+	};
 
 
 /***/ }

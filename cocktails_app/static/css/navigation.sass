@@ -1,0 +1,40 @@
+$animation-time: 400ms
+$transition-time: 100ms
+
+@include keyframes(n0)
+  0%
+    width: 10%
+
+  40%
+    width: 60%
+
+  74%
+    width: 85%
+
+  96%
+    width: 92%
+
+  100%
+    width: 95%
+
+.page-navigation
+  position: fixed
+  top: 0
+  left: 0
+  display: none
+  visibility: hidden
+  width: 0
+  height: 4px
+  background: $brown
+  border-bottom: 1px solid darken($brown, 5%)
+  @include transition(width $transition-time linear)
+
+  &--is-navigating
+    display: block
+    visibility: visible
+
+  &.n0
+    @include animation-name(n0)
+    @include animation-duration($animation-time)
+    @include animation-fill-mode(forwards)
+    @include animation-iteration-count(1)
