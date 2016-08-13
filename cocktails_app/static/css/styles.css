@@ -16,68 +16,58 @@
   font-style: normal;
   font-family: "body-light";
   font-style: oblique; }
-@-webkit-keyframes n0 {
+@-webkit-keyframes spin {
   0% {
-    width: 10%; }
-  40% {
-    width: 60%; }
-  74% {
-    width: 85%; }
-  96% {
-    width: 92%; }
+    -webkit-transform: rotate(0deg); }
   100% {
-    width: 95%; } }
-@-moz-keyframes n0 {
+    -webkit-transform: rotate(360deg); } }
+@-moz-keyframes spin {
   0% {
-    width: 10%; }
-  40% {
-    width: 60%; }
-  74% {
-    width: 85%; }
-  96% {
-    width: 92%; }
+    -moz-transform: rotate(0deg); }
   100% {
-    width: 95%; } }
-@keyframes n0 {
+    -moz-transform: rotate(360deg); } }
+@keyframes spin {
   0% {
-    width: 10%; }
-  40% {
-    width: 60%; }
-  74% {
-    width: 85%; }
-  96% {
-    width: 92%; }
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg); }
   100% {
-    width: 95%; } }
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg); } }
 .page-navigation {
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 6px;
+  right: 6px;
   display: none;
   visibility: hidden;
-  width: 0;
-  height: 4px;
-  background: #b57226;
-  border-bottom: 1px solid #a06522;
-  -webkit-transition: width 100ms linear;
-  -moz-transition: width 100ms linear;
-  transition: width 100ms linear; }
+  width: 14px;
+  height: 14px;
+  border: 2px solid #665468;
+  border-bottom-color: #b57226;
+  border-radius: 50%;
+  -webkit-transition: -webkit-transform 1200ms linear;
+  -moz-transition: -moz-transform 1200ms linear;
+  transition: transform 1200ms linear; }
   .page-navigation--is-navigating {
     display: block;
-    visibility: visible; }
-  .page-navigation.n0 {
-    -webkit-animation-name: n0;
-    -moz-animation-name: n0;
-    animation-name: n0;
-    -webkit-animation-duration: 400ms;
-    -moz-animation-duration: 400ms;
-    animation-duration: 400ms;
-    -webkit-animation-fill-mode: forwards;
-    -moz-animation-fill-mode: forwards;
-    animation-fill-mode: forwards;
-    -webkit-animation-iteration-count: 1;
-    -moz-animation-iteration-count: 1;
-    animation-iteration-count: 1; }
+    visibility: visible;
+    -webkit-animation-name: spin;
+    -moz-animation-name: spin;
+    animation-name: spin;
+    -webkit-animation-duration: 1200ms;
+    -moz-animation-duration: 1200ms;
+    animation-duration: 1200ms;
+    -webkit-animation-iteration-count: infinite;
+    -moz-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -moz-animation-timing-function: linear;
+    animation-timing-function: linear; }
 
 * {
   box-sizing: border-box; }

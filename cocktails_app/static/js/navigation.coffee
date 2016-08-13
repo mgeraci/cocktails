@@ -16,7 +16,5 @@ module.exports = {
 		)
 
 	startAnimation: ->
-		animation = Math.floor(Math.random() * @animationCount)
-
-		$(".page-navigation").addClass("page-navigation--is-navigating n#{animation}")
+		$(".page-navigation").addClass("page-navigation--is-navigating")
 }

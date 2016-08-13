@@ -1,40 +1,29 @@
-$animation-time: 400ms
-$transition-time: 100ms
+$animation-time: 1200ms
 
-@include keyframes(n0)
+@include keyframes(spin)
   0%
-    width: 10%
-
-  40%
-    width: 60%
-
-  74%
-    width: 85%
-
-  96%
-    width: 92%
+    @include transform(rotate(0deg))
 
   100%
-    width: 95%
+    @include transform(rotate(360deg))
 
 .page-navigation
   position: fixed
-  top: 0
-  left: 0
+  top: 6px
+  right: 6px
   display: none
   visibility: hidden
-  width: 0
-  height: 4px
-  background: $brown
-  border-bottom: 1px solid darken($brown, 5%)
-  @include transition(width $transition-time linear)
+  width: 14px
+  height: 14px
+  border: 2px solid lighten($purple, 10%)
+  border-bottom-color: $brown
+  border-radius: 50%
+  @include transition(transform $animation-time linear)
 
   &--is-navigating
     display: block
     visibility: visible
-
-  &.n0
-    @include animation-name(n0)
+    @include animation-name(spin)
     @include animation-duration($animation-time)
-    @include animation-fill-mode(forwards)
-    @include animation-iteration-count(1)
+    @include animation-iteration-count(infinite)
+    @include animation-timing-function(linear)

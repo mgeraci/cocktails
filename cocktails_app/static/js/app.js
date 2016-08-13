@@ -3143,9 +3143,7 @@
 	    })(this));
 	  },
 	  startAnimation: function() {
-	    var animation;
-	    animation = Math.floor(Math.random() * this.animationCount);
-	    return $(".page-navigation").addClass("page-navigation--is-navigating n" + animation);
+	    return $(".page-navigation").addClass("page-navigation--is-navigating");
 	  }
 	};
 
