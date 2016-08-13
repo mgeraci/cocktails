@@ -579,3 +579,11 @@ h2 {
   @media (max-width: 500px) {
     .page-recipe-label {
       font-size: 16px; } }
+
+@media (max-width: 500px) {
+  .page-list-link {
+    display: block;
+    width: 100%;
+    padding: 4px 0;
+    text-decoration: none;
+    background-image: none; } }

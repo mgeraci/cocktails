@@ -10,7 +10,7 @@
 	<ul class="page-list-section-content">
 		{% for item in list_items %}
 			<li>
-				<a href="{{ item.get_absolute_url }}">
+				<a class="page-list-link" href="{{ item.get_absolute_url }}">
 					{{ item.name }}
 				</a>
 			</li>
