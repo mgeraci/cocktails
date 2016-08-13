@@ -84,12 +84,12 @@ def ingredient(request, slug):
     recipes = ingredient.get_recipes()
 
     context = {
-        'ingredient': ingredient,
-        'recipes': recipes,
+        'title': 'Recipes with {}'.format(ingredient.name),
+        'list_items': recipes,
         'search_form': SearchForm(),
     }
 
-    return render(request, 'pages/ingredient.html', context)
+    return render(request, 'pages/list.html', context)
 
 
 def ingredients(request):
