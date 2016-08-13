@@ -2,5 +2,36 @@
   &-title
     word-wrap: break-word
 
+    @include mobile
+      display: none
+
+  &-form
+    display: none
+    width: 100%
+    height: 40px
+    margin-bottom: 40px
+
+    .errorlist
+      display: none
+
+    input[type=text]
+      @include input-style
+      float: left
+      width: 70%
+      height: 100%
+
+    button[type=submit]
+      float: right
+      width: 25%
+      height: 100%
+      background: $brown
+      color: #fff
+      border: 0
+      font-size: 14px
+      border-radius: 3px
+
+    @include mobile
+      display: block
+
   &-results
     margin-bottom: 40px

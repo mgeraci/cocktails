@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}{{ title }}{% endblock %}
+{% block bodyclass %}list{% endblock %}
+
+{% block content %}
+
+<div class="page-list-section">
+	<h2 class="page-list-section-label">{{ title }}</h2>
+
+	<ul class="page-list-section-content">
+		{% for item in list_items %}
+			<li>
+				<a href="{{ item.get_absolute_url }}">
+					{{ item.name }}
+				</a>
+			</li>
+		{% endfor %}
+	</ul>
+</div>
+
+{% endblock %}

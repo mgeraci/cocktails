@@ -6,6 +6,11 @@ $pink: #8a504d
 $brown: #b57226
 $tan: #bf9f6b
 
+$menu-height: 56px
+$menu-items: 4
+$menu-inactive-color: $tan
+$menu-active-color: $brown
+
 
 // global includes
 ///////////////////////////////////////////////////////////////////////////////
@@ -16,6 +21,7 @@ $tan: #bf9f6b
 @import "mixins"
 @import "svg-images"
 @import "navigation"
+@import "mobile-menu"
 
 
 // general styles
@@ -33,6 +39,7 @@ body
 
   @include mobile
     @include type(18px, 26px)
+    padding-bottom: $menu-height + 20
 
 a
   @include link($tan, darken($tan, 10%))
@@ -69,8 +76,7 @@ h2
     margin-bottom: 40px
 
     @include mobile
-      padding-bottom: 11px
-      border-bottom: 1px solid lighten($purple, 7%)
+      display: none
 
     &-title
       float: left
@@ -93,27 +99,8 @@ h2
     display: none
 
   input[type=text]
+    @include input-style
     width: 200px
-    padding: 8px
-    font-size: 14px
-    border-radius: 2px
-    border: 0
-    opacity: 0.3
-
-    @include mobile
-      width: 100%
-      opacity: 1
-
-    .no-touchevents &
-      @include transition(opacity 75ms linear)
-
-      &:focus,
-      &:hover
-        opacity: 1
-        outline: none
-
-    .touchevents &
-      opacity: 1
 
   button[type=submit]
     display: none

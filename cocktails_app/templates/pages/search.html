@@ -1,10 +1,15 @@
 {% extends 'base.html' %}
-{% block title %}&ldquo;{{ query }}&rdquo; | Cocktails{% endblock %}
+{% block title %}Search | Cocktails{% endblock %}
 {% block bodyclass %}search{% endblock %}
 
 {% block content %}
 
 <h2 class="page-search-title">Search: {{ query }}</h2>
+
+<form class="page-search-form" action="/search" method="get">
+	{{ search_form }}
+	<button type="submit">Submit</button>
+</form>
 
 {% if form_error %}
 	{{ form_error }}

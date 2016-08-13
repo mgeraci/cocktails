@@ -40,6 +40,19 @@ def source(request, slug):
     return render(request, 'pages/source.html', context)
 
 
+def sources(request):
+    recipes = Recipe.get(request)
+    sources = Source.get_for_recipes(recipes)
+
+    context = {
+        'title': 'Sources',
+        'list_items': sources,
+        'search_form': SearchForm(),
+    }
+
+    return render(request, 'pages/list.html', context)
+
+
 def recipe(request, slug):
     recipe = get_object_or_404(Recipe, slug=slug)
 
@@ -54,6 +67,18 @@ def recipe(request, slug):
     return render(request, 'pages/recipe.html', context)
 
 
+def recipes(request):
+    recipes = Recipe.get(request)
+
+    context = {
+        'title': 'Recipes',
+        'list_items': recipes,
+        'search_form': SearchForm(),
+    }
+
+    return render(request, 'pages/list.html', context)
+
+
 def ingredient(request, slug):
     ingredient = get_object_or_404(Ingredient, slug=slug)
     recipes = ingredient.get_recipes()
@@ -65,6 +90,19 @@ def ingredient(request, slug):
     }
 
     return render(request, 'pages/ingredient.html', context)
+
+
+def ingredients(request):
+    recipes = Recipe.get(request)
+    ingredients = Ingredient.get_for_recipes(recipes)
+
+    context = {
+        'title': 'Ingredients',
+        'list_items': ingredients,
+        'search_form': SearchForm(),
+    }
+
+    return render(request, 'pages/list.html', context)
 
 
 def search(request):

@@ -1,0 +1,48 @@
+{% load extra_tags %}
+
+<ul class="mobile-menu">
+	<li>
+		<a href="{% url 'recipes_url' %}"
+				{% if request.path|active_menu_item:'recipe' %}
+					class="active"
+				{% endif %}>
+			<span class="mobile-menu-icon"></span>
+			<div class="mobile-menu-text">
+				Recipes
+			</div>
+		</a>
+	</li>
+	<li>
+		<a href="{% url 'ingredients_url' %}"
+				{% if request.path|active_menu_item:'ingredient' %}
+					class="active"
+				{% endif %}>
+			<span class="mobile-menu-icon"></span>
+			<div class="mobile-menu-text">
+				Ingredients
+			</div>
+		</a>
+	</li>
+	<li>
+		<a href="{% url 'sources_url' %}"
+				{% if request.path|active_menu_item:'source' %}
+					class="active"
+				{% endif %}>
+			<span class="mobile-menu-icon"></span>
+			<span class="mobile-menu-text">
+				Sources
+			</span>
+		</a>
+	</li>
+	<li>
+		<a href="{% url 'search_url' %}"
+				{% if request.path|active_menu_item:'search' %}
+					class="active"
+				{% endif %}>
+			<span class="mobile-menu-icon"></span>
+			<span class="mobile-menu-text">
+				Search
+			</span>
+		</a>
+	</li>
+</ul>

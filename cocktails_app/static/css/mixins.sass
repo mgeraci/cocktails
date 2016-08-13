@@ -61,6 +61,29 @@
   .quantity-input
     padding-top: $line-height / 9
 
+
+@mixin input-style
+  padding: 8px
+  font-size: 14px
+  border-radius: 2px
+  border: 0
+  opacity: 0.3
+
+  @include mobile
+    opacity: 1
+
+  .no-touchevents &
+    @include transition(opacity 75ms linear)
+
+    &:focus,
+    &:hover
+      opacity: 1
+      outline: none
+
+  .touchevents &
+    opacity: 1
+
+
 // media queries
 ///////////////////////////////////////////////////////////////////////////////
 

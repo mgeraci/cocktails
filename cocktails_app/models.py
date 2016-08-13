@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 from django.db import models
+from django.core.urlresolvers import reverse
 from django.template.defaultfilters import slugify
 
 
@@ -75,6 +76,9 @@ class Ingredient(models.Model):
         return Recipe.objects.filter(
             pk__in=recipe_ingredients.values('recipe'), **kwargs)
 
+    def get_absolute_url(self):
+        return reverse('ingredient_url', args=[self.slug])
+
     @classmethod
     def get_for_recipes(cls, recipes, **kwargs):
         ingredients = Ingredient.objects.none()
@@ -96,6 +100,9 @@ class Recipe(models.Model):
 
     class Meta:
         ordering = ['name']
+
+    def get_absolute_url(self):
+        return reverse('recipe_url', args=[self.slug])
 
     # add a slug on save, if one doesn't exist
     def save(self, *args, **kwargs):

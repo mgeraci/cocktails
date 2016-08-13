@@ -69,6 +69,66 @@
     -moz-animation-timing-function: linear;
     animation-timing-function: linear; }
 
+.mobile-menu {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 56px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+  background: #4a3d4c; }
+  .mobile-menu::after {
+    clear: both;
+    content: "";
+    display: table; }
+  @media (max-width: 500px) {
+    .mobile-menu {
+      display: block; } }
+  .mobile-menu li {
+    float: left;
+    width: 25%;
+    height: 100%;
+    text-align: center; }
+    .mobile-menu li a {
+      position: relative;
+      display: block;
+      width: 100%;
+      height: 100%;
+      text-decoration: none;
+      background-image: none; }
+      .mobile-menu li a .mobile-menu-icon {
+        position: relative;
+        left: 50%;
+        -webkit-transform: translateX(-50%);
+        -moz-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+        -o-transform: translateX(-50%);
+        transform: translateX(-50%);
+        display: block;
+        top: 8px;
+        width: 24px;
+        height: 24px;
+        border: 1px solid #bf9f6b; }
+      .mobile-menu li a .mobile-menu-text {
+        display: block;
+        position: absolute;
+        bottom: 10px;
+        left: 0;
+        width: 100%;
+        color: #bf9f6b;
+        font-size: 12px;
+        line-height: 0; }
+      .mobile-menu li a.active .mobile-menu-icon {
+        top: 6px;
+        border-color: #b57226; }
+      .mobile-menu li a.active .mobile-menu-text {
+        font-size: 14px;
+        line-height: 0;
+        color: #b57226; }
+    .mobile-menu li:first-child {
+      border: 0; }
+
 * {
   box-sizing: border-box; }
 
@@ -82,7 +142,8 @@ body {
   @media (max-width: 500px) {
     body {
       font-size: 18px;
-      line-height: 26px; } }
+      line-height: 26px;
+      padding-bottom: 76px; } }
 
 a {
   text-decoration: none;
@@ -136,8 +197,7 @@ h2 {
     margin-bottom: 40px; }
     @media (max-width: 500px) {
       .page-header {
-        padding-bottom: 11px;
-        border-bottom: 1px solid #5d4d60; } }
+        display: none; } }
     .page-header-title {
       float: left; }
 
@@ -155,15 +215,14 @@ h2 {
   .page-header-search .errorlist {
     display: none; }
   .page-header-search input[type=text] {
-    width: 200px;
     padding: 8px;
     font-size: 14px;
     border-radius: 2px;
     border: 0;
-    opacity: 0.3; }
+    opacity: 0.3;
+    width: 200px; }
     @media (max-width: 500px) {
       .page-header-search input[type=text] {
-        width: 100%;
         opacity: 1; } }
     .no-touchevents .page-header-search input[type=text] {
       -webkit-transition: opacity 75ms linear;
@@ -232,6 +291,49 @@ h2 {
 
 .page-search-title {
   word-wrap: break-word; }
+  @media (max-width: 500px) {
+    .page-search-title {
+      display: none; } }
+.page-search-form {
+  display: none;
+  width: 100%;
+  height: 40px;
+  margin-bottom: 40px; }
+  .page-search-form .errorlist {
+    display: none; }
+  .page-search-form input[type=text] {
+    padding: 8px;
+    font-size: 14px;
+    border-radius: 2px;
+    border: 0;
+    opacity: 0.3;
+    float: left;
+    width: 70%;
+    height: 100%; }
+    @media (max-width: 500px) {
+      .page-search-form input[type=text] {
+        opacity: 1; } }
+    .no-touchevents .page-search-form input[type=text] {
+      -webkit-transition: opacity 75ms linear;
+      -moz-transition: opacity 75ms linear;
+      transition: opacity 75ms linear; }
+      .no-touchevents .page-search-form input[type=text]:focus, .no-touchevents .page-search-form input[type=text]:hover {
+        opacity: 1;
+        outline: none; }
+    .touchevents .page-search-form input[type=text] {
+      opacity: 1; }
+  .page-search-form button[type=submit] {
+    float: right;
+    width: 25%;
+    height: 100%;
+    background: #b57226;
+    color: #fff;
+    border: 0;
+    font-size: 14px;
+    border-radius: 3px; }
+  @media (max-width: 500px) {
+    .page-search-form {
+      display: block; } }
 .page-search-results {
   margin-bottom: 40px; }
 
@@ -262,7 +364,7 @@ h2 {
   max-width: 600px; }
   @media (max-width: 500px) {
     .page-recipe-content {
-      margin: 40px 0; } }
+      margin: 0; } }
 .page-recipe-title {
   position: relative;
   display: block;
