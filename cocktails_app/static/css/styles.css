@@ -336,6 +336,12 @@ h2 {
       display: block; } }
 .page-search-results {
   margin-bottom: 40px; }
+.page-search-link {
+  display: block;
+  width: 100%;
+  padding: 4px 0;
+  text-decoration: none;
+  background-image: none; }
 
 @-webkit-keyframes highlight {
   0% {

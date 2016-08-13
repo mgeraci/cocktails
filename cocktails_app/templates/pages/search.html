@@ -21,11 +21,12 @@
 
 {% if recipe_titles_res %}
 	<div class="page-search-results">
-		<h3>Recipes</h3>
+		<h2>Recipes</h2>
 		<ul>
 			{% for result in recipe_titles_res %}
 				<li>
-					<a href="{% url 'recipe_url' result.slug %}">
+					<a class="page-search-link"
+							href="{% url 'recipe_url' result.slug %}">
 						{{ result.name }}
 					</a>
 				</li>
@@ -36,11 +37,12 @@
 
 {% if recipe_ingredients_res %}
 	<div class="page-search-results">
-		<h3>Recipes with matching ingredients</h3>
+		<h2>Recipes with matching ingredients</h2>
 		<ul>
 			{% for result in recipe_ingredients_res %}
 				<li>
-					<a href="{% url 'recipe_url' result.slug %}">
+					<a class="page-search-link"
+							href="{% url 'recipe_url' result.slug %}">
 						{{ result.name }}
 					</a>
 				</li>
@@ -51,11 +53,12 @@
 
 {% if ingredient_res %}
 	<div class="page-search-results">
-		<h3>Ingredients</h3>
+		<h2>Ingredients</h2>
 		<ul>
 			{% for result in ingredient_res %}
 				<li>
-					<a href="{% url 'ingredient_url' result.slug %}">
+					<a class="page-search-link"
+							href="{% url 'ingredient_url' result.slug %}">
 						{{ result.name }}
 					</a>
 				</li>
