@@ -15,6 +15,9 @@ class Source(models.Model):
 
         super(Source, self).save(*args, **kwargs)
 
+    def get_absolute_url(self):
+        return reverse('source_url', args=[self.slug])
+
     def __unicode__(self):
         return self.name
 
