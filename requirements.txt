@@ -1,3 +1,5 @@
 Django==1.9.2
+django-debug-toolbar==1.5
+django-mobile==0.7.0
 MySQL-python==1.2.5
-wheel==0.24.0
+sqlparse==0.2.0

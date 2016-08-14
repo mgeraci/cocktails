@@ -2,7 +2,7 @@
 
 from django.db import models
 from django.http import Http404
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 
 from cocktails.localsettings import STATIC_URL
 
@@ -13,6 +13,14 @@ from cocktails_app.models import (
 
 
 def index(request):
+    # redirect to the recipes listing page if on mobile
+    try:
+        if request.flavour and request.flavour == 'mobile':
+            return redirect('cocktails_app.views.recipes')
+
+    except Exception:
+        pass
+
     recipes = Recipe.get(request)
     sources = Source.get_for_recipes(recipes)
     ingredients = Ingredient.get_for_recipes(recipes)
