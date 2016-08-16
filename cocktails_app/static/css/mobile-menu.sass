@@ -8,6 +8,13 @@
   height: $menu-height
   box-shadow: 0 0 4px rgba(#000, 0.5)
   background: $purple
+  @include transition(transform 200ms linear)
+  @include transform(translateY(0))
+
+  &--down
+    @include transform(translateY($menu-height * 1.2))
+
+  // &--up
 
   @include mobile
     display: block
