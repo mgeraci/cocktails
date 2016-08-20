@@ -3163,6 +3163,11 @@
 	module.exports = {
 	  upClass: "mobile-menu--up",
 	  downClass: "mobile-menu--down",
+	  stateDelay: 100,
+	  states: {
+	    up: "up",
+	    down: "down"
+	  },
 	  init: function() {
 	    var atStart;
 	    this.menu = $(".mobile-menu");
@@ -3174,7 +3179,7 @@
 	    return this.dbScrollEnd = debounce(this.onScroll, 100, atStart);
 	  },
 	  scrollWatcher: function() {
-	    return $(document).on("scroll", (function(_this) {
+	    return $(document).on("touchmove, scroll", (function(_this) {
 	      return function(e) {
 	        _this.dbScrollStart();
 	        return _this.dbScrollEnd();
@@ -3184,12 +3189,29 @@
 	  onScroll: function() {
 	    var scroll;
 	    scroll = $(window).scrollTop();
+	    if (scroll === this.lastScroll) {
+	      return;
+	    }
 	    if (scroll > this.lastScroll) {
-	      this.menu.removeClass(this.upClass).addClass(this.downClass);
+	      this.changeState(this.states.down);
 	    } else {
-	      this.menu.removeClass(this.downClass).addClass(this.upClass);
+	      this.changeState(this.states.up);
 	    }
 	    return this.lastScroll = scroll;
+	  },
+	  changeState: function(state) {
+	    if (this.stateTimeout != null) {
+	      clearTimeout(this.stateTimeout);
+	    }
+	    return this.stateTimeout = setTimeout((function(_this) {
+	      return function() {
+	        if (state === _this.states.up) {
+	          return _this.menu.removeClass(_this.downClass).addClass(_this.upClass);
+	        } else if (state === _this.states.down) {
+	          return _this.menu.removeClass(_this.upClass).addClass(_this.downClass);
+	        }
+	      };
+	    })(this), this.stateDelay);
 	  }
 	};
 
