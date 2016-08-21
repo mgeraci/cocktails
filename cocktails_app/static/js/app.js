@@ -3163,55 +3163,50 @@
 	module.exports = {
 	  upClass: "mobile-menu--up",
 	  downClass: "mobile-menu--down",
-	  stateDelay: 100,
-	  states: {
-	    up: "up",
-	    down: "down"
-	  },
 	  init: function() {
 	    var atStart;
 	    this.menu = $(".mobile-menu");
-	    atStart = true;
+	    this.maxScroll = $("body").height() - $(window).height();
 	    this.lastScroll = $(window).scrollTop();
+	    atStart = true;
 	    this.scrollWatcher();
 	    this.dbScrollStart = debounce(this.onScroll, 100, atStart);
 	    atStart = false;
 	    return this.dbScrollEnd = debounce(this.onScroll, 100, atStart);
 	  },
 	  scrollWatcher: function() {
-	    return $(document).on("touchmove, scroll", (function(_this) {
+	    this.document = $(document);
+	    this.body = $("body");
+	    this.document.on("scroll", (function(_this) {
 	      return function(e) {
 	        _this.dbScrollStart();
 	        return _this.dbScrollEnd();
+	      };
+	    })(this));
+	    return this.document.on("touchmove", (function(_this) {
+	      return function(e) {
+	        return _this.onTouchMove(e);
 	      };
 	    })(this));
 	  },
 	  onScroll: function() {
 	    var scroll;
 	    scroll = $(window).scrollTop();
+	    if (scroll > this.maxScroll) {
+	      scroll = this.maxScroll;
+	    }
 	    if (scroll === this.lastScroll) {
 	      return;
 	    }
 	    if (scroll > this.lastScroll) {
-	      this.changeState(this.states.down);
+	      this.menu.removeClass(this.upClass).addClass(this.downClass);
 	    } else {
-	      this.changeState(this.states.up);
+	      this.menu.removeClass(this.downClass).addClass(this.upClass);
 	    }
 	    return this.lastScroll = scroll;
 	  },
-	  changeState: function(state) {
-	    if (this.stateTimeout != null) {
-	      clearTimeout(this.stateTimeout);
-	    }
-	    return this.stateTimeout = setTimeout((function(_this) {
-	      return function() {
-	        if (state === _this.states.up) {
-	          return _this.menu.removeClass(_this.downClass).addClass(_this.upClass);
-	        } else if (state === _this.states.down) {
-	          return _this.menu.removeClass(_this.upClass).addClass(_this.downClass);
-	        }
-	      };
-	    })(this), this.stateDelay);
+	  onTouchMove: function(e) {
+	    return this.onScroll();
 	  }
 	};
 

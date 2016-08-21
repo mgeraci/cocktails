@@ -78,9 +78,9 @@
   height: 56px;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
   background: #4a3d4c;
-  -webkit-transition: -webkit-transform 200ms linear;
-  -moz-transition: -moz-transform 200ms linear;
-  transition: transform 200ms linear;
+  -webkit-transition: -webkit-transform 250ms linear;
+  -moz-transition: -moz-transform 250ms linear;
+  transition: transform 250ms linear;
   -webkit-transform: translateY(0);
   -moz-transform: translateY(0);
   -ms-transform: translateY(0);

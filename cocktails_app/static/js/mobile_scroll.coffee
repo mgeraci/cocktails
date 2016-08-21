@@ -4,47 +4,48 @@ debounce = require("just-debounce")
 module.exports = {
 	upClass: "mobile-menu--up"
 	downClass: "mobile-menu--down"
-	stateDelay: 100
-	states: {
-		up: "up"
-		down: "down"
-	}
 
 	init: ->
 		@menu = $(".mobile-menu")
-		atStart = true
+		@maxScroll = $("body").height() - $(window).height()
 		@lastScroll = $(window).scrollTop()
 
+		atStart = true
 		@scrollWatcher()
 		@dbScrollStart = debounce(@onScroll, 100, atStart)
 		atStart = false
 		@dbScrollEnd = debounce(@onScroll, 100, atStart)
 
 	scrollWatcher: ->
-		$(document).on("touchmove, scroll", (e) =>
+		@document = $(document)
+		@body = $("body")
+
+		@document.on("scroll", (e) =>
 			@dbScrollStart()
 			@dbScrollEnd()
+		)
+
+		@document.on("touchmove", (e) =>
+			@onTouchMove(e)
 		)
 
 	onScroll: ->
 		scroll = $(window).scrollTop()
 
+		# keep scroll in bounds to counteract measuring the "rubber band" effect
+		# on iOS
+		if scroll > @maxScroll
+			scroll = @maxScroll
+
 		return if scroll == @lastScroll
 
 		if scroll > @lastScroll
-			@changeState(@states.down)
+			@menu.removeClass(@upClass).addClass(@downClass)
 		else
-			@changeState(@states.up)
+			@menu.removeClass(@downClass).addClass(@upClass)
 
 		@lastScroll = scroll
 
-	changeState: (state) ->
-		clearTimeout(@stateTimeout) if @stateTimeout?
-
-		@stateTimeout = setTimeout(=>
-			if state == @states.up
-				@menu.removeClass(@downClass).addClass(@upClass)
-			else if state == @states.down
-				@menu.removeClass(@upClass).addClass(@downClass)
-		, @stateDelay)
+	onTouchMove: (e) ->
+		@onScroll()
 }
