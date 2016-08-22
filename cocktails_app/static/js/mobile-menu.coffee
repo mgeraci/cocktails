@@ -2,7 +2,6 @@ $ = require("npm-zepto")
 debounce = require("just-debounce")
 
 module.exports = {
-	upClass: "mobile-menu--up"
 	downClass: "mobile-menu--down"
 
 	init: ->
@@ -39,10 +38,10 @@ module.exports = {
 
 		return if scroll == @lastScroll
 
-		if scroll > @lastScroll
-			@menu.removeClass(@upClass).addClass(@downClass)
-		else
-			@menu.removeClass(@downClass).addClass(@upClass)
+		if scroll > @lastScroll && !@menu.hasClass(@downClass)
+			@menu.addClass(@downClass)
+		else if scroll < @lastScroll && @menu.hasClass(@downClass)
+			@menu.removeClass(@downClass)
 
 		@lastScroll = scroll
 

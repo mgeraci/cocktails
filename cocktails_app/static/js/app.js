@@ -44,7 +44,7 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Fastclick, Index, MobileScroll, Navigation, Recipe, Search, modernizr;
+	var Fastclick, Index, MobileMenu, Navigation, Recipe, Search, modernizr;
 
 	Fastclick = __webpack_require__(1);
 
@@ -58,7 +58,7 @@
 
 	Navigation = __webpack_require__(8);
 
-	MobileScroll = __webpack_require__(9);
+	MobileMenu = __webpack_require__(9);
 
 	Fastclick.attach(document.body);
 
@@ -70,7 +70,7 @@
 
 	Navigation.init();
 
-	MobileScroll.init();
+	MobileMenu.init();
 
 
 /***/ },
@@ -3161,7 +3161,6 @@
 	debounce = __webpack_require__(10);
 
 	module.exports = {
-	  upClass: "mobile-menu--up",
 	  downClass: "mobile-menu--down",
 	  init: function() {
 	    var atStart;
@@ -3198,10 +3197,10 @@
 	    if (scroll === this.lastScroll) {
 	      return;
 	    }
-	    if (scroll > this.lastScroll) {
-	      this.menu.removeClass(this.upClass).addClass(this.downClass);
-	    } else {
-	      this.menu.removeClass(this.downClass).addClass(this.upClass);
+	    if (scroll > this.lastScroll && !this.menu.hasClass(this.downClass)) {
+	      this.menu.addClass(this.downClass);
+	    } else if (scroll < this.lastScroll && this.menu.hasClass(this.downClass)) {
+	      this.menu.removeClass(this.downClass);
 	    }
 	    return this.lastScroll = scroll;
 	  },
