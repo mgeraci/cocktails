@@ -13,20 +13,4 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.CreateModel(
-            name='Action',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=300)),
-            ],
-        ),
-        migrations.RemoveField(
-            model_name='actionstep',
-            name='name',
-        ),
-        migrations.AddField(
-            model_name='actionstep',
-            name='action',
-            field=models.ForeignKey(default=0, on_delete=django.db.models.deletion.CASCADE, to='cocktails_app.Action'),
-        ),
     ]

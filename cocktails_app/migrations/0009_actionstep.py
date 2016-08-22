@@ -13,12 +13,4 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.CreateModel(
-            name='ActionStep',
-            fields=[
-                ('step_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='cocktails_app.Step')),
-                ('name', models.CharField(max_length=300)),
-            ],
-            bases=('cocktails_app.step',),
-        ),
     ]

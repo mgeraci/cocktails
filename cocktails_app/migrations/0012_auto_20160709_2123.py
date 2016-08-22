@@ -12,18 +12,4 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RemoveField(
-            model_name='actionstep',
-            name='action',
-        ),
-        migrations.RemoveField(
-            model_name='actionstep',
-            name='step_ptr',
-        ),
-        migrations.DeleteModel(
-            name='Action',
-        ),
-        migrations.DeleteModel(
-            name='ActionStep',
-        ),
     ]

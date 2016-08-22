@@ -140,7 +140,7 @@ class RecipeIngredient(models.Model):
     amount_num = models.IntegerField()
     amount_den = models.IntegerField(default=1)
     unit = models.ForeignKey(Unit, null=True, blank=True)
-    order = models.PositiveSmallIntegerField(default=0)
+    order = models.PositiveSmallIntegerField(default=1)
 
     class Meta:
         ordering = ['order']
