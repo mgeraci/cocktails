@@ -6,6 +6,10 @@
 @import "svg_images/glass_martini"
 @import "svg_images/glass_rocks"
 @import "svg_images/glass_snifter"
+@import "svg_images/menu_ingredients"
+@import "svg_images/menu_recipes"
+@import "svg_images/menu_search"
+@import "svg_images/menu_sources"
 
 @mixin icon($name)
   background-size: contain
@@ -34,3 +38,27 @@
 
   @if $name == "glass-snifter"
     background-image: $glass-snifter
+
+  @if $name == "menu-ingredients-off"
+    background-image: $menu-ingredients-off
+
+  @if $name == "menu-ingredients-on"
+    background-image: $menu-ingredients-on
+
+  @if $name == "menu-recipes-off"
+    background-image: $menu-recipes-off
+
+  @if $name == "menu-recipes-on"
+    background-image: $menu-recipes-on
+
+  @if $name == "menu-search-off"
+    background-image: $menu-search-off
+
+  @if $name == "menu-search-on"
+    background-image: $menu-search-on
+
+  @if $name == "menu-sources-off"
+    background-image: $menu-sources-off
+
+  @if $name == "menu-sources-on"
+    background-image: $menu-sources-on

@@ -1,3 +1,5 @@
+$menu-names: "ingredients", "recipes", "search", "sources"
+
 .mobile-menu
   @include clearfix
   display: none
@@ -36,7 +38,14 @@
         top: 8px
         width: 24px
         height: 24px
-        border: 1px solid $menu-inactive-color
+        background-position: center center
+
+        @each $menu-item in $menu-names
+          &.#{$menu-item}
+            @include icon("menu-#{$menu-item}-off")
+
+        &.ingredients
+          @include icon("menu-ingredients")
 
       .mobile-menu-text
         display: block
@@ -50,7 +59,10 @@
       &.active
         .mobile-menu-icon
           top: 6px
-          border-color: $menu-active-color
+
+          @each $menu-item in $menu-names
+            &.#{$menu-item}
+              @include icon("menu-#{$menu-item}-on")
 
         .mobile-menu-text
           @include type(14px, 0)
