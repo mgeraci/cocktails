@@ -22,7 +22,12 @@ module.exports = {
 		)
 
 	focusIfMobile: ->
-		$(".page-content #id_query").focus()
+		input = $(".page-content #id_query")
+
+		return if !input.length
+
+		if input.val() == ""
+			input.focus()
 
 	_showForm: ->
 		@header.addClass(@showSearchClass)

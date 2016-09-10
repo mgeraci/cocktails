@@ -2589,7 +2589,14 @@
 	    })(this));
 	  },
 	  focusIfMobile: function() {
-	    return $(".page-content #id_query").focus();
+	    var input;
+	    input = $(".page-content #id_query");
+	    if (!input.length) {
+	      return;
+	    }
+	    if (input.val() === "") {
+	      return input.focus();
+	    }
 	  },
 	  _showForm: function() {
 	    this.header.addClass(this.showSearchClass);
