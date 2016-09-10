@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}Log in{% endblock %}
+{% block bodyclass %}login{% endblock %}
+
+{% block content %}
+
+<h2>Log In</h2>
+
+{% if form.errors %}
+	<p class="page-login-error">
+		That is not a valid login. Please try again.
+	</p>
+{% endif %}
+
+<form method="post" action="{% url 'django.contrib.auth.views.login' %}">
+	<label class="page-login-fieldset">
+		<span class="page-login-fieldset-label">
+			{{ form.username.label_tag }}
+		</span>
+		<span class="page-login-fieldset-input">
+      {{ form.username }}
+    </span>
+	</label>
+
+	<label class="page-login-fieldset">
+		<span class="page-login-fieldset-label">
+      {{ form.password.label_tag }}
+		</span>
+		<span class="page-login-fieldset-input">
+      {{ form.password }}
+		</span>
+  </table>
+
+	<button type="submit" class="page-login-fieldset-submit">
+		Log In
+	</button>
+
+  {% csrf_token %}
+  <input type="hidden" name="next" value="{{ next }}">
+</form>
+
+{% endblock %}

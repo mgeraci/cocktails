@@ -7,6 +7,8 @@ ALLOWED_HOSTS = ['*']
 
 ADMINS = [('Michael P. Geraci', 'me@mgeraci.com')]
 
+LOGIN_REDIRECT_URL = 'index_url'
+
 from localsettings import (
     DEBUG,
     DATABASES,
