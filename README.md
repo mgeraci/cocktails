@@ -6,17 +6,31 @@ Django.
 
 [cocktails.michaelgeraci.com](http://cocktails.michaelgeraci.com)
 
+Features:
+
+* Mobile-first responsive design
+* Browse by ingredient, recipe, or source
+* Search for recipes including an ingredient
+* User authentication and private recipes
+* Recipe multiplier for making larger batches
+* Recipe entry with the Django Admin panel
+
+
 Installation
 ------------
+
+Assuming you have virtualenvwrapper:
 
 * clone the repo
 * `mkvirtualenv cocktails`
 * `pip install -r requirements.txt`
-* add the file `cocktails/localsettings.py` (contents below)
+* add the file `cocktails/localsettings.py` — see contents below
 * create a local database
 * `./manage.py migrate`
-* `./manage.py createsuperuser`; you can use this to log in at localhost:8000/admin
+* `./manage.py createsuperuser` — you can use this to log in at localhost:8000/admin
 * `./manage.py runserver`
+
+Then you can visit localhost:8000 and you should see the site.
 
 ### localsetting.py
 
@@ -33,6 +47,7 @@ Installation
             'PASSWORD': '[your database user password]'
         }
     }
+
 
 CSS and JS
 ----------
@@ -51,6 +66,7 @@ A requirement for sass compilation is the ruby sass gem:
 Then to start gulp watching and compiling the files, run:
 
 	gulp
+
 
 Deployment Notes
 ----------------
@@ -75,5 +91,5 @@ Mostly for my own use, but to deploy:
 To deploy updates:
 
 * `git pull`
-* `./cocktails/manage.py collectstatic`
-* restart apache, if necessary, with `./apache2/bin/restart`
+* get static file updates, if necessary: `./cocktails/manage.py collectstatic`
+* restart apache, if necessary: `./apache2/bin/restart`
