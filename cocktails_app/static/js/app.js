@@ -2570,6 +2570,7 @@
 	    this.header = $(".page-header");
 	    this.input = $(".page-header-search input");
 	    this.showSearchClass = "hasSearch";
+	    this.focusIfMobile();
 	    $("body").on("click", ".page-header-search-icon", (function(_this) {
 	      return function(e) {
 	        if (_this.hasSearch) {
@@ -2586,6 +2587,9 @@
 	        }
 	      };
 	    })(this));
+	  },
+	  focusIfMobile: function() {
+	    return $(".page-content #id_query").focus();
 	  },
 	  _showForm: function() {
 	    this.header.addClass(this.showSearchClass);

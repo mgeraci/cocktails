@@ -6,6 +6,7 @@ module.exports = {
 		@header = $(".page-header")
 		@input = $(".page-header-search input")
 		@showSearchClass = "hasSearch"
+		@focusIfMobile()
 
 		# toggle form on icon click
 		$("body").on("click", ".page-header-search-icon", (e) =>
@@ -19,6 +20,9 @@ module.exports = {
 		@input.on("blur", (e)=>
 			@_hideForm() if @input.val() == ""
 		)
+
+	focusIfMobile: ->
+		$(".page-content #id_query").focus()
 
 	_showForm: ->
 		@header.addClass(@showSearchClass)
