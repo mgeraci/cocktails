@@ -24,8 +24,8 @@ Assuming you have virtualenvwrapper:
 * clone the repo
 * `mkvirtualenv cocktails`
 * `pip install -r requirements.txt`
-* add the file `cocktails/localsettings.py` — see contents below
 * create a local database
+* add the file `cocktails/localsettings.py` — see contents below
 * `./manage.py migrate`
 * `./manage.py createsuperuser` — you can use this to log in at localhost:8000/admin
 * `./manage.py runserver`

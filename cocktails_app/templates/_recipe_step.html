@@ -9,35 +9,16 @@
 		</span>
 	{% endif %}
 
-	{% if step.unit.name == "leaf" %}
-		<span class="step-ingredient">
-			{{ step.ingredient.name }}
-		</span>
+	{% if not step.unit.after_ingredient %}
+		{% include "_recipe_step_unit.html" with step=step %}
 	{% endif %}
 
-	{% if step.unit and not step.is_zero %}
-		<span
-				class="step-unit"
-				data-unit-singular="{{ step.unit.name }}"
-				data-unit-plural="{{ step.unit.plural }}">
-			{% if step.is_over_one %}
-				{{ step.unit.plural }}
-			{% else %}
-				{{ step.unit.name }}
-			{% endif %}
-		</span>
-	{% endif %}
+	<span class="step-ingredient">
+		{{ step.ingredient.name }}
+	</span>
 
-	{% if step.unit.name != "leaf" %}
-		<span class="step-ingredient">
-			{{ step.ingredient.name }}
-		</span>
-	{% endif %}
-
-	{% if step.is_zero and step.is_rinse %}
-		<span class="step-unit">
-			{{ step.unit.name }}
-		</span>
+	{% if step.unit.after_ingredient %}
+		{% include "_recipe_step_unit.html" with step=step %}
 	{% endif %}
 
 </li>

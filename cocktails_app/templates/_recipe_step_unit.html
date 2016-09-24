@@ -1,0 +1,10 @@
+<span
+		class="step-unit"
+		data-unit-singular="{{ step.unit.name }}"
+		data-unit-plural="{{ step.unit.plural }}">
+	{% if step.is_over_one %}
+		{{ step.unit.plural }}
+	{% else %}
+		{{ step.unit.name }}
+	{% endif %}
+</span>
