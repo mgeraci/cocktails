@@ -9,6 +9,15 @@ $label-height: 50px
       &.isCollapsed
         height: $label-height
 
+  &-column
+    float: left
+    width: 50%
+    padding-right: 5%
+
+    @include mobile
+      width: 100%
+      padding-right: 0
+
   &-section
     position: relative
     overflow: hidden

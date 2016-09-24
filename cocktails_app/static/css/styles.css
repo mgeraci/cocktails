@@ -109,6 +109,7 @@
       display: block;
       width: 100%;
       height: 100%;
+      padding: 0;
       text-decoration: none;
       background-image: none; }
       .mobile-menu li a .mobile-menu-icon {
@@ -289,9 +290,9 @@ h2 {
   float: right;
   position: relative;
   top: -2px;
-  right: -10px;
+  right: -4px;
   display: block;
-  width: 35px;
+  width: 30px;
   height: 45px;
   text-align: center; }
   .page-header-search-icon-image {
@@ -305,12 +306,14 @@ h2 {
     .page-header-search-icon {
       display: none; } }
 
-li a {
-  display: inline-block;
+li {
+  display: block;
   margin-top: 7px; }
   @media (max-width: 500px) {
+    li {
+      margin-top: 0; } }
+  @media (max-width: 500px) {
     li a {
-      margin-top: 0;
       display: block;
       width: 100%;
       padding: 4px 0;
@@ -323,6 +326,14 @@ li a {
     background-image: none; }
   .page-index-section.isCollapsed {
     height: 50px; } }
+.page-index-column {
+  float: left;
+  width: 50%;
+  padding-right: 5%; }
+  @media (max-width: 500px) {
+    .page-index-column {
+      width: 100%;
+      padding-right: 0; } }
 .page-index-section {
   position: relative;
   overflow: hidden;

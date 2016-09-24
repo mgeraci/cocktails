@@ -4,52 +4,56 @@
 
 {% block content %}
 
-<div class="page-index-section">
-	<button class="page-index-section-label">
-		<h2>Recipes</h2>
-	</button>
+<div class="page-index-column">
+	<div class="page-index-section">
+		<button class="page-index-section-label">
+			<h2>Recipes</h2>
+		</button>
 
-	<ul class="page-index-section-content">
-		{% for recipe in recipes %}
-			<li>
-				<a href="{% url 'recipe_url' recipe.slug %}">
-					{{ recipe.name }}
-				</a>
-			</li>
-		{% endfor %}
-	</ul>
+		<ul class="page-index-section-content">
+			{% for recipe in recipes %}
+				<li>
+					<a href="{% url 'recipe_url' recipe.slug %}">
+						{{ recipe.name }}
+					</a>
+				</li>
+			{% endfor %}
+		</ul>
+	</div>
+
+	<div class="page-index-section">
+		<button class="page-index-section-label">
+			<h2>Browse by source</h2>
+		</button>
+
+		<ul class="page-index-section-content">
+			{% for source in sources %}
+				<li>
+					<a href="{% url 'source_url' source.slug %}">
+						{{ source.name }}
+					</a>
+				</li>
+			{% endfor %}
+		</ul>
+	</div>
 </div>
 
-<div class="page-index-section isCollapsed">
-	<button class="page-index-section-label">
-		<h2>Browse by ingredient</h2>
-	</button>
+<div class="page-index-column">
+	<div class="page-index-section">
+		<button class="page-index-section-label">
+			<h2>Browse by ingredient</h2>
+		</button>
 
-	<ul class="page-index-section-content">
-		{% for ingredient in ingredients %}
-			<li>
-				<a href="{% url 'ingredient_url' ingredient.slug %}">
-					{{ ingredient.name }}
-				</a>
-			</li>
-		{% endfor %}
-	</ul>
-</div>
-
-<div class="page-index-section isCollapsed">
-	<button class="page-index-section-label">
-		<h2>Browse by source</h2>
-	</button>
-
-	<ul class="page-index-section-content">
-		{% for source in sources %}
-			<li>
-				<a href="{% url 'source_url' source.slug %}">
-					{{ source.name }}
-				</a>
-			</li>
-		{% endfor %}
-	</ul>
+		<ul class="page-index-section-content">
+			{% for ingredient in ingredients %}
+				<li>
+					<a href="{% url 'ingredient_url' ingredient.slug %}">
+						{{ ingredient.name }}
+					</a>
+				</li>
+			{% endfor %}
+		</ul>
+	</div>
 </div>
 
 {% endblock %}
