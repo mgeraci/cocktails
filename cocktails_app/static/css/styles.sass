@@ -86,14 +86,7 @@ h2
   float: right
 
   @include mobile
-    position: absolute
-    top: 0
-    left: 0
-    width: 100%
     display: none
-
-    .hasSearch &
-      display: block
 
   // hide the django form error; instead, I'm handling it in the template
   .errorlist
@@ -108,12 +101,13 @@ h2
 
 .page-header-search-icon
   @include bare-button
-  position: absolute
-  top: -4px
+  float: right
+  position: relative
+  top: -2px
   right: -10px
   display: block
-  width: 50px
-  height: 50px
+  width: 35px
+  height: 45px
   text-align: center
 
   &-image
@@ -122,8 +116,16 @@ h2
     width: 20px
     height: 20px
 
-  @include desktop
+  @include mobile
     display: none
+
+li a
+  display: inline-block
+  margin-top: 7px
+
+  @include mobile
+    margin-top: 0
+    @include mobile-list-style
 
 
 // pages
