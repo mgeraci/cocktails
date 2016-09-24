@@ -40,12 +40,12 @@ def source(request, slug):
     recipes = Recipe.get(request, source=source)
 
     context = {
-        'source': source,
-        'recipes': recipes,
+        'title': 'Recipes from {}'.format(source.name),
+        'list_items': recipes,
         'search_form': SearchForm(),
     }
 
-    return render(request, 'pages/source.html', context)
+    return render(request, 'pages/list.html', context)
 
 
 def sources(request):
