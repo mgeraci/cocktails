@@ -12,6 +12,9 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        migrations.DeleteModel(
+            name='Action',
+        ),
         migrations.AddField(
             model_name='ingredient',
             name='slug',

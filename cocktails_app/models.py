@@ -8,6 +8,9 @@ class Source(models.Model):
     name = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, blank=True)
 
+    class Meta:
+        ordering = ['name']
+
     # add a slug on save, if one doesn't exist
     def save(self, *args, **kwargs):
         if not self.slug:
