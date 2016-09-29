@@ -40,7 +40,7 @@ def source(request, slug):
     recipes = Recipe.get(request, source=source)
 
     context = {
-        'title': 'Recipes from {}'.format(source.name),
+        'title': u'Recipes from {}'.format(source.name),
         'list_items': recipes,
         'search_form': SearchForm(),
     }
@@ -92,7 +92,7 @@ def ingredient(request, slug):
     recipes = ingredient.get_recipes()
 
     context = {
-        'title': 'Recipes with {}'.format(ingredient.name),
+        'title': u'Recipes with {}'.format(ingredient.name),
         'list_items': recipes,
         'search_form': SearchForm(),
     }
