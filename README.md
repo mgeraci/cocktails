@@ -91,7 +91,7 @@ Mostly for my own use, but to deploy:
 		
 	* Change WSGIDaemonProcess to use the python in our virtualenv:
 
-			WSGIDaemonProcess michael_cocktails processes=2 threads=12 python-path=[path-to-app]/michael_cocktails:[path-to-app]/michael_cocktails/cocktails:/home/katur/.virtualenvs/michael_cocktails/lib/python2.7/site-packages:/home/    katur/.virtualenvs/michael_cocktails/lib/python2.7 27 WSGIPythonPath [path-to-app]/michael_cocktails:[path-to-app]/michael_cocktails/cocktails:/home/katur/.virtualenvs/michael_cocktails/lib/python2.7/site-packages:/home/katur/.virtualenvs/michael_cocktails/lib/python2.7
+			WSGIDaemonProcess michael_cocktails processes=2 threads=12 python-path=[path-to-app]/michael_cocktails:[path-to-app]/michael_cocktails/cocktails:/home/katur/.virtualenvs/michael_cocktails/lib/python2.7/site-packages:/home/    katur/.virtualenvs/michael_cocktails/lib/python2.7
 		
 	* Add an alias to the wsgi executable
 	
