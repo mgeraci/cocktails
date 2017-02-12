@@ -77,16 +77,27 @@ Mostly for my own use, but to deploy:
   static files
 * create domains for each
 * create a database and database user, add those to localsettings.py
-* tell apache what python file to run on start, by editing apache2/conf/httpd.conf
-* delete DirectoryIndex and DocumentRoot, and the <Directory> block
-* Add WYSGIPythonPath
-* Change WSGIDaemonProcess to use the python in our virtualenv
+* add a virtualenv, and install the required packages:
+	* `mkvirtualenv michael_cocktails`
+	* `cd michael_cocktails`
+	* `workon michael_cocktails`
+	* `pip install -r requirements.txt`
+	* `pip install --upgrade pip` if prompted
+* in apache2/conf/httpd.conf:
+	* delete `DirectoryIndex` and `DocumentRoot`, and the `<Directory>` block
+	* Add `WYSGIPythonPath` — This is like a bash path, except it should point to the likely spots that python executables can be found:
+	
+			WSGIPythonPath [path-to-app]/michael_cocktails:[path-to-app]/michael_cocktails/cocktails:/home/katur/.virtualenvs/michael_cocktails/lib/python2.7/site-packages:/home/katur/.virtualenvs/michael_cocktails/lib/python2.7
+		
+	* Change WSGIDaemonProcess to use the python in our virtualenv:
 
-		WSGIPythonPath [path-to-app]/michael_cocktails:[path-to-app]/michael_cocktails/cocktails:/home/katur/.virtualenvs/michael_cocktails/lib/python2.7/site-packages:/home/katur/.virtualenvs/michael_cocktails/lib/python2.7
-		WSGIDaemonProcess michael_cocktails processes=2 threads=12 python-path=[path-to-app]/michael_cocktails:[path-to-app]/michael_cocktails/cocktails:/home/katur/.virtualenvs/michael_cocktails/lib/python2.7/site-packages:/home/    katur/.virtualenvs/michael_cocktails/lib/python2.7 27 WSGIPythonPath [path-to-app]/michael_cocktails:[path-to-app]/michael_cocktails/cocktails:/home/katur/.virtualenvs/michael_cocktails/lib/python2.7/site-packages:/home/katur/.virtualenvs/michael_cocktails/lib/python2.7
-		WSGIScriptAlias / [path-to-app]/michael_cocktails/cocktails/cocktail/wsgi.py
+			WSGIDaemonProcess michael_cocktails processes=2 threads=12 python-path=[path-to-app]/michael_cocktails:[path-to-app]/michael_cocktails/cocktails:[path-to-home]/.virtualenvs/michael_cocktails/lib/python2.7/site-packages:[path-to-home]/.virtualenvs/michael_cocktails/lib/python2.7
+		
+	* Add an alias to the wsgi executable
+	
+			WSGIScriptAlias / [path-to-app]/michael_cocktails/cocktails/cocktail/wsgi.py
 
-* change any settings necessary in the static application, like to serve fonts
+* change any settings necessary in the static application (e.g., modify the `.htaccess` file to serve fonts with a longer expiration)
 
 To deploy updates:
 
