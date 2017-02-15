@@ -27,8 +27,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'cocktails_app',
-
-    'django_mobile',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -40,9 +38,6 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
-    'django_mobile.middleware.MobileDetectionMiddleware',
-    'django_mobile.middleware.SetFlavourMiddleware',
 ]
 
 ROOT_URLCONF = 'cocktails_app.urls'
@@ -59,7 +54,6 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.static',
                 'cocktails_app.context_processors.apple_touch_icon_sizes',
-                'django_mobile.context_processors.flavour'
             ],
         },
     },

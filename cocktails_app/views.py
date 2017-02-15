@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import re
+
 from django.db import models
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404, redirect
@@ -11,15 +13,16 @@ from cocktails_app.models import (
     Ingredient, IngredientCategory, Recipe, RecipeIngredient, Source
 )
 
+MOBILE_RE = re.compile(
+    r".*(iphone|mobile|androidtouch)",
+    re.IGNORECASE
+)
+
 
 def index(request):
     # redirect to the recipes listing page if on mobile
-    try:
-        if request.flavour and request.flavour == 'mobile':
-            return redirect('cocktails_app.views.recipes')
-
-    except Exception:
-        pass
+    if MOBILE_RE.match(request.META['HTTP_USER_AGENT']):
+        return redirect('recipes_url')
 
     recipes = Recipe.get(request)
     sources = Source.get_for_recipes(recipes)
