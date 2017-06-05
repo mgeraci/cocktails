@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 from django.db import models
 from django.core.urlresolvers import reverse
 from django.template.defaultfilters import slugify
+from django.forms.models import model_to_dict
 
 
 class Source(models.Model):
@@ -77,10 +78,7 @@ class Ingredient(models.Model):
         return u'{}'.format(self.name)
 
     def get_recipes(self, **kwargs):
-        recipe_ingredients = self.recipeingredient_set
-
-        return Recipe.objects.filter(
-            pk__in=recipe_ingredients.values('recipe'), **kwargs)
+        return self.recipe_set.all()
 
     def get_absolute_url(self):
         return reverse('ingredient_url', args=[self.slug])
@@ -116,6 +114,17 @@ class Recipe(models.Model):
             self.slug = slugify(self.name)
 
         super(Recipe, self).save(*args, **kwargs)
+
+    def serialize(self):
+        res = model_to_dict(self, exclude=['ingredients'])
+
+        res['glass'] = model_to_dict(Glass.objects.get(id=res['glass']))
+        res['source'] = model_to_dict(Source.objects.get(id=res['source']))
+
+        recipeingredients = self.recipeingredient_set.all()
+        res['recipeingredients'] = [ri.serialize() for ri in recipeingredients]
+
+        return res
 
     def __unicode__(self):
         return self.name
@@ -160,6 +169,13 @@ class RecipeIngredient(models.Model):
 
     def is_rinse(self):
         return self.unit.name == 'rinse'
+
+    def serialize(self):
+        res = model_to_dict(self, exclude=['recipe'])
+        res['ingredient'] = model_to_dict(Ingredient.objects.get(id=res['ingredient']))
+        res['unit'] = model_to_dict(Unit.objects.get(id=res['unit']))
+
+        return res
 
     def __unicode__(self):
         return self.ingredient.name

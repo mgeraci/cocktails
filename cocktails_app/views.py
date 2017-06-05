@@ -3,21 +3,32 @@
 import re
 
 from django.db import models
-from django.http import Http404
+from django.http import Http404, JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 
 from cocktails.localsettings import STATIC_URL
 
 from cocktails_app.forms import SearchForm
 from cocktails_app.models import (
-    Ingredient, IngredientCategory, Recipe, RecipeIngredient, Source
+    Glass, Ingredient, IngredientCategory, Recipe, RecipeIngredient, Source
 )
+
+
+# helpers
+# -----------------------------------------------------------------------------
 
 MOBILE_RE = re.compile(
     r".*(iphone|mobile|androidtouch)",
     re.IGNORECASE
 )
 
+
+def get_is_api(request):
+    return request.GET.get('api')
+
+
+# views
+# -----------------------------------------------------------------------------
 
 def index(request):
     # redirect to the recipes listing page if on mobile
@@ -72,10 +83,13 @@ def recipe(request, slug):
 
     context = {
         'recipe': recipe,
-        'search_form': SearchForm(),
     }
 
-    return render(request, 'pages/recipe.html', context)
+    if get_is_api(request):
+        return JsonResponse(recipe.serialize())
+    else:
+        context['search_form'] = SearchForm()
+        return render(request, 'pages/recipe.html', context)
 
 
 def recipes(request):
@@ -84,10 +98,18 @@ def recipes(request):
     context = {
         'title': 'Recipes',
         'list_items': recipes,
-        'search_form': SearchForm(),
     }
 
-    return render(request, 'pages/list.html', context)
+    if get_is_api(request):
+        pairs = [{
+            'name': recipe.name,
+            'slug': recipe.slug
+        } for recipe in recipes]
+
+        return JsonResponse({ 'recipes': pairs })
+    else:
+        context['search_form'] = SearchForm()
+        return render(request, 'pages/list.html', context)
 
 
 def ingredient(request, slug):
