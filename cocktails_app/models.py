@@ -119,10 +119,12 @@ class Recipe(models.Model):
         res = model_to_dict(self, exclude=['ingredients'])
 
         res['glass'] = model_to_dict(Glass.objects.get(id=res['glass']))
-        res['source'] = model_to_dict(Source.objects.get(id=res['source']))
+
+        if res['source']:
+            res['source'] = model_to_dict(Source.objects.get(id=res['source']))
 
         recipeingredients = self.recipeingredient_set.all()
-        res['recipeingredients'] = [ri.serialize() for ri in recipeingredients]
+        res['ingredients'] = [ri.serialize() for ri in recipeingredients]
 
         return res
 
@@ -173,7 +175,9 @@ class RecipeIngredient(models.Model):
     def serialize(self):
         res = model_to_dict(self, exclude=['recipe'])
         res['ingredient'] = model_to_dict(Ingredient.objects.get(id=res['ingredient']))
-        res['unit'] = model_to_dict(Unit.objects.get(id=res['unit']))
+
+        if res['unit']:
+            res['unit'] = model_to_dict(Unit.objects.get(id=res['unit']))
 
         return res
 
