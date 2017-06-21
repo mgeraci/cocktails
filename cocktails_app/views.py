@@ -4,6 +4,8 @@ import re
 
 from django.db import models
 from django.http import Http404, JsonResponse
+from django.contrib.auth import authenticate, login
+from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, get_object_or_404, redirect
 
 from cocktails.localsettings import STATIC_URL
@@ -29,6 +31,22 @@ def get_is_api(request):
 
 # views
 # -----------------------------------------------------------------------------
+
+@csrf_exempt
+def api_login(request):
+    username = request.POST['username']
+    password = request.POST['password']
+
+    user = authenticate(username=username, password=password)
+
+    if user is not None:
+        login(request, user)
+        return JsonResponse({ 'session_key': request.session.session_key })
+    else:
+        return JsonResponse({ 'error': True })
+
+    return render(request, 'pages/index.html')
+
 
 def index(request):
     # redirect to the recipes listing page if on mobile

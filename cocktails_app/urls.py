@@ -22,7 +22,8 @@ urlpatterns = [
     url(r'^source/(?P<slug>[^/]+)/$', views.source, name='source_url'),
     url(r'^recipe/(?P<slug>[^/]+)/$', views.recipe, name='recipe_url'),
 
-    # login
+    # authentication
+    url(r'^api_login/$', views.api_login, name='api_login_url'),
     url(r'^login/$', auth_views.login,
         {'template_name': 'pages/login.html'}, name='login_url'),
     url(r'^logout/$', auth_views.logout,
