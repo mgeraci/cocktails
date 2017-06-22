@@ -43,9 +43,6 @@ def api_login(request):
     username = params.get('username')
     password = params.get('password')
 
-    print '---------------------------------'
-    print username, password
-
     user = authenticate(username=username, password=password)
 
     if user is not None:
