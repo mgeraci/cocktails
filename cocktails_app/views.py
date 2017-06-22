@@ -88,13 +88,21 @@ def sources(request):
     recipes = Recipe.get(request)
     sources = Source.get_for_recipes(recipes)
 
-    context = {
-        'title': 'Sources',
-        'list_items': sources,
-        'search_form': SearchForm(),
-    }
+    if get_is_api(request):
+        pairs = [{
+            'name': source.name,
+            'slug': source.slug
+        } for source in sources]
 
-    return render(request, 'pages/list.html', context)
+        return JsonResponse({ 'sources': pairs });
+    else:
+        context = {
+            'title': 'Sources',
+            'list_items': sources,
+            'search_form': SearchForm(),
+        }
+
+        return render(request, 'pages/list.html', context)
 
 
 def recipe(request, slug):
@@ -103,14 +111,14 @@ def recipe(request, slug):
     if not recipe.is_public and not request.user.is_authenticated():
         raise Http404
 
-    context = {
-        'recipe': recipe,
-    }
-
     if get_is_api(request):
         return JsonResponse(recipe.serialize())
     else:
-        context['search_form'] = SearchForm()
+        context = {
+            'recipe': recipe,
+            'search_form': SearchForm(),
+        }
+
         return render(request, 'pages/recipe.html', context)
 
 
