@@ -75,13 +75,21 @@ def source(request, slug):
     source = get_object_or_404(Source, slug=slug)
     recipes = Recipe.get(request, source=source)
 
-    context = {
-        'title': u'Recipes from {}'.format(source.name),
-        'list_items': recipes,
-        'search_form': SearchForm(),
-    }
+    if get_is_api(request):
+        pairs = [{
+            'name': recipe.name,
+            'slug': recipe.slug
+        } for recipe in recipes]
 
-    return render(request, 'pages/list.html', context)
+        return JsonResponse({ 'recipes': pairs });
+    else:
+        context = {
+            'title': u'Recipes from {}'.format(source.name),
+            'list_items': recipes,
+            'search_form': SearchForm(),
+        }
+
+        return render(request, 'pages/list.html', context)
 
 
 def sources(request):
@@ -146,26 +154,42 @@ def ingredient(request, slug):
     ingredient = get_object_or_404(Ingredient, slug=slug)
     recipes = ingredient.get_recipes()
 
-    context = {
-        'title': u'Recipes with {}'.format(ingredient.name),
-        'list_items': recipes,
-        'search_form': SearchForm(),
-    }
+    if get_is_api(request):
+        pairs = [{
+            'name': recipe.name,
+            'slug': recipe.slug
+        } for recipe in recipes]
 
-    return render(request, 'pages/list.html', context)
+        return JsonResponse({ 'recipes': pairs });
+    else:
+        context = {
+            'title': u'Recipes with {}'.format(ingredient.name),
+            'list_items': recipes,
+            'search_form': SearchForm(),
+        }
+
+        return render(request, 'pages/list.html', context)
 
 
 def ingredients(request):
     recipes = Recipe.get(request)
     ingredients = Ingredient.get_for_recipes(recipes)
 
-    context = {
-        'title': 'Ingredients',
-        'list_items': ingredients,
-        'search_form': SearchForm(),
-    }
+    if get_is_api(request):
+        pairs = [{
+            'name': ingredient.name,
+            'slug': ingredient.slug
+        } for ingredient in ingredients]
 
-    return render(request, 'pages/list.html', context)
+        return JsonResponse({ 'ingredients': pairs });
+    else:
+        context = {
+            'title': 'Ingredients',
+            'list_items': ingredients,
+            'search_form': SearchForm(),
+        }
+
+        return render(request, 'pages/list.html', context)
 
 
 def search(request):
