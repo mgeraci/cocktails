@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import re
+import json
 
 from django.db import models
 from django.http import Http404, JsonResponse
@@ -34,8 +35,16 @@ def get_is_api(request):
 
 @csrf_exempt
 def api_login(request):
-    username = request.POST['username']
-    password = request.POST['password']
+    try:
+        params = json.loads(request.POST.items()[0][0])
+    except:
+        params = request.POST
+
+    username = params.get('username')
+    password = params.get('password')
+
+    print '---------------------------------'
+    print username, password
 
     user = authenticate(username=username, password=password)
 
@@ -44,8 +53,6 @@ def api_login(request):
         return JsonResponse({ 'session_key': request.session.session_key })
     else:
         return JsonResponse({ 'error': True })
-
-    return render(request, 'pages/index.html')
 
 
 def index(request):
