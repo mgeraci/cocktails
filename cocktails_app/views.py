@@ -4,6 +4,7 @@ import re
 import json
 
 from django.db import models
+from django.db.models.query import QuerySet
 from django.http import Http404, JsonResponse
 from django.contrib.auth import authenticate, login
 from django.views.decorators.csrf import csrf_exempt
@@ -207,6 +208,17 @@ def search(request):
         else:
             context['form_error'] = form.errors['query']
 
-    context['search_form'] = form
+    if get_is_api(request):
+        res = {}
 
-    return render(request, 'pages/search.html', context)
+        for k, v in context.iteritems():
+            if isinstance(v, QuerySet):
+                res[k] = [{'name': i.name, 'slug': i.slug} for i in v]
+            else:
+                res[k] = v
+
+        return JsonResponse(res);
+    else:
+        context['search_form'] = form
+
+        return render(request, 'pages/search.html', context)
