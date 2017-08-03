@@ -7,7 +7,6 @@ from cocktails_app.models import Ingredient, Recipe
 OK_CHARS = "abcdefghijklmnopqrstuvwxyz0123456789 .,!?:"
 
 def is_safe(str):
-    print 'in is_safe'
     return [x for x in str if x.lower() not in OK_CHARS] == []
 
 
