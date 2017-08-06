@@ -148,7 +148,8 @@ class Recipe(models.Model):
     def serialize(self):
         res = model_to_dict(self, exclude=['ingredients'])
 
-        res['glass'] = model_to_dict(Glass.objects.get(id=res['glass']))
+        if res['glass']:
+            res['glass'] = model_to_dict(Glass.objects.get(id=res['glass']))
 
         if res['source']:
             res['source'] = model_to_dict(Source.objects.get(id=res['source']))
