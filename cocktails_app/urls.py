@@ -1,9 +1,6 @@
 from django.conf.urls import url
 from django.contrib import admin
-from django.contrib.auth import views as auth_views
-from django.conf import settings
 from . import views
-from django.conf.urls.static import static
 
 urlpatterns = [
     # admin
@@ -21,11 +18,4 @@ urlpatterns = [
     url(r'^ingredient/(?P<slug>[^/]+)/$', views.ingredient, name='ingredient_url'),
     url(r'^source/(?P<slug>[^/]+)/$', views.source, name='source_url'),
     url(r'^recipe/(?P<slug>[^/]+)/$', views.recipe, name='recipe_url'),
-
-    # authentication
-    url(r'^api_login/$', views.api_login, name='api_login_url'),
-    url(r'^login/$', auth_views.login,
-        {'template_name': 'pages/login.html'}, name='login_url'),
-    url(r'^logout/$', auth_views.logout,
-        {'next_page': '/'}, name='logout_url'),
 ]

@@ -6,7 +6,6 @@ import json
 from django.db import models
 from django.db.models.query import QuerySet
 from django.http import Http404, JsonResponse
-from django.contrib.auth import authenticate, login
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, get_object_or_404, redirect
 
@@ -33,25 +32,6 @@ def get_is_api(request):
 
 # views
 # -----------------------------------------------------------------------------
-
-@csrf_exempt
-def api_login(request):
-    try:
-        params = json.loads(request.POST.items()[0][0])
-    except:
-        params = request.POST
-
-    username = params.get('username')
-    password = params.get('password')
-
-    user = authenticate(username=username, password=password)
-
-    if user is not None:
-        login(request, user)
-        return JsonResponse({ 'session_key': request.session.session_key })
-    else:
-        return JsonResponse({ 'error': True })
-
 
 def index(request):
     # redirect to the recipes listing page if on mobile
@@ -116,9 +96,6 @@ def sources(request):
 
 def recipe(request, slug):
     recipe = get_object_or_404(Recipe, slug=slug)
-
-    if not recipe.is_public and not request.user.is_authenticated():
-        raise Http404
 
     if get_is_api(request):
         return JsonResponse(recipe.serialize())
