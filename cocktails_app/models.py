@@ -4,6 +4,36 @@ from django.core.urlresolvers import reverse
 from django.template.defaultfilters import slugify
 from django.forms.models import model_to_dict
 
+from django.contrib.auth import SESSION_KEY
+from django.contrib.sessions.models import Session
+
+
+# authentication helper
+# checks for either a logged in user, or a valid session id passed in the
+# request header
+def has_session(request):
+    # first, check the request user
+    if request.user.is_authenticated():
+        return True
+
+    # next, check the request for a valid sessionid
+    sessionid = None
+
+    try:
+        sessionid = request.META.get('HTTP_SESSIONID')
+    except:
+        pass
+
+    try:
+        session = Session.objects.get(session_key=sessionid)
+        session.get_decoded()[SESSION_KEY]
+        return True
+    except (Session.DoesNotExist, KeyError):
+        return False
+
+    # default to false
+    return False
+
 
 class Source(models.Model):
     name = models.CharField(max_length=200)
@@ -99,6 +129,7 @@ class Recipe(models.Model):
     source = models.ForeignKey(Source, blank=True, null=True)
     glass = models.ForeignKey(Glass, blank=True, null=True)
     directions = models.TextField(blank=True)
+    is_public = models.BooleanField(default=False)
     ingredients = models.ManyToManyField(Ingredient, through='RecipeIngredient')
 
     class Meta:
@@ -133,7 +164,10 @@ class Recipe(models.Model):
 
     @classmethod
     def get(cls, request, **kwargs):
-        return cls.objects.filter(**kwargs)
+        if has_session(request):
+            return cls.objects.filter(**kwargs)
+        else:
+            return cls.objects.filter(is_public=True, **kwargs)
 
 
 class Unit(models.Model):

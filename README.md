@@ -11,6 +11,7 @@ Features:
 * Mobile-first responsive design
 * Browse by ingredient, recipe, or source
 * Search for recipes including an ingredient
+* User authentication and private recipes
 * Recipe multiplier for making larger batches
 * Recipe entry with the Django Admin panel
 
@@ -85,15 +86,15 @@ Mostly for my own use, but to deploy:
 * in apache2/conf/httpd.conf:
 	* delete `DirectoryIndex` and `DocumentRoot`, and the `<Directory>` block
 	* Add `WYSGIPythonPath` — This is like a bash path, except it should point to the likely spots that python executables can be found:
-
+	
 			WSGIPythonPath [path-to-app]/michael_cocktails:[path-to-app]/michael_cocktails/cocktails:/home/katur/.virtualenvs/michael_cocktails/lib/python2.7/site-packages:/home/katur/.virtualenvs/michael_cocktails/lib/python2.7
-
+		
 	* Change WSGIDaemonProcess to use the python in our virtualenv:
 
 			WSGIDaemonProcess michael_cocktails processes=2 threads=12 python-path=[path-to-app]/michael_cocktails:[path-to-app]/michael_cocktails/cocktails:[path-to-home]/.virtualenvs/michael_cocktails/lib/python2.7/site-packages:[path-to-home]/.virtualenvs/michael_cocktails/lib/python2.7
-
+		
 	* Add an alias to the wsgi executable
-
+	
 			WSGIScriptAlias / [path-to-app]/michael_cocktails/cocktails/cocktail/wsgi.py
 
 * change any settings necessary in the static application (e.g., modify the `.htaccess` file to serve fonts with a longer expiration)
