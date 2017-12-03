@@ -63,6 +63,7 @@ class Source(models.Model):
 class Glass(models.Model):
     name = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, blank=True)
+    should_show_glass_label = models.BooleanField(default=True)
 
     class Meta:
         ordering = ['name']

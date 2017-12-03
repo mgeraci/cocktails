@@ -55,7 +55,10 @@
 				<span class="page-recipe-glass-icon glass-{{ recipe.glass.slug }}">
 				</span>
 				<span class="page-recipe-label">
-					{{ recipe.glass.name }} glass
+					{{ recipe.glass.name }}
+					{% if recipe.glass.should_show_glass_label %}
+						glass
+					{% endif %}
 				</span>
 			</div>
 		{% endif %}
