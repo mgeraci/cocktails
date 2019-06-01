@@ -24,8 +24,7 @@ urlpatterns = [
 
     # authentication
     url(r'^api_login/$', views.api_login, name='api_login_url'),
-    url(r'^login/$', auth_views.login,
-        {'template_name': 'pages/login.html'}, name='login_url'),
+    url(r'^login/$', views.site_login, name='login_url'),
     url(r'^logout/$', auth_views.logout,
         {'next_page': '/'}, name='logout_url'),
 ]

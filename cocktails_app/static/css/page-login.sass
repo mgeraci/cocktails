@@ -1,34 +1,89 @@
+$buttons-width: 300px
+$button-gutter: 20px
+$button-size: ($buttons-width - 3 * $button-gutter) / 3
+$button-transition: 200ms
+
 .page-login
+  .login-form
+    position: relative
+
   &-error
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
     margin-bottom: 10px
+    text-align: center
     color: $brown
     font-size: 14px
 
-  &-fieldset
-    display: block
-    margin-top: 20px
+  .login-buttons
+    +clearfix
+    position: relative
+    left: 50%
+    width: $buttons-width
+    padding-top: 40px
+    margin-left: $buttons-width * -0.5
 
-    &:first-child
-      margin-top: 0
-
-    &-label
-      display: block
+    &-indicators
+      float: left
       width: 100%
+      margin-bottom: 25px
+      text-align: center
 
-    &-input input
-      width: 200px
-      margin-top: 5px
-      padding: 8px
-      border: none
-      border-radius: 3px
-      font-size: 15px
+      &-indicator
+        display: inline-block
+        width: 12px
+        height: 12px
+        margin-left: 18px
+        border-radius: 50%
+        border: 1px solid $tan
 
-    &-submit
-      display: block
-      margin-top: 20px
-      padding: 8px 12px
-      background: $brown
-      border: 0
-      border-radius: 3px
-      font-size: 15px
-      color: $purple
+        &:first-child
+          margin-left: 0
+
+        &.filled
+          background: $tan
+
+  .login-button
+    border-radius: 50%
+    border: none
+    padding: 0
+    background: none
+    border: 1px solid $tan
+    color: $tan
+    transition: background $button-transition linear, border-color $button-transition linear
+
+    &:active
+      background: $pink
+      border-color: $pink
+      transition: background 0ms linear, border-color 0ms linear
+
+    &,
+    &-placeholder
+      float: left
+      width: $button-size
+      height: $button-size
+      margin: $button-gutter / 2
+
+    &-number,
+    &-letter
+      display: inline-block
+      width: 100%
+      text-align: center
+
+    &-number
+      font-size: 32px
+      font-family: body-light
+
+      .centered &
+        font-size: 28px
+
+    &-letters
+      height: $button-size / 6
+      font-size: 10px
+      letter-spacing: 3px
+      font-family: body
+
+    &:focus
+      outline: none

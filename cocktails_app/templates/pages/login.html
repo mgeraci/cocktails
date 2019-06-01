@@ -4,39 +4,43 @@
 
 {% block content %}
 
-<h2>Log In</h2>
+<form method="post" class="login-form" action="{% url 'login_url' %}">
+    <div class="login-buttons">
+        <div class="login-buttons-indicators">
+            <div class="login-buttons-indicators-indicator"></div>
+            <div class="login-buttons-indicators-indicator"></div>
+            <div class="login-buttons-indicators-indicator"></div>
+            <div class="login-buttons-indicators-indicator"></div>
+        </div>
+        {% for button in buttons %}
+            {% if button.number != None %}
+                <button
+                    type="button"
+                    value="{{button.number}}"
+                    class="login-button {% if button.letters == '' %}centered{% endif %}"
+                 >
+                    <div class="login-button-number">{{ button.number }}</div>
+                    <div class="login-button-letters">{{ button.letters }}</div>
+                </button>
+            {% else %}
+                <div class="login-button-placeholder"></div>
+            {% endif %}
+        {% endfor %}
+    </div>
 
-{% if form.errors %}
-	<p class="page-login-error">
-		That is not a valid login. Please try again.
-	</p>
-{% endif %}
+    {% if error %}
+        <p class="page-login-error">
+            That is not a valid login. Please try again.
+        </p>
+    {% endif %}
 
-<form method="post" action="{% url 'login_url' %}">
-	<label class="page-login-fieldset">
-		<span class="page-login-fieldset-label">
-			{{ form.username.label_tag }}
-		</span>
-		<span class="page-login-fieldset-input">
-      {{ form.username }}
-    </span>
-	</label>
+    <input
+        name="password"
+        type="hidden"
+        class="page-login-fieldset-input"
+    />
 
-	<label class="page-login-fieldset">
-		<span class="page-login-fieldset-label">
-      {{ form.password.label_tag }}
-		</span>
-		<span class="page-login-fieldset-input">
-      {{ form.password }}
-		</span>
-  </table>
-
-	<button type="submit" class="page-login-fieldset-submit">
-		Log In
-	</button>
-
-  {% csrf_token %}
-  <input type="hidden" name="next" value="{{ next }}">
+    {% csrf_token %}
 </form>
 
 {% endblock %}

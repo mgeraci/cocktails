@@ -38,6 +38,7 @@ Then you can visit localhost:8000 and you should see the site.
     STATIC_ROOT = 'staticfiles'
     STATIC_URL = '/static/'
     SECRET_KEY = '[your secret key]'
+    VIEWER_USERNAME = '[the username you create for the viewer]
 
     DATABASES = {
         'default': {

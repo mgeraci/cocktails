@@ -10,7 +10,7 @@ from django.contrib.auth import authenticate, login
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, get_object_or_404, redirect
 
-from cocktails.localsettings import STATIC_URL
+from cocktails.localsettings import STATIC_URL, VIEWER_USERNAME
 
 from cocktails_app.forms import SearchForm
 from cocktails_app.models import (
@@ -41,7 +41,7 @@ def api_login(request):
     except:
         params = request.POST
 
-    username = params.get('username')
+    username = VIEWER_USERNAME
     password = params.get('password')
 
     user = authenticate(username=username, password=password)
@@ -52,6 +52,38 @@ def api_login(request):
     else:
         return JsonResponse({ 'error': True })
 
+def site_login(request):
+    user = None
+    username = VIEWER_USERNAME
+    password = request.POST.get('password', None)
+
+    if password:
+        user = authenticate(username=username, password=password)
+
+    context = {
+        'buttons': [
+            { 'number': 1, 'letters': '' },
+            { 'number': 2, 'letters': 'ABC' },
+            { 'number': 3, 'letters': 'DEF' },
+            { 'number': 4, 'letters': 'GHI' },
+            { 'number': 5, 'letters': 'JKL' },
+            { 'number': 6, 'letters': 'MNO' },
+            { 'number': 7, 'letters': 'PQRS' },
+            { 'number': 8, 'letters': 'TUV' },
+            { 'number': 9, 'letters': 'WXYZ' },
+            { 'number': None, 'letters': None },
+            { 'number': 0, 'letters': '+' },
+            { 'number': None, 'letters': None },
+        ]
+    }
+
+    if user is not None:
+        login(request, user)
+        return redirect('index_url')
+    elif password:
+        context['error'] = True
+
+    return render(request, 'pages/login.html', context)
 
 def index(request):
     # redirect to the recipes listing page if on mobile
