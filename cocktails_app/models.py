@@ -1,4 +1,5 @@
 from __future__ import unicode_literals
+import re
 from django.db import models
 from django.core.urlresolvers import reverse
 from django.template.defaultfilters import slugify
@@ -126,6 +127,7 @@ class Ingredient(models.Model):
 
 class Recipe(models.Model):
     name = models.CharField(max_length=200)
+    sort_name = models.CharField(max_length=200, blank=True)
     slug = models.SlugField(max_length=200, blank=True)
     source = models.ForeignKey(Source, blank=True, null=True)
     glass = models.ForeignKey(Glass, blank=True, null=True)
@@ -134,7 +136,7 @@ class Recipe(models.Model):
     ingredients = models.ManyToManyField(Ingredient, through='RecipeIngredient')
 
     class Meta:
-        ordering = ['name']
+        ordering = ['sort_name']
 
     def get_absolute_url(self):
         return reverse('recipe_url', args=[self.slug])
@@ -143,6 +145,8 @@ class Recipe(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.name)
+
+        self.sort_name = re.sub(r"^(the|el|la|los|las|le|les) ", "", self.name.lower())
 
         super(Recipe, self).save(*args, **kwargs)
 
