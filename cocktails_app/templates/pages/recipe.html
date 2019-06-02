@@ -7,7 +7,13 @@
 <div class="page-recipe-content">
 
 	<h2 class="page-recipe-title">
-		{{ recipe.name }}
+		{% if share_link %}
+			<a class="page-recipe-title-link" href="{{ share_link }}">
+				{{ recipe.name }}
+			</a>
+		{% else %}
+			{{ recipe.name }}
+		{% endif %}
 	</h2>
 
 	{% if recipe.source %}

@@ -16,6 +16,7 @@ from cocktails_app.forms import SearchForm
 from cocktails_app.models import (
     Glass, Ingredient, IngredientCategory, Recipe, RecipeIngredient, Source
 )
+from cocktails_app.utils import decrypt, encrypt
 
 
 # helpers
@@ -151,6 +152,23 @@ def recipe(request, slug):
 
     if not recipe.is_public and not request.user.is_authenticated():
         raise Http404
+
+    if get_is_api(request):
+        return JsonResponse(recipe.serialize())
+    else:
+        context = {
+            'recipe': recipe,
+            'share_link': '/recipe/l/{}'.format(encrypt(recipe.slug)),
+            'search_form': SearchForm(),
+        }
+
+        return render(request, 'pages/recipe.html', context)
+
+
+def recipe_share(request, slug):
+    decrypted_slug = decrypt(slug)
+    print decrypted_slug
+    recipe = get_object_or_404(Recipe, slug=decrypted_slug)
 
     if get_is_api(request):
         return JsonResponse(recipe.serialize())

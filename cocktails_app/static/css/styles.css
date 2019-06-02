@@ -110,8 +110,8 @@
       width: 100%;
       height: 100%;
       padding: 0;
-      text-decoration: none;
-      background-image: none; }
+      text-decoration: none !important;
+      background-image: none !important; }
       .mobile-menu li a .mobile-menu-icon {
         position: relative;
         left: 50%;
@@ -216,8 +216,8 @@ h1 {
   font-size: 33px;
   line-height: 42px; }
   h1 a {
-    text-decoration: none;
-    background-image: none; }
+    text-decoration: none !important;
+    background-image: none !important; }
 
 h2 {
   font-size: 28px;
@@ -317,13 +317,13 @@ li {
       display: block;
       width: 100%;
       padding: 4px 0;
-      text-decoration: none;
-      background-image: none; } }
+      text-decoration: none !important;
+      background-image: none !important; } }
 
 @media (max-width: 500px) {
   .page-index a {
-    text-decoration: none;
-    background-image: none; }
+    text-decoration: none !important;
+    background-image: none !important; }
   .page-index-section.isCollapsed {
     height: 50px; } }
 .page-index-column {
@@ -438,6 +438,11 @@ li {
   padding-bottom: 0;
   font-family: body-light;
   text-align: center; }
+  .page-recipe-title-link, .page-recipe-title-link:hover {
+    cursor: default;
+    color: #bf9f6b !important;
+    text-decoration: none !important;
+    background-image: none !important; }
 .page-recipe-source {
   display: block;
   width: 100%;

@@ -21,6 +21,7 @@ urlpatterns = [
     url(r'^ingredient/(?P<slug>[^/]+)/$', views.ingredient, name='ingredient_url'),
     url(r'^source/(?P<slug>[^/]+)/$', views.source, name='source_url'),
     url(r'^recipe/(?P<slug>[^/]+)/$', views.recipe, name='recipe_url'),
+    url(r'^recipe/l/(?P<slug>[^/]+)/$', views.recipe_share, name='recipe_share_url'),
 
     # authentication
     url(r'^api_login/$', views.api_login, name='api_login_url'),

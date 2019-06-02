@@ -37,8 +37,16 @@ Then you can visit localhost:8000 and you should see the site.
     DEBUG = True
     STATIC_ROOT = 'staticfiles'
     STATIC_URL = '/static/'
+
+    # django's secret key
     SECRET_KEY = '[your secret key]'
+
+    # create a user for login with a 4-digit password
     VIEWER_USERNAME = '[the username you create for the viewer]
+
+    # receipes can be viewed when unauthenticated with an encoded url; this key
+    # generates that. it must be 32 or more characters
+    SHARE_KEY = '[your other secret key]'
 
     DATABASES = {
         'default': {
