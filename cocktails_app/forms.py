@@ -33,7 +33,7 @@ class SearchForm(forms.Form):
         q = cleaned_data['query'].lower()
 
         recipes = list(get_recipes_with_duplicated_names(self.request))
-        title_recipes = filter(lambda recipe: q in recipe.name, recipes)
+        title_recipes = filter(lambda recipe: q in recipe.name.lower(), recipes)
         ingredients = Ingredient.get_for_recipes(recipes, name__icontains=q).distinct()
         ingredient_recipes = Recipe.objects.filter(ingredients__in=ingredients).distinct()
 
