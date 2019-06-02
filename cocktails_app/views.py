@@ -16,7 +16,7 @@ from cocktails_app.forms import SearchForm
 from cocktails_app.models import (
     Glass, Ingredient, IngredientCategory, Recipe, RecipeIngredient, Source
 )
-from cocktails_app.utils import decrypt, encrypt
+from cocktails_app.utils import decrypt, encrypt, get_recipes_with_duplicated_names
 
 
 # helpers
@@ -91,7 +91,7 @@ def index(request):
     if MOBILE_RE.match(request.META['HTTP_USER_AGENT']):
         return redirect('recipes_url')
 
-    recipes = Recipe.get(request)
+    recipes = get_recipes_with_duplicated_names(request)
     sources = Source.get_for_recipes(recipes)
     ingredients = Ingredient.get_for_recipes(recipes)
 
@@ -170,19 +170,16 @@ def recipe_share(request, slug):
     print decrypted_slug
     recipe = get_object_or_404(Recipe, slug=decrypted_slug)
 
-    if get_is_api(request):
-        return JsonResponse(recipe.serialize())
-    else:
-        context = {
-            'recipe': recipe,
-            'search_form': SearchForm(),
-        }
+    context = {
+        'recipe': recipe,
+        'search_form': SearchForm(),
+    }
 
-        return render(request, 'pages/recipe.html', context)
+    return render(request, 'pages/recipe.html', context)
 
 
 def recipes(request):
-    recipes = Recipe.get(request)
+    recipes = get_recipes_with_duplicated_names(request);
 
     context = {
         'title': 'Recipes',
@@ -190,12 +187,12 @@ def recipes(request):
     }
 
     if get_is_api(request):
-        pairs = [{
+        res = [{
             'name': recipe.name,
             'slug': recipe.slug
         } for recipe in recipes]
 
-        return JsonResponse({ 'recipes': pairs })
+        return JsonResponse({ 'recipes': res })
     else:
         context['search_form'] = SearchForm()
         return render(request, 'pages/list.html', context)

@@ -25,8 +25,10 @@
 		<ul>
 			{% for result in recipe_titles_res %}
 				<li>
-					<a class="page-search-link"
-							href="{% url 'recipe_url' result.slug %}">
+					<a
+						class="page-search-link"
+						href="{% url 'recipe_url' result.slug %}"
+					>
 						{{ result.name }}
 					</a>
 				</li>
@@ -41,8 +43,10 @@
 		<ul>
 			{% for result in recipe_ingredients_res %}
 				<li>
-					<a class="page-search-link"
-							href="{% url 'recipe_url' result.slug %}">
+					<a
+						class="page-search-link"
+						href="{% url 'recipe_url' result.slug %}"
+					>
 						{{ result.name }}
 					</a>
 				</li>
@@ -57,8 +61,10 @@
 		<ul>
 			{% for result in ingredient_res %}
 				<li>
-					<a class="page-search-link"
-							href="{% url 'ingredient_url' result.slug %}">
+					<a
+						class="page-search-link"
+						href="{% url 'ingredient_url' result.slug %}"
+					>
 						{{ result.name }}
 					</a>
 				</li>

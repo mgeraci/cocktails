@@ -2,6 +2,7 @@ from django import forms
 
 from cocktails.localsettings import STATIC_URL
 from cocktails_app.models import Ingredient, Recipe
+from cocktails_app.utils import get_recipes_with_duplicated_names
 
 
 OK_CHARS = "abcdefghijklmnopqrstuvwxyz0123456789 .,!?:"
@@ -31,9 +32,8 @@ class SearchForm(forms.Form):
         cleaned_data = self.cleaned_data
         q = cleaned_data['query'].lower()
 
-        recipes = Recipe.get(self.request)
-
-        title_recipes = recipes.filter(name__icontains=q).distinct()
+        recipes = list(get_recipes_with_duplicated_names(self.request))
+        title_recipes = filter(lambda recipe: q in recipe.name, recipes)
         ingredients = Ingredient.get_for_recipes(recipes, name__icontains=q).distinct()
         ingredient_recipes = Recipe.objects.filter(ingredients__in=ingredients).distinct()
 
