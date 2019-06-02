@@ -33,8 +33,8 @@ class SearchForm(forms.Form):
 
         recipes = Recipe.get(self.request)
 
-        title_recipes = recipes.filter(name__icontains=q)
-        ingredients = Ingredient.get_for_recipes(recipes, name__icontains=q)
+        title_recipes = recipes.filter(name__icontains=q).distinct()
+        ingredients = Ingredient.get_for_recipes(recipes, name__icontains=q).distinct()
         ingredient_recipes = Recipe.objects.filter(ingredients__in=ingredients).distinct()
 
         return {
