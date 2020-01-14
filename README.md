@@ -42,7 +42,7 @@ Then you can visit localhost:8000 and you should see the site.
     SECRET_KEY = '[your secret key]'
 
     # create a user for login with a 4-digit password
-    VIEWER_USERNAME = '[the username you create for the viewer]
+    VIEWER_USERNAME = '[the username you create for the viewer]'
 
     # receipes can be viewed when unauthenticated with an encoded url; this key
     # generates that. it must be 32 or more characters
