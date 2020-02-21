@@ -167,7 +167,6 @@ def recipe(request, slug):
 
 def recipe_share(request, slug):
     decrypted_slug = decrypt(slug)
-    print decrypted_slug
     recipe = get_object_or_404(Recipe, slug=decrypted_slug)
 
     context = {
