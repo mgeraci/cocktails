@@ -109,8 +109,11 @@ class Ingredient(models.Model):
     def __unicode__(self):
         return u'{}'.format(self.name)
 
-    def get_recipes(self, **kwargs):
-        return self.recipe_set.all()
+    def get_recipes(self, request, **kwargs):
+        if has_session(request):
+            return self.recipe_set.all()
+        else:
+            return self.recipe_set.all().filter(is_public=True, **kwargs)
 
     def get_absolute_url(self):
         return reverse('ingredient_url', args=[self.slug])
