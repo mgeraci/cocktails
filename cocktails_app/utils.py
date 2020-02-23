@@ -1,5 +1,7 @@
-from Crypto.Cipher import AES
+import os
+import json
 import base64
+from Crypto.Cipher import AES
 
 from django.db.models import Count
 
@@ -35,3 +37,12 @@ def get_recipes_with_duplicated_names(request):
             recipe.name = u'{} ({})'.format(recipe.name, recipe.source)
 
     return recipes
+
+
+def get_static_path(file):
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    manifest_path = dir_path + "/static/dist/manifest.json"
+
+    with open(manifest_path) as data:
+        data = json.load(data)
+        return data.get(file)

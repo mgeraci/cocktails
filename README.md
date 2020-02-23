@@ -1,5 +1,4 @@
-Cocktails
-=========
+# Cocktails
 
 Cocktails is a simple web app to manage cocktail recipes. It's written in
 Django.
@@ -16,8 +15,7 @@ Features:
 * Recipe entry with the Django Admin panel
 
 
-Installation
-------------
+## Installation
 
 Assuming you have virtualenvwrapper:
 
@@ -58,27 +56,21 @@ Then you can visit localhost:8000 and you should see the site.
     }
 
 
-CSS and JS
-----------
+## CSS and JS
 
-CSS is written using SASS, JS is in coffeescript, and both are managed with
-gulp. The coffee is compiled with webpack. Assuming you already have node, npm
-and gulp installed, to install all of the packages required to compile these
-files, run:
+CSS is written using SASS, JS is in ES6, and both are managed with webpack.
 
-	npm install
+The desired node Version is specified in `.nvmrc`. Assuming you have that
+installed and activated (e.g. with `nvm use`), run `yarn install` to install
+the JS packages required for this app.
 
-A requirement for sass compilation is the ruby sass gem:
-
-	gem install sass
-
-Then to start gulp watching and compiling the files, run:
-
-	gulp
+Then to start webpack watching and compiling the files, run `yarn watch`. To
+compile once and exit, run `yarn build`. Cachebusting is built into these
+commands; filenames are created with a hash, and those hashes are stored in a
+json file which python reads when creating the asset paths.
 
 
-Deployment Notes
-----------------
+## Deployment Notes
 
 Mostly for my own use, but to deploy:
 

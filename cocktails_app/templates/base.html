@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load static_paths %}
 
 <!DOCTYPE HTML>
 <html lang="en">
@@ -24,7 +25,7 @@
 		{% include "_standalone_navigation.html" %}
 
 		<link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
-		<link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'dist' %}/{{ 'index.css'|get_static_filname }}">
 	</head>
 	<body class="page-{% block bodyclass %}{% endblock %}"
 			style="background: #4a3d4c;">
@@ -54,6 +55,6 @@
 
 		{% include "_mobile_menu.html" %}
 
-		<script type="text/javascript" src="{{ STATIC_URL }}js/app.js"></script>
+		<script type="text/javascript" src="{{ STATIC_URL }}dist/{{ 'index.js'|get_static_filname }}"></script>
 	</body>
 </html>

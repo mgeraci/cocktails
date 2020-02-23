@@ -1,4 +1,5 @@
 from django.contrib import admin
+from cocktails_app.utils import get_static_path
 from cocktails_app.models import (
     Ingredient,
     IngredientCategory,
@@ -29,14 +30,9 @@ class RecipeAdmin(admin.ModelAdmin):
 
     class Media:
         css = {
-            'all': ('css/vendor/chosen.css',)
+            'all': ('dist/{}'.format(get_static_path('admin.css')),)
         }
-
-        js = (
-            'js/vendor/jquery-3.1.0.min.js',
-            'js/vendor/chosen.jquery.min.js',
-            'js/admin/recipe-admin.js',
-        )
+        js = ('dist/{}'.format(get_static_path('admin.js')),)
 
 
 class UnitAdmin(admin.ModelAdmin):

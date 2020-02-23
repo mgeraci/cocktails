@@ -5,3 +5,4 @@ database_backups
 node_modules
 .sass-cache
 localsettings.py
+yarn-error.log
