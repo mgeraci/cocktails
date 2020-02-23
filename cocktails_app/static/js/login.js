@@ -22,10 +22,17 @@ const Login = {
       loginButton.addEventListener('click', this.onClick.bind(this));
       loginButton.addEventListener('tap', this.onClick.bind(this));
     });
+
+    document.addEventListener('keydown', (e) => {
+      this.handleInput(e.key);
+    });
   },
 
   onClick(e) {
-    const value = e.currentTarget.getAttribute('value');
+    this.handleInput(e.currentTarget.getAttribute('value'));
+  },
+
+  handleInput(value) {
     const currentPassword = this.input[0].getAttribute('value') || '';
     const newPassword = `${currentPassword}${value}`;
 
