@@ -199,7 +199,9 @@ def recipes(request):
 
 def ingredient(request, slug):
     ingredient = get_object_or_404(Ingredient, slug=slug)
-    recipes = ingredient.get_recipes(request)
+    recipes = ingredient.get_recipes(request).distinct()
+
+    print recipes
 
     if get_is_api(request):
         pairs = [{
