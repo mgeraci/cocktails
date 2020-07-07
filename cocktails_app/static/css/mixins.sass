@@ -21,7 +21,7 @@
     color: $default-color
     @include link-underline($default-color)
 
-  .no-touchevents &
+  .desktop &
     &:hover,
     &:active
       color: $hover-color
@@ -72,14 +72,14 @@
   @include mobile
     opacity: 1
 
-  .no-touchevents &
+  .desktop &
     @include transition(opacity 75ms linear)
 
     &:focus,
     &:hover
       opacity: 1
 
-  .touchevents &
+  .mobile &
     opacity: 1
 
   &:focus
