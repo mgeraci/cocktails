@@ -94,7 +94,7 @@ class IngredientCategory(models.Model):
 class Ingredient(models.Model):
     name = models.CharField(max_length=200)
     category = models.ForeignKey(IngredientCategory, default='Alcohol')
-    type_of = models.ForeignKey("self", null=True)
+    type_of = models.ForeignKey("self", blank=True, null=True)
     slug = models.SlugField(blank=True)
 
     class Meta:
