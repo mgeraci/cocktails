@@ -94,6 +94,7 @@ class IngredientCategory(models.Model):
 class Ingredient(models.Model):
     name = models.CharField(max_length=200)
     category = models.ForeignKey(IngredientCategory, default='Alcohol')
+    type_of = models.ForeignKey("self", null=True)
     slug = models.SlugField(blank=True)
 
     class Meta:
@@ -110,10 +111,14 @@ class Ingredient(models.Model):
         return u'{}'.format(self.name)
 
     def get_recipes(self, request, **kwargs):
+        inherited_ingredients = self.ingredient_set.all()
+        inherited_recipes = Recipe.objects.filter(ingredients__in=inherited_ingredients)
+        all_recipes = self.recipe_set.all() | inherited_recipes
+
         if has_session(request):
-            return self.recipe_set.all()
+            return all_recipes
         else:
-            return self.recipe_set.all().filter(is_public=True, **kwargs)
+            return all_recipes.filter(is_public=True, **kwargs)
 
     def get_absolute_url(self):
         return reverse('ingredient_url', args=[self.slug])
