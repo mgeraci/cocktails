@@ -258,7 +258,7 @@ def search(request):
         res = {}
 
         for k, v in context.iteritems():
-            if isinstance(v, QuerySet):
+            if isinstance(v, QuerySet) or isinstance(v, list):
                 res[k] = [{'name': i.name, 'slug': i.slug} for i in v]
             else:
                 res[k] = v
