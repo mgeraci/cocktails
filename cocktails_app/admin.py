@@ -11,6 +11,9 @@ from cocktails_app.models import (
 )
 
 
+admin.ModelAdmin.list_per_page = 500
+
+
 class IngredientAdmin(admin.ModelAdmin):
     pass
 
