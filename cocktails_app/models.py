@@ -12,7 +12,7 @@ from django.contrib.sessions.models import Session
 # authentication helper
 # checks for either a logged in user, or a valid session id passed in the
 # request header
-def has_session(request):
+def get_has_session(request):
     # first, check the request user
     if request.user.is_authenticated():
         return True
@@ -115,7 +115,7 @@ class Ingredient(models.Model):
         inherited_recipes = Recipe.objects.filter(ingredients__in=inherited_ingredients)
         all_recipes = self.recipe_set.all() | inherited_recipes
 
-        if has_session(request):
+        if get_has_session(request):
             return all_recipes
         else:
             return all_recipes.filter(is_public=True, **kwargs)
@@ -177,7 +177,7 @@ class Recipe(models.Model):
 
     @classmethod
     def get(cls, request, **kwargs):
-        if has_session(request):
+        if get_has_session(request):
             return cls.objects.filter(**kwargs)
         else:
             return cls.objects.filter(is_public=True, **kwargs)

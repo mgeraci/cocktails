@@ -6,7 +6,7 @@ from Crypto.Cipher import AES
 from django.db.models import Count
 
 from cocktails.localsettings import SHARE_KEY
-from cocktails_app.models import Recipe
+from cocktails_app.models import Recipe, get_has_session
 
 
 def encrypt(clear_text):
@@ -27,7 +27,12 @@ def decrypt(cipher_text):
 
 
 def get_recipes_with_duplicated_names(request):
+    has_session = get_has_session(request)
     recipes = Recipe.get(request)
+
+    if (not has_session):
+        recipes = recipes.filter(is_public=True)
+
     recipes_with_duplicated_names = set(
         Recipe.objects.values('name').annotate(Count('id')).filter(id__count__gt=1).values_list('name', flat=True)
     )
