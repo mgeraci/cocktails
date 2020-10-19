@@ -8,6 +8,9 @@ from django.forms.models import model_to_dict
 from django.contrib.auth import SESSION_KEY
 from django.contrib.sessions.models import Session
 
+from cocktails.localsettings import PRODUCTION_ROOT, DEBUG
+from cocktails_app.sharing import encrypt
+
 
 # authentication helper
 # checks for either a logged in user, or a valid session id passed in the
@@ -169,6 +172,14 @@ class Recipe(models.Model):
 
         recipeingredients = self.recipeingredient_set.all()
         res['ingredients'] = [ri.serialize() for ri in recipeingredients]
+
+        res['share_link'] = '/recipe/{}'.format(res['slug'])
+
+        if not res['is_public']:
+            res['share_link'] = '/recipe/l/{}'.format(encrypt(res['slug']))
+
+        if DEBUG == False:
+            res['share_link'] = '{}{}'.format(PRODUCTION_ROOT, res['share_link'])
 
         return res
 

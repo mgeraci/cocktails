@@ -16,7 +16,8 @@ from cocktails_app.forms import SearchForm
 from cocktails_app.models import (
     Glass, Ingredient, IngredientCategory, Recipe, RecipeIngredient, Source
 )
-from cocktails_app.utils import decrypt, encrypt, get_recipes_with_duplicated_names
+from cocktails_app.utils import get_recipes_with_duplicated_names
+from cocktails_app.sharing import decrypt, encrypt
 
 
 # helpers

@@ -46,6 +46,10 @@ Then you can visit localhost:8000 and you should see the site.
     # generates that. it must be 32 or more characters
     SHARE_KEY = '[your other secret key]'
 
+    # for sharing links, the production url (starting with `http`) must be
+    # defined
+    PRODUCTION_ROOT = 'https://cocktails.example.com'
+
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
