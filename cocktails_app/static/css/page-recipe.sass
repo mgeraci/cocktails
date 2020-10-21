@@ -169,7 +169,7 @@
         width: $mobile-height
         height: $mobile-height
 
-    $glasses: cocktail collins flute martini rocks snifter mug
+    $glasses: coupe collins flute martini rocks snifter mug
 
     @each $glass in $glasses
       .glass-#{$glass}
@@ -179,7 +179,7 @@
         @if $glass == "rocks"
           @include transform(scale(0.85))
 
-        @if $glass == "cocktail"
+        @if $glass == "coupe"
           @include transform(scale(0.9))
 
 
