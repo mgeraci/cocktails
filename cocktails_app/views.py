@@ -269,3 +269,15 @@ def search(request):
         context['search_form'] = form
 
         return render(request, 'pages/search.html', context)
+
+
+def apple_app_site_association(request):
+    return JsonResponse({
+        'applinks': {
+            'apps': [],
+            'details': [{
+                'appID': 'FG7AYYTX96.com.geraci.martinez.cocktails.app',
+                'paths': ['*']
+            }]
+        }
+    })

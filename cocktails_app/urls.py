@@ -28,4 +28,7 @@ urlpatterns = [
     url(r'^login/$', views.site_login, name='login_url'),
     url(r'^logout/$', auth_views.logout,
         {'next_page': '/'}, name='logout_url'),
+
+    # ios app
+    url(r'^apple-app-site-association', views.apple_app_site_association),
 ]
