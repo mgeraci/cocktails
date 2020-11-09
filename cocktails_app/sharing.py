@@ -11,7 +11,7 @@ def encrypt(clear_text):
                    len(str(clear_text)) % AES.block_size) * "\0")
     cipher_text = base64.urlsafe_b64encode(enc_secret.encrypt(tag_string))
 
-    return cipher_text
+    return cipher_text.decode('UTF-8')
 
 
 def decrypt(cipher_text):
