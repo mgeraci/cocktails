@@ -1,6 +1,7 @@
 database_backups
 .pyc
 **/*.pyc
+cocktails-venv
 .DS_Store
 node_modules
 .sass-cache

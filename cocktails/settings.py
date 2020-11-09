@@ -9,7 +9,7 @@ ADMINS = [('Michael P. Geraci', 'me@mgeraci.com')]
 
 LOGIN_REDIRECT_URL = 'index_url'
 
-from localsettings import (
+from .localsettings import (
     DEBUG,
     DATABASES,
     STATIC_ROOT,

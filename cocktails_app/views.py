@@ -250,7 +250,7 @@ def search(request):
         context['query'] = request.GET.get('query')
 
         if form.is_valid():
-            for k, v in form.process().iteritems():
+            for k, v in form.process().items():
                 context[k] = v
         else:
             context['form_error'] = form.errors['query']
@@ -258,12 +258,13 @@ def search(request):
     if get_is_api(request):
         res = {}
 
-        for k, v in context.iteritems():
+        for k, v in context.items():
             if isinstance(v, QuerySet) or isinstance(v, list):
                 res[k] = [{'name': i.name, 'slug': i.slug} for i in v]
             else:
                 res[k] = v
 
+        print(res.keys(), res['no_results'])
         return JsonResponse(res);
     else:
         context['search_form'] = form

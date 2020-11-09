@@ -34,12 +34,14 @@ class SearchForm(forms.Form):
         has_session = get_has_session(self.request)
 
         recipes = list(get_recipes_with_duplicated_names(self.request))
-        title_recipes = filter(lambda recipe: q in recipe.name.lower(), recipes)
-        ingredients = Ingredient.get_for_recipes(recipes, name__icontains=q)
+        title_recipes = list(filter(lambda recipe: q in recipe.name.lower(), recipes))
+        ingredients = list(Ingredient.get_for_recipes(recipes, name__icontains=q))
         ingredient_recipes = Recipe.objects.filter(ingredients__in=ingredients).distinct()
 
         if not has_session:
             ingredient_recipes = ingredient_recipes.filter(is_public=True)
+
+        ingredient_recipes = list(ingredient_recipes)
 
         return {
             'recipe_titles_res': title_recipes,

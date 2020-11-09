@@ -56,7 +56,7 @@ class Source(models.Model):
     def get_absolute_url(self):
         return reverse('source_url', args=[self.slug])
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     @classmethod
@@ -79,7 +79,7 @@ class Glass(models.Model):
 
         super(Glass, self).save(*args, **kwargs)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
@@ -90,7 +90,7 @@ class IngredientCategory(models.Model):
     class Meta:
         ordering = ['name']
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
@@ -110,7 +110,7 @@ class Ingredient(models.Model):
 
         super(Ingredient, self).save(*args, **kwargs)
 
-    def __unicode__(self):
+    def __str__(self):
         return u'{}'.format(self.name)
 
     def get_recipes(self, request, **kwargs):
@@ -183,7 +183,7 @@ class Recipe(models.Model):
 
         return res
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     @classmethod
@@ -199,7 +199,7 @@ class Unit(models.Model):
     plural = models.CharField(max_length=100)
     after_ingredient = models.BooleanField(default=False)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     class Meta:
@@ -236,5 +236,5 @@ class RecipeIngredient(models.Model):
 
         return res
 
-    def __unicode__(self):
+    def __str__(self):
         return self.ingredient.name

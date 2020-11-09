@@ -1,7 +1,7 @@
 # Cocktails
 
-Cocktails is a simple web app to manage cocktail recipes. It's written in
-Django.
+Cocktails is a simple web app to manage cocktail recipes, written in Python,
+using Django.
 
 [cocktails.michaelgeraci.com](http://cocktails.michaelgeraci.com)
 
@@ -17,10 +17,11 @@ Features:
 
 ## Installation
 
-Assuming you have virtualenvwrapper:
+Assuming you have Python `3.9.0` or later:
 
 * clone the repo
-* `mkvirtualenv cocktails`
+* `python -m venv cocktails-venv`
+* `source cocktails-venv/bin/activate`
 * `pip install -r requirements.txt`
 * create a local database
 * add the file `cocktails/localsettings.py` — see contents below
