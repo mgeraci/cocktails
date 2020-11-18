@@ -39,7 +39,8 @@ def get_is_api(request):
 @csrf_exempt
 def api_login(request):
     try:
-        params = json.loads(request.POST.items()[0][0])
+        params = request.body.decode('utf-8')
+        params = json.loads(params)
     except:
         params = request.POST
 
@@ -264,7 +265,6 @@ def search(request):
             else:
                 res[k] = v
 
-        print(res.keys(), res['no_results'])
         return JsonResponse(res);
     else:
         context['search_form'] = form
