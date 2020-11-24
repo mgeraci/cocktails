@@ -80,3 +80,9 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+
+# Session settings
+
+# 5 years, in seconds
+SESSION_COOKIE_AGE = 157788000
