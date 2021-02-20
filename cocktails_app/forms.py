@@ -35,7 +35,7 @@ class SearchForm(forms.Form):
 
         recipes = list(get_recipes_with_duplicated_names(self.request))
         title_recipes = list(filter(lambda recipe: q in recipe.name.lower(), recipes))
-        ingredients = list(Ingredient.get_for_recipes(recipes, name__icontains=q))
+        ingredients = list(Ingredient.get_for_recipes(recipes, q=q))
         ingredient_recipes = Recipe.objects.filter(ingredients__in=ingredients).distinct()
 
         if not has_session:

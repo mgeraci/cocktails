@@ -129,11 +129,14 @@ class Ingredient(models.Model):
     @classmethod
     def get_for_recipes(cls, recipes, **kwargs):
         ingredients = Ingredient.objects.none()
+        ingredients_type_of = Ingredient.objects.none()
+        query = kwargs.get('q') or ''
 
         for recipe in recipes:
-            ingredients |= recipe.ingredients.filter(**kwargs)
+            ingredients |= recipe.ingredients.filter(name__icontains=query)
+            ingredients_type_of |= recipe.ingredients.filter(type_of__name__icontains=query)
 
-        return ingredients.distinct()
+        return (ingredients | ingredients_type_of).distinct()
 
 
 class Recipe(models.Model):
