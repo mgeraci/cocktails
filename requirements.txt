@@ -10,7 +10,7 @@ packaging==16.8
 pycrypto==2.6.1
 pyparsing==2.1.10
 pytz==2019.1
-PyYAML==5.1
+PyYAML==5.4
 requests==2.22.0
 shellescape==3.4.1
 six==1.10.0
