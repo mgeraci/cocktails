@@ -6,6 +6,10 @@ $pink: #8a504d
 $brown: #b57226
 $tan: #bf9f6b
 
+$body-padding: 20px
+
+$desktop-max-width: 800px
+
 $menu-height: 56px
 $menu-items: 4
 $menu-inactive-color: $tan
@@ -21,8 +25,8 @@ $menu-transition: 250ms
 @import "fonts"
 @import "mixins"
 @import "svg-images"
-@import "navigation"
 @import "mobile-menu"
+@import "staffbar"
 
 
 // general styles
@@ -33,7 +37,7 @@ $menu-transition: 250ms
 
 body
   background: $purple
-  padding: 20px
+  padding: $body-padding
   color: $tan
   font-family: "body-light", helvetica neue, helvetica, arial, sans serif
   @include type(20px, 26px)
@@ -64,7 +68,7 @@ h2
 .page
   @include center
   width: 100%
-  max-width: 800px
+  max-width: $desktop-max-width
 
   &-header,
   &-content

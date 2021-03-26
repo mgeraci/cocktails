@@ -1,0 +1,35 @@
+{% if user.is_staff %}
+	<div class="staffbar">
+		<div class="staffbar-content">
+			<span class="staffbar-user">
+				logged in as {{ user.get_username }}
+			</span>
+
+			{% if recipe %}
+				<a class="staffbar-link" href="{{ recipe.get_admin_url }}">
+					edit
+				</a>
+			{% endif %}
+
+			{% if ingredient %}
+				<a class="staffbar-link" href="{{ ingredient.get_admin_url }}">
+					edit
+				</a>
+			{% endif %}
+
+			{% if source %}
+				<a class="staffbar-link" href="{{ ingredient.get_admin_url }}">
+					edit
+				</a>
+			{% endif %}
+
+			<a class="staffbar-link" href="{% url 'admin:index' %}">
+				admin
+			</a>
+
+			<a class="staffbar-link" href="/logout">
+				sign out
+			</a>
+		</div>
+	</div>
+{% endif %}

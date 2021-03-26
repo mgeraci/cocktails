@@ -123,6 +123,7 @@ def source(request, slug):
             'title': u'Recipes from {}'.format(source.name),
             'list_items': recipes,
             'search_form': SearchForm(),
+            'source': source,
         }
 
         return render(request, 'pages/list.html', context)
@@ -215,6 +216,7 @@ def ingredient(request, slug):
             'title': u'Recipes with {}'.format(ingredient.name),
             'list_items': recipes,
             'search_form': SearchForm(),
+            'ingredient': ingredient,
         }
 
         return render(request, 'pages/list.html', context)

@@ -56,6 +56,9 @@ class Source(models.Model):
     def get_absolute_url(self):
         return reverse('source_url', args=[self.slug])
 
+    def get_admin_url(self):
+        return reverse("admin:%s_%s_change" % (self._meta.app_label, self._meta.model_name), args=(self.id,))
+
     def __str__(self):
         return self.name
 
@@ -126,6 +129,9 @@ class Ingredient(models.Model):
     def get_absolute_url(self):
         return reverse('ingredient_url', args=[self.slug])
 
+    def get_admin_url(self):
+        return reverse("admin:%s_%s_change" % (self._meta.app_label, self._meta.model_name), args=(self.id,))
+
     @classmethod
     def get_for_recipes(cls, recipes, **kwargs):
         ingredients = Ingredient.objects.none()
@@ -185,6 +191,9 @@ class Recipe(models.Model):
             res['share_link'] = '{}{}'.format(PRODUCTION_ROOT, res['share_link'])
 
         return res
+
+    def get_admin_url(self):
+        return reverse("admin:%s_%s_change" % (self._meta.app_label, self._meta.model_name), args=(self.id,))
 
     def __str__(self):
         return self.name

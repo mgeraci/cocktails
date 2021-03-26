@@ -30,7 +30,7 @@
 	<body class="page-{% block bodyclass %}{% endblock %}"
 			style="background: #4a3d4c;">
 
-		<div class="page-navigation"></div>
+		{% include "_staffbar.html" %}
 
 		<div class="page">
 			<header class="page-header">
@@ -50,7 +50,6 @@
 			<section class="page-content">
 				{% block content %}{% endblock %}
 			</section>
-
 		</div>
 
 		{% include "_mobile_menu.html" %}
