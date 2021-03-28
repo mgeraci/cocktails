@@ -148,7 +148,7 @@ class Ingredient(models.Model):
 class Recipe(models.Model):
     name = models.CharField(max_length=200)
     sort_name = models.CharField(max_length=200, blank=True)
-    slug = models.SlugField(max_length=200, blank=True)
+    slug = models.SlugField(max_length=200, blank=True, unique=True)
     source = models.ForeignKey(Source, blank=True, null=True)
     glass = models.ForeignKey(Glass, blank=True, null=True)
     directions = models.TextField(blank=True)
@@ -161,7 +161,6 @@ class Recipe(models.Model):
     def get_absolute_url(self):
         return reverse('recipe_url', args=[self.slug])
 
-    # add a slug on save, if one doesn't exist
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.name)
