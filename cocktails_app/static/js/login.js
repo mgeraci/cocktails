@@ -33,6 +33,10 @@ const Login = {
   },
 
   handleInput(value) {
+    if (value === 'Meta') {
+      return;
+    }
+
     const currentPassword = this.input[0].getAttribute('value') || '';
     const newPassword = `${currentPassword}${value}`;
 

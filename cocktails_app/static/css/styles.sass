@@ -103,6 +103,23 @@ h2
   button[type=submit]
     display: none
 
+.page-header-login
+  @include no-link
+  float: right
+  margin-left: 24px
+  font-size: 16px
+  line-height: 35px
+
+.mobile-login
+  @include no-link
+  position: relative
+  z-index: 2
+  float: right
+  margin-bottom: -20px
+
+  @include desktop
+    display: none
+
 .page-header-search-icon
   @include bare-button
   float: right
