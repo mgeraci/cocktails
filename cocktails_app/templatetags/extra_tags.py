@@ -9,3 +9,7 @@ def active_menu_item(x, y):
 
     except Exception:
         return False
+
+@register.filter
+def show_login_on_mobile_path(path):
+    return path == "/" or path == "/recipes/" or path == "/ingredients/" or path == "/sources/"
