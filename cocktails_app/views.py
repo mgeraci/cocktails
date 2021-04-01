@@ -59,6 +59,10 @@ def site_login(request):
     user = None
     username = VIEWER_USERNAME
     password = request.POST.get('password', None)
+    post_login_url = request.POST.get('next')
+
+    if not post_login_url or post_login_url[:1] != '/':
+        post_login_url = 'index_url'
 
     if password:
         user = authenticate(username=username, password=password)
@@ -82,7 +86,7 @@ def site_login(request):
 
     if user is not None:
         login(request, user)
-        return redirect('index_url')
+        return redirect(post_login_url)
     elif password:
         context['error'] = True
 
@@ -154,7 +158,7 @@ def recipe(request, slug):
     recipe = get_object_or_404(Recipe, slug=slug)
 
     if not recipe.is_public and not request.user.is_authenticated():
-        raise Http404
+        return redirect('/login/?next=/recipe/{}'.format(slug))
 
     if get_is_api(request):
         return JsonResponse(recipe.serialize())

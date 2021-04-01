@@ -40,6 +40,13 @@
         class="page-login-fieldset-input"
     />
 
+    <input
+        name="next"
+        type="hidden"
+        class="page-login-fieldset-input"
+        value="{{ request.GET.next }}"
+    />
+
     {% csrf_token %}
 </form>
 
