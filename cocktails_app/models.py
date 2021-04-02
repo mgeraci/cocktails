@@ -11,6 +11,11 @@ from django.contrib.sessions.models import Session
 from cocktails.localsettings import PRODUCTION_ROOT, DEBUG
 from cocktails_app.sharing import encrypt
 
+RECIPE_CATEGORIES = {
+    'COCKTAIL': 1,
+    'LARGE_FORMAT': 2,
+    'INGREDIENT': 3,
+}
 
 # authentication helper
 # checks for either a logged in user, or a valid session id passed in the
@@ -162,7 +167,7 @@ class Recipe(models.Model):
     slug = models.SlugField(max_length=200, blank=True, unique=True)
     source = models.ForeignKey(Source, blank=True, null=True)
     glass = models.ForeignKey(Glass, blank=True, null=True)
-    category = models.ForeignKey(RecipeCategory, default=1)
+    category = models.ForeignKey(RecipeCategory, default=RECIPE_CATEGORIES['COCKTAIL'])
     directions = models.TextField(blank=True)
     is_public = models.BooleanField(default=False)
     ingredients = models.ManyToManyField(Ingredient, through='RecipeIngredient')

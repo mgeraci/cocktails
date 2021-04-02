@@ -3,7 +3,7 @@ import json
 
 from django.db.models import Count
 
-from cocktails_app.models import Recipe, get_has_session
+from cocktails_app.models import Recipe, get_has_session, RECIPE_CATEGORIES
 
 
 def get_recipes_with_duplicated_names(request):
@@ -12,6 +12,13 @@ def get_recipes_with_duplicated_names(request):
 
     if (not has_session):
         recipes = recipes.filter(is_public=True)
+
+    try:
+        filters = [int(f) for f in request.GET.get('filters').split(',')]
+    except:
+        filters = [RECIPE_CATEGORIES['COCKTAIL'], RECIPE_CATEGORIES['LARGE_FORMAT']]
+
+    recipes = recipes.filter(category__in=filters)
 
     recipes_with_duplicated_names = set(
         Recipe.objects.values('name').annotate(Count('id')).filter(id__count__gt=1).values_list('name', flat=True)
