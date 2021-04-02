@@ -145,6 +145,17 @@ class Ingredient(models.Model):
         return (ingredients | ingredients_type_of).distinct()
 
 
+class RecipeCategory(models.Model):
+    name = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=200, unique=True)
+
+    class Meta:
+        ordering = ['name']
+
+    def __str__(self):
+        return self.name
+
+
 class Recipe(models.Model):
     name = models.CharField(max_length=200)
     sort_name = models.CharField(max_length=200, blank=True)
