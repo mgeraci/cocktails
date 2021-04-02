@@ -146,7 +146,7 @@ class Ingredient(models.Model):
 
 
 class RecipeCategory(models.Model):
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True)
 
     class Meta:
