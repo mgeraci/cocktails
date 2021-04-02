@@ -162,6 +162,7 @@ class Recipe(models.Model):
     slug = models.SlugField(max_length=200, blank=True, unique=True)
     source = models.ForeignKey(Source, blank=True, null=True)
     glass = models.ForeignKey(Glass, blank=True, null=True)
+    category = models.ForeignKey(RecipeCategory, default=1)
     directions = models.TextField(blank=True)
     is_public = models.BooleanField(default=False)
     ingredients = models.ManyToManyField(Ingredient, through='RecipeIngredient')
