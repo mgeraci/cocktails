@@ -61,7 +61,9 @@ def site_login(request):
     password = request.POST.get('password', None)
     post_login_url = request.POST.get('next')
 
-    if not post_login_url or post_login_url[:1] != '/':
+    # default to the index page if missing, or if it's not a relative path,
+    # and check that it's not a protocol-less url (//www.example.com)
+    if not post_login_url or post_login_url[0] != '/' or post_login_url[1] == '/':
         post_login_url = 'index_url'
 
     if password:
@@ -114,6 +116,9 @@ def index(request):
 def source(request, slug):
     source = get_object_or_404(Source, slug=slug)
     recipes = Recipe.get(request, source=source)
+
+    if len(recipes) == 0 and not request.user.is_authenticated():
+        return redirect('/login/?next=/source/{}'.format(slug))
 
     if get_is_api(request):
         pairs = [{
