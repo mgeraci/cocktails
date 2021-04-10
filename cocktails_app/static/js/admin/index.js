@@ -49,7 +49,7 @@ $(() => {
   bindChosen();
 
   // when we add an ingredient row, bind dropdowns again
-  $('.add-row a').on('click', () => bindChosen());
+  $('.add-row a').on('click', bindChosen);
 
   // get the initial ingredient counts
   ingredientCounts = getIngredientCounts();
