@@ -10,6 +10,7 @@ from django.contrib.sessions.models import Session
 
 from cocktails.localsettings import PRODUCTION_ROOT, DEBUG
 from cocktails_app.sharing import encrypt
+from cocktails_app.unique_slugify import unique_slugify
 
 RECIPE_CATEGORIES = {
     'COCKTAIL': 1,
@@ -180,7 +181,7 @@ class Recipe(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.name)
+            unique_slugify(self, self.name)
 
         self.sort_name = re.sub(r"^(the|el|la|los|las|le|les) ", "", self.name.lower())
 
