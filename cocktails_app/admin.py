@@ -32,6 +32,8 @@ class RecipeAdmin(admin.ModelAdmin):
         RecipeIngredientInline,
     ]
 
+    list_display = ('name', 'source', 'category')
+
     class Media:
         css = {
             'all': ('dist/{}'.format(get_static_path('admin.css')),)
