@@ -13,10 +13,24 @@ def get_recipes_with_duplicated_names(request):
     if (not has_session):
         recipes = recipes.filter(is_public=True)
 
+    default_filters = [
+        RECIPE_CATEGORIES['COCKTAIL'],
+        RECIPE_CATEGORIES['LARGE_FORMAT'],
+    ]
+
     try:
-        filters = [int(f) for f in request.GET.get('filters').split(',')]
+        filters = default_filters
+
+        if request.path == '/search/':
+            filters = [
+                RECIPE_CATEGORIES['COCKTAIL'],
+                RECIPE_CATEGORIES['LARGE_FORMAT'],
+                RECIPE_CATEGORIES['INGREDIENT'],
+            ]
+        else:
+            filters = [int(f) for f in request.GET.get('filters').split(',')]
     except:
-        filters = [RECIPE_CATEGORIES['COCKTAIL'], RECIPE_CATEGORIES['LARGE_FORMAT']]
+        filters = default_filters
 
     recipes = recipes.filter(category__in=filters)
 
