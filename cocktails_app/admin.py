@@ -26,6 +26,9 @@ class IngredientCategoryAdmin(admin.ModelAdmin):
 class RecipeIngredientInline(admin.TabularInline):
     model = RecipeIngredient
 
+    # the number of ingredient rows to show on a recipe admin page
+    extra = 10
+
 
 class RecipeAdmin(admin.ModelAdmin):
     inlines = [
