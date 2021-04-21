@@ -16,7 +16,7 @@ from cocktails_app.forms import SearchForm
 from cocktails_app.models import (
     Glass, Ingredient, IngredientCategory, Recipe, RecipeIngredient, Source,
 )
-from cocktails_app.utils import get_recipes_with_duplicated_names
+from cocktails_app.utils import get_recipes_with_duplicated_names, filter_recipes
 from cocktails_app.sharing import decrypt, encrypt
 
 
@@ -116,6 +116,7 @@ def index(request):
 def source(request, slug):
     source = get_object_or_404(Source, slug=slug)
     recipes = Recipe.get(request, source=source)
+    recipes = filter_recipes(recipes, request)
 
     if len(recipes) == 0 and not request.user.is_authenticated():
         return redirect('/login/?next=/source/{}'.format(slug))

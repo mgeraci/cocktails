@@ -6,13 +6,7 @@ from django.db.models import Count
 from cocktails_app.models import Recipe, get_has_session, RECIPE_CATEGORIES
 
 
-def get_recipes_with_duplicated_names(request):
-    has_session = get_has_session(request)
-    recipes = Recipe.get(request)
-
-    if (not has_session):
-        recipes = recipes.filter(is_public=True)
-
+def filter_recipes(recipes, request):
     default_categories = [
         RECIPE_CATEGORIES['COCKTAIL'],
         RECIPE_CATEGORIES['LARGE_FORMAT'],
@@ -41,6 +35,18 @@ def get_recipes_with_duplicated_names(request):
         recipes = recipes.filter(category__in=categories, glass__in=glasses)
     else:
         recipes = recipes.filter(category__in=categories)
+
+    return recipes
+
+
+def get_recipes_with_duplicated_names(request):
+    has_session = get_has_session(request)
+    recipes = Recipe.get(request)
+
+    if (not has_session):
+        recipes = recipes.filter(is_public=True)
+
+    recipes = filter_recipes(recipes, request)
 
     recipes_with_duplicated_names = set(
         Recipe.objects.values('name').annotate(Count('id')).filter(id__count__gt=1).values_list('name', flat=True)
