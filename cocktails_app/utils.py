@@ -28,11 +28,19 @@ def get_recipes_with_duplicated_names(request):
                 RECIPE_CATEGORIES['INGREDIENT'],
             ]
         else:
-            categories = [int(f) for f in request.GET.get('categories').split(',')]
+            categories = [int(c) for c in request.GET.get('categories').split(',')]
     except:
         categories = default_categories
 
-    recipes = recipes.filter(category__in=categories)
+    try:
+        glasses = [int(g) for g in request.GET.get('glasses').split(',')]
+    except:
+        glasses = None
+
+    if glasses:
+        recipes = recipes.filter(category__in=categories, glass__in=glasses)
+    else:
+        recipes = recipes.filter(category__in=categories)
 
     recipes_with_duplicated_names = set(
         Recipe.objects.values('name').annotate(Count('id')).filter(id__count__gt=1).values_list('name', flat=True)

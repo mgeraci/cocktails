@@ -18,6 +18,22 @@ RECIPE_CATEGORIES = {
     'INGREDIENT': 3,
 }
 
+GLASSES = {
+    'COUPE': 1,
+    'ROCKS': 2,
+    'COLLINS': 3,
+    'FLUTE': 4,
+    'SNIFTER': 5,
+    'MUG': 6,
+    'TIKI': 7,
+    'PILSNER': 8,
+    'NICK_NORA': 9,
+    'PINEAPPLE': 10,
+    'COCONUT': 11,
+    'JULEP': 12,
+    'MARTINI': 13,
+}
+
 # authentication helper
 # checks for either a logged in user, or a valid session id passed in the
 # request header
