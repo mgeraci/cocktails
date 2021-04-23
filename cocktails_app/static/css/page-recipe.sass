@@ -169,7 +169,7 @@
         width: $mobile-height
         height: $mobile-height
 
-    $glasses: coupe collins flute martini rocks snifter mug tiki pilsner nicknora
+    $glasses: coupe collins flute martini rocks snifter mug tiki pilsner nicknora coconut julep pineapple
 
     @each $glass in $glasses
       .glass-#{$glass}
@@ -181,6 +181,15 @@
 
         @if $glass == "coupe"
           @include transform(scale(0.9))
+
+        @if $glass == "julep"
+          @include transform(scale(0.9))
+
+        @if $glass == "coconut"
+          @include transform(scale(1.1) translateY(-2px))
+
+        @if $glass == "pineapple"
+          @include transform(scale(1.3) translateY(-2px))
 
 
   // layout for bottom section, quantity and glass
