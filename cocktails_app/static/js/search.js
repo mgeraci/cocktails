@@ -13,7 +13,7 @@ const Search = {
 
     setTimeout(() => {
       input[0].focus();
-    }, 500);
+    }, 250);
   },
 };
 
