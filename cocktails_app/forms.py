@@ -2,7 +2,10 @@ from django import forms
 
 from cocktails.localsettings import STATIC_URL
 from cocktails_app.models import Ingredient, Recipe, get_has_session
-from cocktails_app.utils import get_recipes_with_duplicated_names
+from cocktails_app.utils import (
+    get_recipes_with_duplicated_names,
+    decorate_recipe_list_with_sources,
+)
 
 
 OK_CHARS = "abcdefghijklmnopqrstuvwxyz0123456789 .,!?:"
@@ -36,7 +39,9 @@ class SearchForm(forms.Form):
         recipes = list(get_recipes_with_duplicated_names(self.request))
         title_recipes = list(filter(lambda recipe: q in recipe.name.lower(), recipes))
         ingredients = list(Ingredient.get_for_recipes(recipes, q=q))
-        ingredient_recipes = Recipe.objects.filter(ingredients__in=ingredients).distinct()
+        ingredient_recipes = decorate_recipe_list_with_sources(
+            Recipe.objects.filter(ingredients__in=ingredients).distinct()
+        )
 
         if not has_session:
             ingredient_recipes = ingredient_recipes.filter(is_public=True)

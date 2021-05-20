@@ -39,15 +39,7 @@ def filter_recipes(recipes, request):
     return recipes
 
 
-def get_recipes_with_duplicated_names(request):
-    has_session = get_has_session(request)
-    recipes = Recipe.get(request)
-
-    if (not has_session):
-        recipes = recipes.filter(is_public=True)
-
-    recipes = filter_recipes(recipes, request)
-
+def decorate_recipe_list_with_sources(recipes):
     recipes_with_duplicated_names = set(
         Recipe.objects.values('name').annotate(Count('id')).filter(id__count__gt=1).values_list('name', flat=True)
     )
@@ -57,6 +49,18 @@ def get_recipes_with_duplicated_names(request):
             recipe.name = u'{} ({})'.format(recipe.name, recipe.source)
 
     return recipes
+
+
+def get_recipes_with_duplicated_names(request):
+    has_session = get_has_session(request)
+    recipes = Recipe.get(request)
+
+    if (not has_session):
+        recipes = recipes.filter(is_public=True)
+
+    recipes = filter_recipes(recipes, request)
+
+    return decorate_recipe_list_with_sources(recipes)
 
 
 def get_static_path(file):
