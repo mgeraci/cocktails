@@ -185,7 +185,7 @@ class Recipe(models.Model):
     source = models.ForeignKey(Source, blank=True, null=True)
     glass = models.ForeignKey(Glass, blank=True, null=True)
     category = models.ForeignKey(RecipeCategory, default=RECIPE_CATEGORIES['COCKTAIL'], related_name='legacy_recipe_set')
-    categories = models.ManyToManyField(RecipeCategory, default=RECIPE_CATEGORIES['COCKTAIL'], blank=True)
+    categories = models.ManyToManyField(RecipeCategory, default=RECIPE_CATEGORIES['COCKTAIL'])
     directions = models.TextField(blank=True)
     is_public = models.BooleanField(default=False)
     ingredients = models.ManyToManyField(Ingredient, through='RecipeIngredient')
