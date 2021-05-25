@@ -3,7 +3,7 @@ import json
 
 from django.db.models import Count
 
-from cocktails_app.models import Recipe, get_has_session, RECIPE_CATEGORIES
+from cocktails_app.models import Recipe, Glass, RecipeTag, get_has_session, RECIPE_CATEGORIES
 
 
 def filter_recipes(recipes, request):
@@ -31,10 +31,18 @@ def filter_recipes(recipes, request):
     except:
         glasses = None
 
+    try:
+        tags = [int(t) for t in request.GET.get('tags').split(',')]
+    except:
+        tags = None
+
+    recipes = recipes.filter(category__in=categories)
+
     if glasses:
-        recipes = recipes.filter(category__in=categories, glass__in=glasses)
-    else:
-        recipes = recipes.filter(category__in=categories)
+        recipes = recipes.filter(glass__in=glasses)
+
+    if tags:
+        recipes = recipes.filter(tags__in=tags)
 
     return recipes
 
