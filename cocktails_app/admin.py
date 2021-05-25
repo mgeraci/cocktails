@@ -9,6 +9,7 @@ from cocktails_app.models import (
     Source,
     Glass,
     RecipeCategory,
+    RecipeTag,
 )
 
 
@@ -60,6 +61,10 @@ class RecipeCategoryAdmin(admin.ModelAdmin):
     pass
 
 
+class RecipeTagAdmin(admin.ModelAdmin):
+    pass
+
+
 admin.site.register(Ingredient, IngredientAdmin)
 admin.site.register(IngredientCategory, IngredientCategoryAdmin)
 admin.site.register(Recipe, RecipeAdmin)
@@ -67,3 +72,4 @@ admin.site.register(Unit, UnitAdmin)
 admin.site.register(Source, SourceAdmin)
 admin.site.register(Glass, GlassAdmin)
 admin.site.register(RecipeCategory, RecipeCategoryAdmin)
+admin.site.register(RecipeTag, RecipeTagAdmin)

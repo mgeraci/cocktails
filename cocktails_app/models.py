@@ -178,6 +178,17 @@ class RecipeCategory(models.Model):
         return self.name
 
 
+class RecipeTag(models.Model):
+    name = models.CharField(max_length=200, unique=True)
+    slug = models.SlugField(max_length=200, unique=True)
+
+    class Meta:
+        ordering = ['name']
+
+    def __str__(self):
+        return self.name
+
+
 class Recipe(models.Model):
     name = models.CharField(max_length=200)
     sort_name = models.CharField(max_length=200, blank=True)
@@ -185,7 +196,7 @@ class Recipe(models.Model):
     source = models.ForeignKey(Source, blank=True, null=True)
     glass = models.ForeignKey(Glass, blank=True, null=True)
     category = models.ForeignKey(RecipeCategory, default=RECIPE_CATEGORIES['COCKTAIL'], related_name='legacy_recipe_set')
-    categories = models.ManyToManyField(RecipeCategory, default=RECIPE_CATEGORIES['COCKTAIL'])
+    tags = models.ManyToManyField(RecipeTag, blank=True)
     directions = models.TextField(blank=True)
     is_public = models.BooleanField(default=False)
     ingredients = models.ManyToManyField(Ingredient, through='RecipeIngredient')
@@ -212,6 +223,9 @@ class Recipe(models.Model):
 
         if res['source']:
             res['source'] = model_to_dict(Source.objects.get(id=res['source']))
+
+        if res['tags']:
+            res['tags'] = [model_to_dict(RecipeTag.objects.get(id=tag.id)) for tag in res['tags']]
 
         recipeingredients = self.recipeingredient_set.all()
         res['ingredients'] = [ri.serialize() for ri in recipeingredients]
