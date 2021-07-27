@@ -26,7 +26,7 @@ urlpatterns = [
     # authentication
     url(r'^api_login/$', views.api_login, name='api_login_url'),
     url(r'^login/$', views.site_login, name='login_url'),
-    url(r'^logout/$', auth_views.LogoutView,
+    url(r'^logout/$', auth_views.LogoutView.as_view(),
         {'next_page': '/'}, name='logout_url'),
 
     # ios app

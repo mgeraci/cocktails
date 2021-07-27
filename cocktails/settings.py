@@ -58,6 +58,8 @@ TEMPLATES = [
     },
 ]
 
+LOGOUT_REDIRECT_URL = "/"
+
 WSGI_APPLICATION = 'cocktails.wsgi.application'
 
 
