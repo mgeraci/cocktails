@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 import re
 from django.db import models
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.template.defaultfilters import slugify
 from django.forms.models import model_to_dict
 
@@ -121,8 +121,8 @@ class IngredientCategory(models.Model):
 
 class Ingredient(models.Model):
     name = models.CharField(max_length=200)
-    category = models.ForeignKey(IngredientCategory, default='Alcohol')
-    type_of = models.ForeignKey("self", blank=True, null=True)
+    category = models.ForeignKey(IngredientCategory, default='Alcohol', on_delete=models.CASCADE)
+    type_of = models.ForeignKey("self", blank=True, null=True, on_delete=models.CASCADE)
     slug = models.SlugField(blank=True)
 
     class Meta:
@@ -193,9 +193,9 @@ class Recipe(models.Model):
     name = models.CharField(max_length=200)
     sort_name = models.CharField(max_length=200, blank=True)
     slug = models.SlugField(max_length=200, blank=True, unique=True)
-    source = models.ForeignKey(Source, blank=True, null=True)
-    glass = models.ForeignKey(Glass, blank=True, null=True)
-    category = models.ForeignKey(RecipeCategory, default=RECIPE_CATEGORIES['COCKTAIL'], related_name='legacy_recipe_set')
+    source = models.ForeignKey(Source, blank=True, null=True, on_delete=models.CASCADE)
+    glass = models.ForeignKey(Glass, blank=True, null=True, on_delete=models.CASCADE)
+    category = models.ForeignKey(RecipeCategory, default=RECIPE_CATEGORIES['COCKTAIL'], related_name='legacy_recipe_set', on_delete=models.CASCADE)
     tags = models.ManyToManyField(RecipeTag, blank=True)
     directions = models.TextField(blank=True)
     is_public = models.BooleanField(default=False)
@@ -267,12 +267,12 @@ class Unit(models.Model):
 
 
 class RecipeIngredient(models.Model):
-    recipe = models.ForeignKey(Recipe)
-    ingredient = models.ForeignKey(Ingredient)
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+    ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
 
     amount_num = models.IntegerField()
     amount_den = models.IntegerField(default=1)
-    unit = models.ForeignKey(Unit, null=True, blank=True)
+    unit = models.ForeignKey(Unit, null=True, blank=True, on_delete=models.CASCADE)
     order = models.PositiveSmallIntegerField(default=1)
 
     class Meta:
