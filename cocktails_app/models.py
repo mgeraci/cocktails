@@ -39,7 +39,7 @@ GLASSES = {
 # request header
 def get_has_session(request):
     # first, check the request user
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         return True
 
     # next, check the request for a valid sessionid

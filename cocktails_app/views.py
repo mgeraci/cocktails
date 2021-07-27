@@ -118,7 +118,7 @@ def source(request, slug):
     recipes = Recipe.get(request, source=source)
     recipes = filter_recipes(recipes, request)
 
-    if len(recipes) == 0 and not request.user.is_authenticated():
+    if len(recipes) == 0 and not request.user.is_authenticated:
         return redirect('/login/?next=/source/{}'.format(slug))
 
     if get_is_api(request):
@@ -163,7 +163,7 @@ def sources(request):
 def recipe(request, slug):
     recipe = get_object_or_404(Recipe, slug=slug)
 
-    if not recipe.is_public and not request.user.is_authenticated():
+    if not recipe.is_public and not request.user.is_authenticated:
         return redirect('/login/?next=/recipe/{}'.format(slug))
 
     if get_is_api(request):
