@@ -96,6 +96,7 @@ class Glass(models.Model):
 
     class Meta:
         ordering = ['name']
+        verbose_name_plural = 'Glasses'
 
     # add a slug on save, if one doesn't exist
     def save(self, *args, **kwargs):
@@ -114,6 +115,7 @@ class IngredientCategory(models.Model):
 
     class Meta:
         ordering = ['name']
+        verbose_name_plural = 'Ingredient categories'
 
     def __str__(self):
         return self.name
@@ -173,6 +175,7 @@ class RecipeCategory(models.Model):
 
     class Meta:
         ordering = ['name']
+        verbose_name_plural = 'Recipe categories'
 
     def __str__(self):
         return self.name
