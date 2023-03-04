@@ -1,6 +1,7 @@
 database_backups
 .pyc
 **/*.pyc
+env
 cocktails-venv
 .DS_Store
 node_modules
