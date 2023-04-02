@@ -196,6 +196,7 @@ class Recipe(models.Model):
     name = models.CharField(max_length=200)
     sort_name = models.CharField(max_length=200, blank=True)
     slug = models.SlugField(max_length=200, blank=True, unique=True)
+    encrypted_slug = models.CharField(max_length=200, blank=True)
     source = models.ForeignKey(Source, blank=True, null=True, on_delete=models.CASCADE)
     glass = models.ForeignKey(Glass, blank=True, null=True, on_delete=models.CASCADE)
     category = models.ForeignKey(RecipeCategory, default=RECIPE_CATEGORIES['COCKTAIL'], related_name='legacy_recipe_set', on_delete=models.CASCADE)
