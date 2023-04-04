@@ -178,9 +178,15 @@ def recipe(request, slug):
         return render(request, 'pages/recipe.html', context)
 
 
+# the view that runs when you go to an encrypted recipe link, e.g. /recipe/l/...
 def recipe_share(request, slug):
-    decrypted_slug = decrypt(slug)
-    recipe = get_object_or_404(Recipe, slug=decrypted_slug)
+    # first, check the database for a saved, old version of the encrypted slug
+    try:
+        recipe = Recipe.objects.get(encrypted_slug=slug)
+    except:
+        # if not found, try decrypting it with the new share key
+        decrypted_slug = decrypt(slug)
+        recipe = get_object_or_404(Recipe, slug=decrypted_slug)
 
     context = {
         'recipe': recipe,
