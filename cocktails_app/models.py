@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 import re
+import uuid
 from django.db import models
 from django.urls import reverse
 from django.template.defaultfilters import slugify
@@ -9,7 +10,6 @@ from django.contrib.auth import SESSION_KEY
 from django.contrib.sessions.models import Session
 
 from cocktails.localsettings import PRODUCTION_ROOT, DEBUG
-from cocktails_app.sharing import encrypt
 from cocktails_app.unique_slugify import unique_slugify
 
 RECIPE_CATEGORIES = {
@@ -196,7 +196,7 @@ class Recipe(models.Model):
     name = models.CharField(max_length=200)
     sort_name = models.CharField(max_length=200, blank=True)
     slug = models.SlugField(max_length=200, blank=True, unique=True)
-    encrypted_slug = models.CharField(max_length=200, blank=True)
+    encrypted_slug = models.CharField(max_length=200, default=uuid.uuid4)
     source = models.ForeignKey(Source, blank=True, null=True, on_delete=models.CASCADE)
     glass = models.ForeignKey(Glass, blank=True, null=True, on_delete=models.CASCADE)
     category = models.ForeignKey(RecipeCategory, default=RECIPE_CATEGORIES['COCKTAIL'], related_name='legacy_recipe_set', on_delete=models.CASCADE)
@@ -237,7 +237,7 @@ class Recipe(models.Model):
         res['share_link'] = '/recipe/{}'.format(res['slug'])
 
         if not res['is_public']:
-            res['share_link'] = '/recipe/l/{}'.format(encrypt(res['slug']))
+            res['share_link'] = '/recipe/l/{}'.format(self.encrypted_slug)
 
         if DEBUG == False:
             res['share_link'] = '{}{}'.format(PRODUCTION_ROOT, res['share_link'])

@@ -17,7 +17,6 @@ from cocktails_app.models import (
     Glass, Ingredient, IngredientCategory, Recipe, RecipeIngredient, Source,
 )
 from cocktails_app.utils import get_recipes_with_duplicated_names, filter_recipes
-from cocktails_app.sharing import decrypt, encrypt
 
 
 # helpers
@@ -171,7 +170,7 @@ def recipe(request, slug):
     else:
         context = {
             'recipe': recipe,
-            'share_link': '/recipe/l/{}'.format(encrypt(recipe.slug)),
+            'share_link': '/recipe/l/{}'.format(recipe.encrypted_slug),
             'search_form': SearchForm(),
         }
 
@@ -180,13 +179,7 @@ def recipe(request, slug):
 
 # the view that runs when you go to an encrypted recipe link, e.g. /recipe/l/...
 def recipe_share(request, slug):
-    # first, check the database for a saved, old version of the encrypted slug
-    try:
-        recipe = Recipe.objects.get(encrypted_slug=slug)
-    except:
-        # if not found, try decrypting it with the new share key
-        decrypted_slug = decrypt(slug)
-        recipe = get_object_or_404(Recipe, slug=decrypted_slug)
+    recipe = get_object_or_404(Recipe, encrypted_slug=slug)
 
     context = {
         'recipe': recipe,
