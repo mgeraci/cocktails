@@ -79,8 +79,6 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
-USE_L10N = True
-
 USE_TZ = True
 
 
@@ -88,3 +86,8 @@ USE_TZ = True
 
 # 5 years, in seconds
 SESSION_COOKIE_AGE = 157788000
+
+
+# Form settings
+
+FORM_RENDERER = "django.forms.renderers.DjangoDivFormRenderer"
