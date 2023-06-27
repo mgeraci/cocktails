@@ -36,7 +36,10 @@ class RecipeAdmin(admin.ModelAdmin):
         RecipeIngredientInline,
     ]
 
-    list_display = ('name', 'source', 'category')
+    def has_tag(self, obj):
+        return obj.tags.exists()
+
+    list_display = ('name', 'source', 'category', 'has_tag')
 
     class Media:
         css = {
