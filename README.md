@@ -7,27 +7,32 @@ using Django.
 
 Features:
 
-* Mobile-first responsive design
-* Browse by ingredient, recipe, or source
-* Search for recipes including an ingredient
-* User authentication and private recipes
-* Recipe multiplier for making larger batches
-* Recipe entry with the Django Admin panel
-
+- Mobile-first responsive design
+- Browse by ingredient, recipe, or source
+- Search for recipes including an ingredient
+- User authentication and private recipes
+- API for native apps
+- Recipe multiplier for making larger batches
+- Recipe entry with the Django Admin panel
 
 ## Installation
 
 Assuming you have Python `3.9.0` or later:
 
-* clone the repo
-* `python -m venv cocktails-venv`
-* `source cocktails-venv/bin/activate`
-* `pip install -r requirements.txt`
-* create a local database
-* add the file `cocktails/localsettings.py` — see contents below
-* `./manage.py migrate`
-* `./manage.py createsuperuser` — you can use this to log in at localhost:8000/admin
-* `./manage.py runserver`
+- clone the repo
+- `python -m venv cocktails-venv`
+- `source cocktails-venv/bin/activate`
+- `pip install -r requirements.txt`
+- create a local database
+- add the file `cocktails/localsettings.py` — see contents below
+- `./manage.py migrate`
+- if not importing existing data `./manage.py createsuperuser` — you can use this to log in at localhost:8000/admin
+- `./manage.py runserver`
+
+For running after installation:
+
+- `source cocktails-venv/bin/activate`
+- `./manage.py runserver`
 
 Then you can visit localhost:8000 and you should see the site.
 
@@ -56,7 +61,6 @@ Then you can visit localhost:8000 and you should see the site.
         }
     }
 
-
 ## CSS and JS
 
 CSS is written using SASS, JS is in ES6, and both are managed with webpack.
@@ -70,39 +74,38 @@ compile once and exit, run `yarn build`. Cachebusting is built into these
 commands; filenames are created with a hash, and those hashes are stored in a
 json file which python reads when creating the asset paths.
 
-
 ## Deployment Notes
 
 Mostly for my own use, but to deploy:
 
-* create a python application for the app and a static php application for the
+- create a python application for the app and a static php application for the
   static files
-* create domains for each
-* create a database and database user, add those to localsettings.py
-* add a virtualenv, and install the required packages:
-	* `mkvirtualenv michael_cocktails`
-	* `cd michael_cocktails`
-	* `workon michael_cocktails`
-	* `pip install -r requirements.txt`
-	* `pip install --upgrade pip` if prompted
-* in apache2/conf/httpd.conf:
-	* delete `DirectoryIndex` and `DocumentRoot`, and the `<Directory>` block
-	* Add `WYSGIPythonPath` — This is like a bash path, except it should point to the likely spots that python executables can be found:
+- create domains for each
+- create a database and database user, add those to localsettings.py
+- add a virtualenv, and install the required packages:
+  - `mkvirtualenv michael_cocktails`
+  - `cd michael_cocktails`
+  - `workon michael_cocktails`
+  - `pip install -r requirements.txt`
+  - `pip install --upgrade pip` if prompted
+- in apache2/conf/httpd.conf:
+  - delete `DirectoryIndex` and `DocumentRoot`, and the `<Directory>` block
+  - Add `WYSGIPythonPath` — This is like a bash path, except it should point to the likely spots that python executables can be found:
 
-			WSGIPythonPath [path-to-app]/michael_cocktails:[path-to-app]/michael_cocktails/cocktails:/home/katur/.virtualenvs/michael_cocktails/lib/python2.7/site-packages:/home/katur/.virtualenvs/michael_cocktails/lib/python2.7
+        WSGIPythonPath [path-to-app]/michael_cocktails:[path-to-app]/michael_cocktails/cocktails:/home/katur/.virtualenvs/michael_cocktails/lib/python2.7/site-packages:/home/katur/.virtualenvs/michael_cocktails/lib/python2.7
 
-	* Change WSGIDaemonProcess to use the python in our virtualenv:
+  - Change WSGIDaemonProcess to use the python in our virtualenv:
 
-			WSGIDaemonProcess michael_cocktails processes=2 threads=12 python-path=[path-to-app]/michael_cocktails:[path-to-app]/michael_cocktails/cocktails:[path-to-home]/.virtualenvs/michael_cocktails/lib/python2.7/site-packages:[path-to-home]/.virtualenvs/michael_cocktails/lib/python2.7
+        WSGIDaemonProcess michael_cocktails processes=2 threads=12 python-path=[path-to-app]/michael_cocktails:[path-to-app]/michael_cocktails/cocktails:[path-to-home]/.virtualenvs/michael_cocktails/lib/python2.7/site-packages:[path-to-home]/.virtualenvs/michael_cocktails/lib/python2.7
 
-	* Add an alias to the wsgi executable
+  - Add an alias to the wsgi executable
 
-			WSGIScriptAlias / [path-to-app]/michael_cocktails/cocktails/cocktail/wsgi.py
+        WSGIScriptAlias / [path-to-app]/michael_cocktails/cocktails/cocktail/wsgi.py
 
-* change any settings necessary in the static application (e.g., modify the `.htaccess` file to serve fonts with a longer expiration)
+- change any settings necessary in the static application (e.g., modify the `.htaccess` file to serve fonts with a longer expiration)
 
 To deploy updates:
 
-* `git pull`
-* get static file updates, if necessary: `./cocktails/manage.py collectstatic`
-* restart apache, if necessary: `./apache2/bin/restart`
+- `git pull`
+- get static file updates, if necessary: `./cocktails/manage.py collectstatic`
+- restart apache, if necessary: `./apache2/bin/restart`
