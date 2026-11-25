@@ -163,8 +163,8 @@ class Ingredient(models.Model):
         query = kwargs.get('q') or ''
 
         for recipe in recipes:
-            ingredients |= recipe.ingredients.filter(name__icontains=query)
-            ingredients_type_of |= recipe.ingredients.filter(type_of__name__icontains=query)
+            ingredients |= recipe.ingredients.filter(name__iexact=query)
+            ingredients_type_of |= recipe.ingredients.filter(type_of__name__iexact=query)
 
         return (ingredients | ingredients_type_of).distinct()
 
