@@ -16,7 +16,11 @@ from cocktails_app.forms import SearchForm
 from cocktails_app.models import (
     Glass, Ingredient, IngredientCategory, Recipe, RecipeIngredient, Source,
 )
-from cocktails_app.utils import get_recipes_with_duplicated_names, filter_recipes
+from cocktails_app.utils import (
+    get_recipes_with_duplicated_names,
+    filter_recipes,
+    format_search_query,
+)
 
 
 # helpers
@@ -259,7 +263,7 @@ def search(request):
         form = SearchForm()
     else:
         form = SearchForm(request.GET, request=request)
-        context['query'] = request.GET.get('query')
+        context['query'] = format_search_query(request.GET.get('query'))
 
         if form.is_valid():
             for k, v in form.process().items():

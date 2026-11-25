@@ -6,6 +6,18 @@ from django.db.models import Count
 from cocktails_app.models import Recipe, Glass, RecipeTag, get_has_session, RECIPE_CATEGORIES
 
 
+# separator between tokens for tokenized search. each token is a phrase, so
+# 'lemon juice|gin' is two tokens that must both match. kept here so both the
+# search form and the view/template can reference the same constant
+SEARCH_TOKEN_SEPARATOR = '|'
+
+
+def format_search_query(query):
+    """Render a search query for display, replacing the token separator with
+    a comma so a tokenized query reads as a list of tokens."""
+    return query.replace(SEARCH_TOKEN_SEPARATOR, ', ')
+
+
 def filter_recipes(recipes, request):
     default_categories = [
         RECIPE_CATEGORIES['COCKTAIL'],
